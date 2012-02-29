@@ -27,8 +27,6 @@ public class RapidJSWebActivity extends Activity {
 //		String url = "file:///android_asset/gameNative.html";
 //		String url = "file:///android_asset/test2.html";
 		
-
-		
 		this.rapidJSWebView = (RapidJSWebView) this.findViewById(R.id.rapidJSWebView);
 		rapidJSWebView.init(this, new Handler(), false);
 		
@@ -61,13 +59,16 @@ public class RapidJSWebActivity extends Activity {
 		String rapidURI = i.getDataString();
 		if (rapidURI != null)
 			defaultUrl = parseRapidURL(i.getDataString());
+		
+		System.out.println("URI: " + rapidURI);
 
 		currentUrl = defaultUrl;
 	}
 	
 	public String parseRapidURL(String rapidURI) {
-		String noRapid = rapidURI.substring(8);
-		return noRapid.substring(0, 4) + ":" + noRapid.substring(4);
+		
+		rapidURI = rapidURI.replaceFirst("rapid://.*?/+", "");
+		return "http://" + rapidURI;
 	}
 	
 	public void loadCurrentUrlWithPlugins(){
