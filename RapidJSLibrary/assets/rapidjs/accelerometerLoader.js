@@ -1,5 +1,4 @@
 
-
 function __gotCurrentAcceleration(callbackID, x,y,z,timestamp){
 	acceleration = {};
 	acceleration.x = x;

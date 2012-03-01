@@ -31,7 +31,7 @@ public class AcceleratedWebViewRequests {
 
 		this.activityEventsModifier = new ActivityEventsModifier();
 	}
-	
+
 	public Handler getHandler(){
 		return handler;
 	}
@@ -67,7 +67,8 @@ public class AcceleratedWebViewRequests {
 			DataInputStream urlDataInputStream = new DataInputStream(new BufferedInputStream(urlInputStream));
 			String line = "";
 			while ((line = urlDataInputStream.readLine()) != null) {
-				content += line;
+				if (!line.startsWith("//"))
+					content += line + "\n";
 			}
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
@@ -83,7 +84,7 @@ public class AcceleratedWebViewRequests {
 		}
 		return content;
 	}
-	
+
 	public String getRapidJSAsset(String asset){
 		return getLocalAsset("rapidjs/" + asset);
 	}

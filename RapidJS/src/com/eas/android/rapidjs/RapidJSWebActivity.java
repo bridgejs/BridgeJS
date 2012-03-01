@@ -23,6 +23,7 @@ public class RapidJSWebActivity extends Activity {
 		
 
 		String url = "http://html5.litten.com/layers/canvaslayers.html";
+//		String url = "http://rapidjs.com/gameNative.html";
 //		String url = "file:///android_asset/gamePhoneGap.html";
 //		String url = "file:///android_asset/gameNative.html";
 //		String url = "file:///android_asset/test2.html";
