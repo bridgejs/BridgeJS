@@ -32,7 +32,7 @@ public class RapidJSWebView extends WebView {
 	private PluginManager pluginManager;
 
 	public void init(final Activity activity, Handler handler, boolean accelerateCanvas){
-		
+
 		this.pluginManager = new PluginManager(this, activity, handler, accelerateCanvas);
 
 		pluginManager.initPlugins();
@@ -40,6 +40,8 @@ public class RapidJSWebView extends WebView {
 		WebSettings settings = getSettings();
 		settings.setJavaScriptEnabled(true);
 		settings.setUserAgentString(settings.getUserAgentString().replace("Android", "RapidDroid"));
+
+		settings.setBuiltInZoomControls(true);
 
 		this.setWebChromeClient(new WebChromeClient());
 
@@ -55,9 +57,16 @@ public class RapidJSWebView extends WebView {
 				if (accelerate)
 					pluginManager.onPageStartedLoading(view);
 			}
+			@Override
+			public boolean shouldOverrideUrlLoading(WebView  view, String  url)
+			{
+				loadUrlWithPlugins(url);
+				return true;
+			}
 		}); 
+
 	}
-	
+
 	public void loadUrlWithPlugins(final String url){
 		this.loadUrl("");
 		pluginManager.loadUrlWithPlugins(this, url);
