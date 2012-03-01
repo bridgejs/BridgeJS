@@ -1,0 +1,11 @@
+#comment for .gitignore to work
+
+bin/**/*
+bin/
+*.un~
+*.swap~
+*.jar
+*.dex
+*.class
+*.apk
+*.ap_
