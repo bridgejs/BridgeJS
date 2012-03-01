@@ -38,7 +38,7 @@ public class PluginLoader {
 	public String getContent(String url){
 		String content = requests.getUrlData(url);
 		content = injectJSAtBeginning(content, pluginManager.getPluginsJS());
-		System.out.println(content);
+//		System.out.println(content);
 		return content;
 	}
 

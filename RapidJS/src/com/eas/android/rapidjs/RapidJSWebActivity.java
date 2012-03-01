@@ -58,10 +58,15 @@ public class RapidJSWebActivity extends Activity {
 	
 	public void loadFromIntent(Intent i, String defaultUrl){
 		String rapidURI = i.getDataString();
-		if (rapidURI != null)
+		String webURI = i.getStringExtra(Intent.EXTRA_TEXT);
+		if (rapidURI != null){
 			defaultUrl = parseRapidURL(i.getDataString());
+		}
+		else if (webURI != null){
+		    defaultUrl = webURI;
+		}
 		
-		System.out.println("URI: " + rapidURI);
+		System.out.println("URI: " + defaultUrl);
 
 		currentUrl = defaultUrl;
 	}
