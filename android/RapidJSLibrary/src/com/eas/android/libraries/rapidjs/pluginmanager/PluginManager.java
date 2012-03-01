@@ -2,6 +2,8 @@ package com.eas.android.libraries.rapidjs.pluginmanager;
 
 import java.util.ArrayList;
 
+import com.eas.android.libraries.rapidjs.pluginmanager.activitymodifiers.ActivityEventsModifier;
+
 import android.app.Activity;
 import android.graphics.Canvas;
 import android.os.Handler;

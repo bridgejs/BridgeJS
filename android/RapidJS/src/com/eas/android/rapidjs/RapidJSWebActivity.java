@@ -1,8 +1,7 @@
 package com.eas.android.rapidjs;
 
 import com.eas.android.libraries.rapidjs.RapidJSWebView;
-import com.eas.android.libraries.rapidjs.pluginmanager.ActivityEventsModifier;
-
+import com.eas.android.libraries.rapidjs.pluginmanager.activitymodifiers.*;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -33,28 +32,10 @@ public class RapidJSWebActivity extends Activity {
 		
 		loadFromIntent(getIntent(), url);
 		loadCurrentUrlWithPlugins();
-//		loadCurrentUrlWithoutPlugins();
-		
-//		setupButton();
+
 		
 	}
 	
-//	public void setupButton(){
-//		final Button button = (Button) this.findViewById(R.id.switchButton);
-//		button.setText("Switch to Accelerated WebView");
-//		button.setOnClickListener(new OnClickListener(){
-//			public void onClick(View arg0) {
-//				if (accWebView.accelerate){
-//					loadCurrentUrlWithoutPlugins();
-//					button.setText("Switch to Accelerated WebView");
-//				}
-//				else {
-//					loadCurrentUrlWithPlugins();
-//					button.setText("Switch to Normal WebView");
-//				}
-//			}
-//		});
-//	}
 	
 	public void loadFromIntent(Intent i, String defaultUrl){
 		String rapidURI = i.getDataString();
@@ -82,35 +63,71 @@ public class RapidJSWebActivity extends Activity {
 		rapidJSWebView.loadUrlWithPlugins(currentUrl);
 	}
 	
-//	public void loadCurrentUrlWithoutPlugins(){
-//		accWebView.accelerate = false;
-//		accWebView.loadUrl(currentUrl);
-//	}
-
 	/* Note: we do have to get the activityEventsModifier in *EVERY* event listener we override 
 	 * 			since we don't know if the pointer to the runnable will have changed at some point */
 
+	@Override
+	public void onStart() {
+		super.onStart();
+		ActivityEventsModifier activityEventsModifier = rapidJSWebView.getActivityEventsModifier();
+		activityEventsModifier.getOnResumeModifier().run();
+	}
+	
 	@Override
 	public void onResume() {
 		super.onResume();
 		ActivityEventsModifier activityEventsModifier = rapidJSWebView.getActivityEventsModifier();
 		activityEventsModifier.getOnResumeModifier().run();
 	}
-
+	
+	@Override
+	public void onPause() {
+		ActivityEventsModifier activityEventsModifier = rapidJSWebView.getActivityEventsModifier();
+		activityEventsModifier.getOnPauseModifier().run();
+		super.onPause();
+	}
+	
 	@Override
 	public void onStop() {
 		ActivityEventsModifier activityEventsModifier = rapidJSWebView.getActivityEventsModifier();
 		activityEventsModifier.getOnStopModifier().run();
 		super.onStop();
 	}
+	
+	@Override
+	public void onDestroy() {
+		ActivityEventsModifier activityEventsModifier = rapidJSWebView.getActivityEventsModifier();
+		activityEventsModifier.getOnDestroyModifier().run();
+		super.onDestroy();
+	}
+	
+	@Override
+	public void onRestart() {
+		ActivityEventsModifier activityEventsModifier = rapidJSWebView.getActivityEventsModifier();
+		activityEventsModifier.getOnRestartModifier().run();
+		super.onRestart();
+	}
 
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event){
+		ActivityEventsModifier activityEventsModifier = rapidJSWebView.getActivityEventsModifier();
+
 		if (keyCode == KeyEvent.KEYCODE_BACK){
-			System.out.println("DONE...");
-//			accWebView.destroy(); //TODO: Throws an error
-			this.finish();
+			activityEventsModifier.getOnBackButtonModifier();
 		}
+		else if (keyCode == KeyEvent.KEYCODE_MENU) {
+			activityEventsModifier.getOnMenuButtonModifier();
+		}
+		else if (keyCode == KeyEvent.KEYCODE_VOLUME_DOWN) {
+			activityEventsModifier.getOnVolumeDownButtonModifier();
+		}
+		else if (keyCode == KeyEvent.KEYCODE_VOLUME_UP) {
+			activityEventsModifier.getOnVolumeUpButtonModifier();
+		}
+		else if (keyCode == KeyEvent.KEYCODE_HOME) {
+			activityEventsModifier.getOnHomeButtonModifier();
+		}
+		
 		return super.onKeyDown(keyCode, event);
 	}
 }

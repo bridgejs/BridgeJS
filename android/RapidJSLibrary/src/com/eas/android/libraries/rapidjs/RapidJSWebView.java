@@ -1,8 +1,8 @@
 package com.eas.android.libraries.rapidjs;
 
 
-import com.eas.android.libraries.rapidjs.pluginmanager.ActivityEventsModifier;
 import com.eas.android.libraries.rapidjs.pluginmanager.PluginManager;
+import com.eas.android.libraries.rapidjs.pluginmanager.activitymodifiers.ActivityEventsModifier;
 
 import android.app.Activity;
 import android.content.Context;
