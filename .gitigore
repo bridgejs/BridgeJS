@@ -1,3 +1,7 @@
-bin/
 *.un~
 *.swap~
+*.jar
+*.dex
+*.class
+*.apk
+*.ap_
