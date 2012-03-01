@@ -1,0 +1,52 @@
+
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<title>Canvas Layers Test</title>
+</head>
+<body>
+<section>
+<div id="canvasesdiv" style="position:relative; width:400px; height:300px">
+<canvas id="layer1"
+style="z-index: 1;
+position:absolute;
+left:0px;
+top:0px;
+" height="300px" width="400">
+This text is displayed if your browser does not support HTML5 Canvas.
+</canvas>
+</div>
+
+<script type="text/javascript">
+var layer1;
+var ctx;
+var x = 0;
+var y = 0;
+var dx = 2;
+var dy = 4;
+var WIDTH = 400;
+var HEIGHT = 300;
+var city = new Image();
+
+function init() {
+layer1 = document.getElementById("layer1");
+ctx = layer1.getContext("2d");
+setInterval(drawAll, 20);
+}
+
+function drawAll() {
+draw1();
+}
+
+function draw1() {
+ctx.fillRect(x,y, 5, 5); 
+x += dx;
+y += dy;
+}
+
+init();
+</script>
+</section>
+</body>
+</html>
