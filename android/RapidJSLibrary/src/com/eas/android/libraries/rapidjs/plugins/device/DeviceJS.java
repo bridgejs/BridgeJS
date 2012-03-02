@@ -8,8 +8,6 @@ import com.eas.android.libraries.rapidjs.pluginmanager.AcceleratedWebViewRequest
 
 public class DeviceJS {
 	
-	private AcceleratedWebViewRequests requests;
-	
 	private String deviceName;
 	private String devicePhonegap;
 	private String deviceRapid;
@@ -18,15 +16,14 @@ public class DeviceJS {
 	private String deviceVersion;
 	
 	public DeviceJS(AcceleratedWebViewRequests requests){
-		this.requests = requests;
-		
-		setDeviceInformation();
+		setDeviceInformation(requests);
 	}
 	
-	private void setDeviceInformation(){
+	private void setDeviceInformation(AcceleratedWebViewRequests requests){
 		deviceName = Build.DEVICE;
-		devicePhonegap = "-1"; //TODO This probably isn't the right way to do this
-		deviceRapid = "0.0.1"; //TODO This should probably be defined in a metainfo file sometime
+		devicePhonegap = "-1"; // TODO Should represent the version of PhoneGap's API that we're supporting.
+							   // This probably isn't the right way to do this
+		deviceRapid = "0.0.1"; // TODO This should probably be defined in a metainfo file somewhere
 		devicePlatform = "Android";
 		
 		final TelephonyManager telephonyManager = (TelephonyManager) requests.getSystemService(Context.TELEPHONY_SERVICE);
