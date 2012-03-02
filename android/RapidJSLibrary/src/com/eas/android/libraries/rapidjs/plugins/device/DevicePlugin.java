@@ -7,10 +7,16 @@ import com.eas.android.libraries.rapidjs.pluginmanager.AcceleratedWebViewRequest
 import com.eas.android.libraries.rapidjs.pluginmanager.JSTools;
 
 public class DevicePlugin extends AcceleratedWebViewPlugin{
+	
+	private String loadingJS;
 
 	@Override
 	public void init(JSTools pluginApplyer, AcceleratedWebViewRequests requests) {
-		// TODO Auto-generated method stub
+
+		loadingJS = requests.getRapidJSAsset("deviceLoader.js");
+		
+		DeviceJS device = new DeviceJS(requests);
+		pluginApplyer.addJavascriptInterface(device, "__androidDevice");
 		
 	}
 
@@ -34,8 +40,7 @@ public class DevicePlugin extends AcceleratedWebViewPlugin{
 
 	@Override
 	public String getPluginJS() {
-		// TODO Auto-generated method stub
-		return null;
+		return loadingJS;
 	}
 
 }
