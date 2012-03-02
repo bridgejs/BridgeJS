@@ -39,7 +39,6 @@ public class RapidJSWebView extends WebView {
 
 		WebSettings settings = getSettings();
 		settings.setJavaScriptEnabled(true);
-		settings.setUserAgentString(settings.getUserAgentString().replace("Android", "RapidDroid"));
 
 		settings.setBuiltInZoomControls(true);
 
