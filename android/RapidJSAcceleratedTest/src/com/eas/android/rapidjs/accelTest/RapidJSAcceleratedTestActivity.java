@@ -1,7 +1,7 @@
 package com.eas.android.rapidjs.accelTest;
 
 import com.eas.android.libraries.rapidjs.RapidJSWebView;
-import com.eas.android.libraries.rapidjs.pluginmanager.ActivityEventsModifier;
+import com.eas.android.libraries.rapidjs.pluginmanager.activitymodifiers.ActivityEventsModifier;
 
 import android.app.Activity;
 import android.content.Intent;

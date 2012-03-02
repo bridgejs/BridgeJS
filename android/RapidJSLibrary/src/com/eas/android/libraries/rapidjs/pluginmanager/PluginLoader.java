@@ -7,13 +7,13 @@ import android.webkit.WebView;
 
 public class PluginLoader {
 
-	private AcceleratedWebViewRequests requests;
+	private RapidJSRequests requests;
 
 	private WebView webView;
 
 	private PluginManager pluginManager;
 	
-	public PluginLoader(PluginManager pluginManager, WebView webView, AcceleratedWebViewRequests requests, JSTools jsTools, Handler handler){
+	public PluginLoader(PluginManager pluginManager, WebView webView, RapidJSRequests requests, Handler handler){
 		this.webView = webView;
 		this.requests = requests;
 		this.pluginManager = pluginManager;

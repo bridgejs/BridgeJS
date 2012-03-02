@@ -16,7 +16,7 @@ import android.content.res.AssetManager;
 import android.os.Handler;
 import android.webkit.WebView;
 
-public class AcceleratedWebViewRequests {
+public class RapidJSRequests {
 
 	private WebView webView;
 
@@ -25,8 +25,12 @@ public class AcceleratedWebViewRequests {
 	private Activity activity;
 
 	private ActivityEventsModifier activityEventsModifier;
-
-	public AcceleratedWebViewRequests(WebView webView, Activity activity, Handler handler, PluginManager pluginManager){
+	
+	public void addJavascriptInterface(Object obj, String interfaceName){
+		webView.addJavascriptInterface(obj, interfaceName);
+	}
+	
+	public RapidJSRequests(WebView webView, Activity activity, Handler handler, PluginManager pluginManager){
 		this.webView = webView;
 		this.activity = activity;
 		this.handler = handler;

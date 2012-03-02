@@ -11,20 +11,16 @@ import android.webkit.WebView;
 
 public class PluginManager {
 
-	private ArrayList<AcceleratedWebViewPlugin> plugins;
+	private ArrayList<RapidJSWebViewPlugin> plugins;
 
-	private JSTools jsTools;
-
-	private AcceleratedWebViewRequests requests;
+	private RapidJSRequests requests;
 
 	private PluginLoader pluginLoader;
 
 	public PluginManager(WebView webView, Activity activity, Handler handler, boolean accelerateCanvas){
-		plugins = new ArrayList<AcceleratedWebViewPlugin>();
-		
-		jsTools = new JSTools(webView);
-		requests = new AcceleratedWebViewRequests(webView, activity, handler, this);
-		pluginLoader = new PluginLoader(this, webView, requests, jsTools, handler);
+		plugins = new ArrayList<RapidJSWebViewPlugin>();
+		requests = new RapidJSRequests(webView, activity, handler, this);
+		pluginLoader = new PluginLoader(this, webView, requests, handler);
 		
 		PluginInitializer.init(plugins, this, webView, accelerateCanvas);
 	}
@@ -35,21 +31,21 @@ public class PluginManager {
 
 	public void initPlugins(){
 		for (int i = 0; i < plugins.size(); i++){
-			AcceleratedWebViewPlugin plugin = plugins.get(i);
-			plugin.init(jsTools, requests);
+			RapidJSWebViewPlugin plugin = plugins.get(i);
+			plugin.init(requests);
 		}
 	}
 
 	public void onPageFinishedLoading(WebView webView){
 		for (int i = 0; i < plugins.size(); i++){
-			AcceleratedWebViewPlugin plugin = plugins.get(i);
+			RapidJSWebViewPlugin plugin = plugins.get(i);
 			plugin.onPageFinishedLoading();
 		}
 	}
 
 	public void onPageStartedLoading(WebView webView){
 		for (int i = 0; i < plugins.size(); i++){
-			AcceleratedWebViewPlugin plugin = plugins.get(i);
+			RapidJSWebViewPlugin plugin = plugins.get(i);
 			plugin.onPageStartedLoading();
 		}
 	}
@@ -57,7 +53,7 @@ public class PluginManager {
 	public String getPluginsJS(){
 		String str = "";
 		for (int i = 0; i < plugins.size(); i++){
-			AcceleratedWebViewPlugin plugin = plugins.get(i);
+			RapidJSWebViewPlugin plugin = plugins.get(i);
 			str += plugin.getPluginJS();
 		}
 		return str;
@@ -69,7 +65,7 @@ public class PluginManager {
 
 	public void onDraw(Canvas canvas, int left, int top, float scale){
 		for (int i = 0; i < plugins.size(); i++){
-			AcceleratedWebViewPlugin plugin = plugins.get(i);
+			RapidJSWebViewPlugin plugin = plugins.get(i);
 			plugin.onDraw(canvas, left, top, scale);
 		}
 	}
