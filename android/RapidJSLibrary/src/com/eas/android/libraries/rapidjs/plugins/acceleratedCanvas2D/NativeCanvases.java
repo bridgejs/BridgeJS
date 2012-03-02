@@ -3,7 +3,7 @@ package com.eas.android.libraries.rapidjs.plugins.acceleratedCanvas2D;
 import java.util.Hashtable;
 import java.util.Iterator;
 
-import com.eas.android.libraries.rapidjs.pluginmanager.AcceleratedWebViewRequests;
+import com.eas.android.libraries.rapidjs.pluginmanager.RapidJSRequests;
 
 import android.graphics.Canvas;
 import android.graphics.Matrix;
@@ -19,7 +19,7 @@ public class NativeCanvases {
 		Log.d("AWV", str);
 	}
 
-	public NativeCanvases(AcceleratedWebViewRequests requests) {
+	public NativeCanvases(RapidJSRequests requests) {
 		nativeCanvasesByID = new Hashtable<String, NativeCanvas>();
 		canvasUnifier = new CanvasUnifier(nativeCanvasesByID, requests);
 	}

@@ -2,38 +2,32 @@ package com.eas.android.libraries.rapidjs.plugins.accelerometer;
 
 import android.graphics.Canvas;
 
-import com.eas.android.libraries.rapidjs.pluginmanager.AcceleratedWebViewPlugin;
-import com.eas.android.libraries.rapidjs.pluginmanager.AcceleratedWebViewRequests;
-import com.eas.android.libraries.rapidjs.pluginmanager.JSTools;
+import com.eas.android.libraries.rapidjs.pluginmanager.RapidJSWebViewPlugin;
+import com.eas.android.libraries.rapidjs.pluginmanager.RapidJSRequests;
 
-public class AccelerometerPlugin extends AcceleratedWebViewPlugin{
+public class AccelerometerPlugin implements RapidJSWebViewPlugin{
 
 	private String loadingJS;
 
-	@Override
-	public void init(JSTools pluginApplyer, AcceleratedWebViewRequests requests) {
+	public void init(RapidJSRequests requests) {
 
 		loadingJS = requests.getRapidJSAsset("accelerometerLoader.js");
 
 		AccelerometerJS accelerometer = new AccelerometerJS(requests);
-		pluginApplyer.addJavascriptInterface(accelerometer, "__androidAccelerometer");
+		requests.addJavascriptInterface(accelerometer, "__androidAccelerometer");
 	}
-
-	@Override
+	
 	public String getPluginJS() {
 		return loadingJS;
 	}
 
-	@Override
 	public void onPageFinishedLoading() {
 	}
 
-	@Override
 	public void onDraw(Canvas canvas, int left, int top, float scale) {
 
 	}
 
-	@Override
 	public void onPageStartedLoading() {
 
 	}

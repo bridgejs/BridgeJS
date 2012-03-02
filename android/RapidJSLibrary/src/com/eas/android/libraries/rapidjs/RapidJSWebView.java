@@ -68,8 +68,12 @@ public class RapidJSWebView extends WebView {
 	}
 
 	public void loadUrlWithPlugins(final String url){
-		this.loadUrl("");
+		gotoBlankWebPage();
 		pluginManager.loadUrlWithPlugins(this, url);
+	}
+	
+	public void gotoBlankWebPage(){
+		this.loadUrl("");
 	}
 
 	@Override

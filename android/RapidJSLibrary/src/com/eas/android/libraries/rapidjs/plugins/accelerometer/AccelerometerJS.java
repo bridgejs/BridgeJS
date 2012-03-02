@@ -6,17 +6,17 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 
-import com.eas.android.libraries.rapidjs.pluginmanager.AcceleratedWebViewRequests;
+import com.eas.android.libraries.rapidjs.pluginmanager.RapidJSRequests;
 
 public class AccelerometerJS {
 	
-	private AcceleratedWebViewRequests requests;
+	private RapidJSRequests requests;
 	
 	private float accelX;
 	private float accelY;
 	private float accelZ;
 	
-	public AccelerometerJS(AcceleratedWebViewRequests requests){
+	public AccelerometerJS(RapidJSRequests requests){
 		this.requests = requests;
 		
 		final SensorManager sensorManager = (SensorManager) requests.getSystemService(Activity.SENSOR_SERVICE);

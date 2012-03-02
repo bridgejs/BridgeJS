@@ -1,10 +1,10 @@
 package com.eas.android.libraries.rapidjs.plugins.callback;
 
-import com.eas.android.libraries.rapidjs.pluginmanager.AcceleratedWebViewRequests;
+import com.eas.android.libraries.rapidjs.pluginmanager.RapidJSRequests;
 
 public class CallbackJS {
 	
-	public CallbackJS(AcceleratedWebViewRequests requests){
+	public CallbackJS(RapidJSRequests requests){
 		
 	}
 	

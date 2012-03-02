@@ -8,7 +8,7 @@ import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.Queue;
 
-import com.eas.android.libraries.rapidjs.pluginmanager.AcceleratedWebViewRequests;
+import com.eas.android.libraries.rapidjs.pluginmanager.RapidJSRequests;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -28,9 +28,9 @@ public class CanvasUnifier {
 	private Paint whitePaint;
 	private Paint transparentPaint;
 	
-	private AcceleratedWebViewRequests requests;
+	private RapidJSRequests requests;
 
-	public CanvasUnifier(Hashtable<String, NativeCanvas> nativeCanvasesById, AcceleratedWebViewRequests requests){
+	public CanvasUnifier(Hashtable<String, NativeCanvas> nativeCanvasesById, RapidJSRequests requests){
 		this.nativeCanvasesByID = nativeCanvasesById;
 		
 		this.requests = requests;

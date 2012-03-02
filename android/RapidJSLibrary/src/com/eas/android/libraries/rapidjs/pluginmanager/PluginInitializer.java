@@ -9,7 +9,7 @@ import com.eas.android.libraries.rapidjs.plugins.accelerometer.AccelerometerPlug
 import com.eas.android.libraries.rapidjs.plugins.callback.CallbackPlugin;
 
 public class PluginInitializer {
-	public static void init(ArrayList<AcceleratedWebViewPlugin> plugins, PluginManager pluginManager, WebView webView, boolean accelerateCanvas){
+	public static void init(ArrayList<RapidJSWebViewPlugin> plugins, PluginManager pluginManager, WebView webView, boolean accelerateCanvas){
 		plugins.add(new CallbackPlugin());
 		if (accelerateCanvas)
 			plugins.add(new AcceleratedCanvas2DPlugin());
