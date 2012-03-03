@@ -30,30 +30,26 @@ public class PluginManager {
 	}
 
 	public void initPlugins(){
-		for (int i = 0; i < plugins.size(); i++){
-			RapidJSWebViewPlugin plugin = plugins.get(i);
+		for (RapidJSWebViewPlugin plugin: plugins){
 			plugin.init(requests);
 		}
 	}
 
 	public void onPageFinishedLoading(WebView webView){
-		for (int i = 0; i < plugins.size(); i++){
-			RapidJSWebViewPlugin plugin = plugins.get(i);
+		for (RapidJSWebViewPlugin plugin: plugins){
 			plugin.onPageFinishedLoading();
 		}
 	}
 
 	public void onPageStartedLoading(WebView webView){
-		for (int i = 0; i < plugins.size(); i++){
-			RapidJSWebViewPlugin plugin = plugins.get(i);
+		for (RapidJSWebViewPlugin plugin: plugins){
 			plugin.onPageStartedLoading();
 		}
 	}
 
 	public String getPluginsJS(){
 		String str = "";
-		for (int i = 0; i < plugins.size(); i++){
-			RapidJSWebViewPlugin plugin = plugins.get(i);
+		for (RapidJSWebViewPlugin plugin: plugins){
 			str += plugin.getPluginJS();
 		}
 		return str;
@@ -64,8 +60,7 @@ public class PluginManager {
 	}
 
 	public void onDraw(Canvas canvas, int left, int top, float scale){
-		for (int i = 0; i < plugins.size(); i++){
-			RapidJSWebViewPlugin plugin = plugins.get(i);
+		for (RapidJSWebViewPlugin plugin: plugins){
 			plugin.onDraw(canvas, left, top, scale);
 		}
 	}
