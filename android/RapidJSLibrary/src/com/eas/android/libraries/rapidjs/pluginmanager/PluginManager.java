@@ -23,6 +23,7 @@ public class PluginManager {
 		pluginLoader = new PluginLoader(this, webView, requests, handler);
 		
 		PluginInitializer.init(plugins, this, webView, accelerateCanvas);
+		
 	}
 
 	public ActivityEventsModifier getActivityEventsModifier() {
