@@ -4,7 +4,7 @@ import android.content.Context;
 import android.os.Build;
 import android.telephony.TelephonyManager;
 
-import com.eas.android.libraries.rapidjs.pluginmanager.AcceleratedWebViewRequests;
+import com.eas.android.libraries.rapidjs.pluginmanager.RapidJSRequests;
 
 public class DeviceJS {
 	
@@ -15,11 +15,11 @@ public class DeviceJS {
 	private String deviceUUID;
 	private String deviceVersion;
 	
-	public DeviceJS(AcceleratedWebViewRequests requests){
+	public DeviceJS(RapidJSRequests requests){
 		setDeviceInformation(requests);
 	}
 	
-	private void setDeviceInformation(AcceleratedWebViewRequests requests){
+	private void setDeviceInformation(RapidJSRequests requests){
 		deviceName = Build.DEVICE;
 		devicePhonegap = "-1"; // TODO Should represent the version of PhoneGap's API that we're supporting.
 							   // This probably isn't the right way to do this
