@@ -23,6 +23,8 @@ public class Modifiers {
 	public List<Runnable> onVolumeUpKeyModifiers;
 	public List<Runnable> onHomeKeyModifiers;
 	
+	public ActivityResultCallback onActivityResultModifier;
+	
 	public Modifiers() {
 		this.onResumeModifiers = new ArrayList<Runnable>();
 		this.onStopModifiers = new ArrayList<Runnable>();
@@ -36,5 +38,7 @@ public class Modifiers {
 		this.onVolumeDownKeyModifiers = new ArrayList<Runnable>();
 		this.onVolumeUpKeyModifiers = new ArrayList<Runnable>();
 		this.onHomeKeyModifiers = new ArrayList<Runnable>();
+		
+		this.onActivityResultModifier = null;
 	}
 }

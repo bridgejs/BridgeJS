@@ -9,7 +9,8 @@ function Rapid () {
 	}
 
 	function browserSupportsPhoneGap(){
-		return (typeof device.phonegap !== "undefined");
+		return (typeof device !== "undefined" &&
+				typeof device.phonegap !== "undefined");
 	}
 
 	function recommendUserSwitchesToRapid(){
@@ -22,7 +23,7 @@ function Rapid () {
 		changeURLTo("rapid://" + document.URL);
 	}
 
-	function changeURLTo(newURL){
+	function changeURLTo(newUrl){
             location.replace(newUrl);
 	}
 
@@ -58,11 +59,11 @@ function Rapid () {
 	}
 
 	if (browserIsRapid()){
-		this.accelerometer.getCurrentAcceleration = navigtator.accelerometer.getCurentAcceleration;
+		this.accelerometer.getCurrentAcceleration = navigator.accelerometer.getCurentAcceleration;
 		this.accelerometer.watchAcceleration = navigator.accelerometer.watchAcceleration;
 	}
 	if (browserSupportsPhoneGap()){
-		this.accelerometer.getCurrentAcceleration = navigtator.accelerometer.getCurentAcceleration;
+		this.accelerometer.getCurrentAcceleration = navigator.accelerometer.getCurentAcceleration;
 		this.accelerometer.watchAcceleration = navigator.accelerometer.watchAcceleration;
 	}
 	else if (browserSupportsWebkitAccelerometer()){
@@ -76,8 +77,8 @@ function Rapid () {
 
 		window.ondevicemotion = function(event){
 			lastEvent = event;
-			for (fnId in fnsWatchingAccelerationOnSuccess) {
-				fnsWatchingAccelerationOnSuccess[fnId](event);
+			for (fnId in fnsWatchingAccelerometerOnSuccess) {
+				fnsWatchingAccelerometerOnSuccess[fnId](event);
 			}
 		}
 		this.accelerometer.getCurrentAcceleration = function(onSuccess, onError){
