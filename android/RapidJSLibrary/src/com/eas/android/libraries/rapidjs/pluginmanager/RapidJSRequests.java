@@ -35,7 +35,7 @@ public class RapidJSRequests {
 		this.activity = activity;
 		this.handler = handler;
 
-		this.activityEventsModifier = new ActivityEventsModifier();
+		this.activityEventsModifier = new ActivityEventsModifier(activity);
 	}
 
 	public Handler getHandler(){

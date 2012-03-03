@@ -2,15 +2,24 @@ package com.eas.android.libraries.rapidjs.pluginmanager.activitymodifiers;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Queue;
+
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 
 /* I think this is a pretty good solution to the problem of adding code to the main activity */
 public class ActivityEventsModifier {
 
-	Modifiers modifiers;
+	private Modifiers modifiers;
+	private Activity activity;
+	private SpawnActivityForResult spawnActivityInstance;
+	
 	//TODO: Etc...
 
-	public ActivityEventsModifier() {
+	public ActivityEventsModifier(Activity activity) {
 		modifiers = new Modifiers();
+		this.activity = activity;
 	}
 
 	public void addToOnResumeModifier(final Runnable newAction) {
@@ -59,6 +68,15 @@ public class ActivityEventsModifier {
 		modifiers.onHomeKeyModifiers.add(newAction);
 	}
 	
+	
+	public void spawnActivityForResult(SpawnActivityForResult spawnActivityInstance) {
+		this.spawnActivityInstance = spawnActivityInstance;
+		
+		int requestCode = spawnActivityInstance.getRequestCode();
+		Intent startIntent = spawnActivityInstance.getStartIntent();
+		
+		activity.startActivityForResult(startIntent, requestCode);
+	}
 	
 	private Runnable flatten(final List<Runnable> runnables) {
 		return new Runnable() {
@@ -113,5 +131,9 @@ public class ActivityEventsModifier {
 	
 	public Runnable getOnHomeButtonModifier() {
 		return flatten(modifiers.onHomeKeyModifiers);
+	}
+	
+	public SpawnActivityForResult getSpawnActivityInstance() {
+		return spawnActivityInstance;
 	}
 }
