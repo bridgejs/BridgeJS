@@ -8,7 +8,7 @@ function __gotCurrentAcceleration(callbackID, x,y,z,timestamp){
 	___retrieveCallback(callbackID)(acceleration);
 };
 
-function bindAccelerometerToAndroid(){
+function __bindAccelerometerToAndroid(){
 	navigator.accelerometer = {};
 	navigator.accelerometer.getCurrentAcceleration = function(onSuccess, onError){
 		__androidAccelerometer.getCurrentAcceleration(
