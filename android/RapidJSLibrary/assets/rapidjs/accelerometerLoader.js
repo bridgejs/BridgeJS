@@ -62,5 +62,5 @@ if (!Object.prototype.mWatch) {
 	};
 };
 
-bindAccelerometerToAndroid();
+__bindAccelerometerToAndroid();
 console.log("accelerometer loaded");
