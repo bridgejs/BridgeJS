@@ -10,15 +10,15 @@ app.get('/server.js', function(req, res){
 });
 
 app.get('/rapid.js', function(req, res){
-	res.sendfile(__dirname + '/rapid.js');
+	res.sendfile(__dirname + '/js/rapid.js');
 });
 
-app.get('/gameNative.html', function(req, res){
-	res.sendfile(__dirname + '/gameNative.html');
+app.get('/demos/gameNative.html', function(req, res){
+	res.sendfile(__dirname + '/demos/gameNative.html');
 });
 
-app.get('/accelPhoneGap.html', function(req, res){
-	res.sendfile(__dirname + '/accelPhoneGap.html');
+app.get('/demos/gamePhoneGap.html', function(req, res){
+	res.sendfile(__dirname + '/demos/gamePhoneGap.html');
 });
 
 app.listen(80);
