@@ -106,6 +106,18 @@ public class RapidJSWebActivity extends Activity {
 		activityEventsModifier.getOnRestartModifier().run();
 		super.onRestart();
 	}
+	
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		ActivityEventsModifier activityEventsModifier = rapidJSWebView.getActivityEventsModifier();
+		SpawnActivityForResult spawnActivityInstance = activityEventsModifier.getSpawnActivityInstance();
+		int originalRequestCode = spawnActivityInstance.getRequestCode();
+		ActivityResultCallback callbackToPlugin = spawnActivityInstance.getActivityResultCallback();
+		
+		if (originalRequestCode == requestCode) {
+			callbackToPlugin.onActivityResult(requestCode, resultCode, data);
+		}
+	}
 
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event){
