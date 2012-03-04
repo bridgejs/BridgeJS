@@ -10,3 +10,4 @@ bin/
 *.class
 *.apk
 *.ap_
+*.swp
