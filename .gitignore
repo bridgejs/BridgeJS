@@ -4,6 +4,7 @@ bin/**/*
 bin/
 *.un~
 *.swap~
+*.swp
 *.jar
 *.dex
 *.class
