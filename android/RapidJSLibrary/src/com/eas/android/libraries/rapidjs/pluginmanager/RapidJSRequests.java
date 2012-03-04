@@ -131,6 +131,41 @@ public class RapidJSRequests {
 	public void addToOnStop(Runnable onStopTask) {
 		activityEventsModifier.addToOnStopModifier(onStopTask);
 	}
+	
+	public void addToOnStart(Runnable onStartTask) {
+		activityEventsModifier.addToOnStartModifier(onStartTask);
+	}
+	
+	public void addToOnDestroy(Runnable onDestroyTask) {
+		activityEventsModifier.addToOnStartModifier(onDestroyTask);
+	}
+	
+	public void addToOnPause(Runnable onPauseTask) {
+		activityEventsModifier.addToOnStartModifier(onPauseTask);
+	}
+	
+	
+	public void addToOnMenuButtonModifier(final Runnable newAction) {
+		activityEventsModifier.addToOnMenuButtonModifier(newAction);
+	}
+	
+	public void addToOnBackButtonModifier(final Runnable newAction) {
+		activityEventsModifier.addToOnBackButtonModifier(newAction);
+	}
+	
+	public void addToOnVolumeDownButtonModifier(final Runnable newAction) {
+		activityEventsModifier.addToOnVolumeDownButtonModifier(newAction);
+	}
+	
+	public void addToOnVolumeUpButtonModifier(final Runnable newAction) {
+		activityEventsModifier.addToOnVolumeUpButtonModifier(newAction);
+	}
+	
+	public void addToOnHomeButtonModifier(final Runnable newAction) {
+		activityEventsModifier.addToOnHomeButtonModifier(newAction);
+	}
+	
+	
 
 	public ActivityEventsModifier getActivityEventsModifier() {
 		return this.activityEventsModifier;

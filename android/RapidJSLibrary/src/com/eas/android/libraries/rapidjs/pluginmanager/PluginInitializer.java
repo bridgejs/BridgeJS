@@ -8,6 +8,7 @@ import com.eas.android.libraries.rapidjs.plugins.acceleratedCanvas2D.Accelerated
 import com.eas.android.libraries.rapidjs.plugins.accelerometer.AccelerometerPlugin;
 import com.eas.android.libraries.rapidjs.plugins.callback.CallbackPlugin;
 import com.eas.android.libraries.rapidjs.plugins.core.CorePlugin;
+import com.eas.android.libraries.rapidjs.plugins.geolocation.GeolocationPlugin;
 
 public class PluginInitializer {
 	public static void init(ArrayList<RapidJSWebViewPlugin> plugins, PluginManager pluginManager, WebView webView, boolean accelerateCanvas){
@@ -16,5 +17,6 @@ public class PluginInitializer {
 		if (accelerateCanvas)
 			plugins.add(new AcceleratedCanvas2DPlugin());
 		plugins.add(new AccelerometerPlugin());
+		plugins.add(new GeolocationPlugin());
 	}
 }
