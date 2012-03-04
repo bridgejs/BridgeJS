@@ -1,17 +1,23 @@
 package com.eas.android.rapidjs;
 
-import com.eas.android.libraries.rapidjs.RapidJSWebView;
-import com.eas.android.libraries.rapidjs.pluginmanager.activitymodifiers.*;
+import com.eas.android.libraries.rapidjs.browser.RapidJSBrowser;
+import com.eas.android.libraries.rapidjs.pluginmanager.activitymodifiers.ActivityEventsModifier;
+import com.eas.android.libraries.rapidjs.pluginmanager.activitymodifiers.ActivityResultCallback;
+import com.eas.android.libraries.rapidjs.pluginmanager.activitymodifiers.SpawnActivityForResult;
+
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.KeyEvent;
+import android.view.inputmethod.InputMethodManager;
 
 public class RapidJSWebActivity extends Activity {
 	/** Called when the activity is first created. */
 
-	private RapidJSWebView rapidJSWebView;
+	private RapidJSBrowser browser;
+
 
 	private String currentUrl;
 
@@ -20,16 +26,16 @@ public class RapidJSWebActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 
+		//				String url = "http://html5.litten.com/layers/canvaslayers.html"; //simple canvas animation demo
+		//		String url = "http://impactjs.com/drop"; //built with game library, not working
+		//		String url = "http://www.benjoffe.com/code/games/torus/"; //fast, but needs keyboard
+		//		String url = "http://clear.youyuxi.com/"; // ui demo w/ css3 (FAST!)
+		//		String url = "http://www.nihilogic.dk/labs/wolf/"; //wolfenstein, needs keyboard
+//		String url = "http://ptdef.com/"; //tower defence game, works well
+		//		String url = "http://rapidjs.com/gameNative.html"; //simple accelerometer game
 
-		String url = "http://html5.litten.com/layers/canvaslayers.html";
-		//		String url = "http://impactjs.com/drop";
-		//		String url = "http://rapidjs.com/gameNative.html";
-		//		String url = "file:///android_asset/gamePhoneGap.html";
-		//		String url = "file:///android_asset/gameNative.html";
-		//		String url = "file:///android_asset/test2.html";
-
-		this.rapidJSWebView = (RapidJSWebView) this.findViewById(R.id.rapidJSWebView);
-		rapidJSWebView.init(this, new Handler(), false);
+		this.browser = (RapidJSBrowser)this.findViewById(R.id.browser);	
+		this.browser.init(this, new Handler(), false);
 
 		loadFromIntent(getIntent(), url);
 		loadCurrentUrlWithPlugins();
@@ -58,8 +64,7 @@ public class RapidJSWebActivity extends Activity {
 	}
 
 	public void loadCurrentUrlWithPlugins(){
-		rapidJSWebView.accelerate = true;
-		rapidJSWebView.loadUrlWithPlugins(currentUrl);
+		browser.loadUrlWithPlugins(currentUrl);
 	}
 
 	/* Note: we do have to get the activityEventsModifier in *EVERY* event listener we override 
@@ -68,52 +73,52 @@ public class RapidJSWebActivity extends Activity {
 	@Override
 	public void onStart() {
 		super.onStart();
-		ActivityEventsModifier activityEventsModifier = rapidJSWebView.getActivityEventsModifier();
+		ActivityEventsModifier activityEventsModifier = browser.getActivityEventsModifier();
 		activityEventsModifier.getOnResumeModifier().run();
 	}
 
 	@Override
 	public void onResume() {
 		super.onResume();
-		ActivityEventsModifier activityEventsModifier = rapidJSWebView.getActivityEventsModifier();
+		ActivityEventsModifier activityEventsModifier = browser.getActivityEventsModifier();
 		activityEventsModifier.getOnResumeModifier().run();
 	}
 
 	@Override
 	public void onPause() {
-		ActivityEventsModifier activityEventsModifier = rapidJSWebView.getActivityEventsModifier();
+		ActivityEventsModifier activityEventsModifier = browser.getActivityEventsModifier();
 		activityEventsModifier.getOnPauseModifier().run();
 		super.onPause();
 	}
 
 	@Override
 	public void onStop() {
-		ActivityEventsModifier activityEventsModifier = rapidJSWebView.getActivityEventsModifier();
+		ActivityEventsModifier activityEventsModifier = browser.getActivityEventsModifier();
 		activityEventsModifier.getOnStopModifier().run();
 		super.onStop();
 	}
 
 	@Override
 	public void onDestroy() {
-		ActivityEventsModifier activityEventsModifier = rapidJSWebView.getActivityEventsModifier();
+		ActivityEventsModifier activityEventsModifier = browser.getActivityEventsModifier();
 		activityEventsModifier.getOnDestroyModifier().run();
 		super.onDestroy();
 	}
 
 	@Override
 	public void onRestart() {
-		ActivityEventsModifier activityEventsModifier = rapidJSWebView.getActivityEventsModifier();
+		ActivityEventsModifier activityEventsModifier = browser.getActivityEventsModifier();
 		activityEventsModifier.getOnRestartModifier().run();
 		super.onRestart();
 	}
-	
+
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
-		ActivityEventsModifier activityEventsModifier = rapidJSWebView.getActivityEventsModifier();
+		ActivityEventsModifier activityEventsModifier = browser.getActivityEventsModifier();
 		SpawnActivityForResult spawnActivityInstance = activityEventsModifier.getSpawnActivityInstance();
 		int originalRequestCode = spawnActivityInstance.getRequestCode();
 		ActivityResultCallback callbackToPlugin = spawnActivityInstance.getActivityResultCallback();
-		
+
 		if (originalRequestCode == requestCode) {
 			callbackToPlugin.onActivityResult(requestCode, resultCode, data);
 		}
@@ -121,7 +126,7 @@ public class RapidJSWebActivity extends Activity {
 
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event){
-		ActivityEventsModifier activityEventsModifier = rapidJSWebView.getActivityEventsModifier();
+		ActivityEventsModifier activityEventsModifier = browser.getActivityEventsModifier();
 
 		if (keyCode == KeyEvent.KEYCODE_BACK){
 			activityEventsModifier.getOnBackButtonModifier();
