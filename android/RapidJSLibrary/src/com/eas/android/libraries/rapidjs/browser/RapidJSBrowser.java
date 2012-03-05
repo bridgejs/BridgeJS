@@ -1,6 +1,8 @@
 package com.eas.android.libraries.rapidjs.browser;
 
 
+import java.lang.reflect.InvocationTargetException;
+
 import com.eas.android.libraries.rapidjs.pluginmanager.PluginManager;
 import com.eas.android.libraries.rapidjs.pluginmanager.activitymodifiers.ActivityEventsModifier;
 
@@ -72,6 +74,11 @@ public class RapidJSBrowser extends FrameLayout{
 
 	public void gotoBlankWebPage(){
 		webView.loadUrl("");
+	}
+
+	public void stopAndDestroyWebView() throws IllegalArgumentException, SecurityException, IllegalAccessException, InvocationTargetException, NoSuchMethodException, ClassNotFoundException{
+		Class.forName("android.webkit.WebView").getMethod("onPause", 
+				(Class[]) null).invoke(webView, (Object[]) null);
 	}
 
 	@Override

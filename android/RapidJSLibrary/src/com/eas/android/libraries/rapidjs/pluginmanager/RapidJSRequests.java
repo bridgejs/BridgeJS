@@ -25,11 +25,11 @@ public class RapidJSRequests {
 	private Activity activity;
 
 	private ActivityEventsModifier activityEventsModifier;
-	
+
 	public void addJavascriptInterface(Object obj, String interfaceName){
 		webView.addJavascriptInterface(obj, interfaceName);
 	}
-	
+
 	public RapidJSRequests(WebView webView, Activity activity, Handler handler, PluginManager pluginManager){
 		this.webView = webView;
 		this.activity = activity;
@@ -117,11 +117,15 @@ public class RapidJSRequests {
 	}
 
 	public void postJavascript(final String javascript){
-		handler.post(new Runnable(){
-			public void run() {
-				webView.loadUrl("javascript:" + javascript);
-			}
-		});
+		try {
+			handler.post(new Runnable(){
+				public void run() {
+					webView.loadUrl("javascript:" + javascript);
+				}
+			});
+		} catch(Exception e){
+			e.printStackTrace();
+		}
 	}
 
 	public void addToOnResume(Runnable onResumeTask) {

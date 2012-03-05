@@ -1,5 +1,7 @@
 package com.eas.android.rapidjs;
 
+import java.lang.reflect.InvocationTargetException;
+
 import com.eas.android.libraries.rapidjs.browser.RapidJSBrowser;
 import com.eas.android.libraries.rapidjs.pluginmanager.activitymodifiers.ActivityEventsModifier;
 import com.eas.android.libraries.rapidjs.pluginmanager.activitymodifiers.ActivityResultCallback;
@@ -34,6 +36,14 @@ public class RapidJSWebActivity extends Activity {
 		//		String url = "http://ptdef.com/"; //tower defence game, works well
 //		String url = "http://rapidjs.com/demos/gameNative.html"; //simple accelerometer game
 
+		if (browser != null){
+			try {
+				browser.stopAndDestroyWebView();
+			} catch (Exception e){
+				e.printStackTrace();
+			}
+		}
+						
 		this.browser = (RapidJSBrowser)this.findViewById(R.id.browser);	
 		this.browser.init(this, new Handler(), false);
 
@@ -95,6 +105,11 @@ public class RapidJSWebActivity extends Activity {
 	public void onStop() {
 		ActivityEventsModifier activityEventsModifier = browser.getActivityEventsModifier();
 		activityEventsModifier.getOnStopModifier().run();
+		try {
+			browser.stopAndDestroyWebView();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		super.onStop();
 	}
 
