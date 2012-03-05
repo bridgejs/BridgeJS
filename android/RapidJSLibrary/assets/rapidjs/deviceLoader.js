@@ -10,3 +10,5 @@ function __bindDeviceToAndroid(){
 }
 
 __bindDeviceToAndroid();
+
+console.log("device loaded");

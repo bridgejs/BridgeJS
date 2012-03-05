@@ -26,13 +26,13 @@ public class RapidJSWebActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 
-		//				String url = "http://html5.litten.com/layers/canvaslayers.html"; //simple canvas animation demo
+						String url = "http://html5.litten.com/layers/canvaslayers.html"; //simple canvas animation demo
 		//		String url = "http://impactjs.com/drop"; //built with game library, not working
 		//		String url = "http://www.benjoffe.com/code/games/torus/"; //fast, but needs keyboard
-//				String url = "http://clear.youyuxi.com/"; // ui demo w/ css3 (FAST!)
+		//				String url = "http://clear.youyuxi.com/"; // ui demo w/ css3 (FAST!)
 		//		String url = "http://www.nihilogic.dk/labs/wolf/"; //wolfenstein, needs keyboard
-		String url = "http://ptdef.com/"; //tower defence game, works well
-//				String url = "http://rapidjs.com/gameNative.html"; //simple accelerometer game
+		//		String url = "http://ptdef.com/"; //tower defence game, works well
+//		String url = "http://rapidjs.com/demos/gameNative.html"; //simple accelerometer game
 
 		this.browser = (RapidJSBrowser)this.findViewById(R.id.browser);	
 		this.browser.init(this, new Handler(), false);
