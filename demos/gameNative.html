@@ -13,7 +13,7 @@
 			style="position: relative; width: 400px; height: 300px">
 			<canvas id="layer1"
 				style="z-index: 1; position: absolute; left: 0px; top: 0px;"
-				height="200px" width="300">
+				height="500px" width="400">
 This text is displayed if your browser does not support HTML5 Canvas.
 </canvas>
 		</div>
@@ -59,11 +59,11 @@ This text is displayed if your browser does not support HTML5 Canvas.
 
 				dx = 0;
 				dy = 0;
-				WIDTH = 300;
-				HEIGHT = 200;
+				WIDTH = 400;
+				HEIGHT = 500;
 				x = 100;
 				y = HEIGHT/2;
-				currentSpace = 90;
+				currentSpace = 150;
 				
 				distance = 0;
 
@@ -92,15 +92,15 @@ This text is displayed if your browser does not support HTML5 Canvas.
 				wall[1] = walls[walls.length-1][1];
 				if (Math.random() < .05){
 					dir *= -1
-					dir += 2*Math.random()*dir/Math.abs(dir);
+					dir += Math.random()*dir/Math.abs(dir);
 				}
 				if (wall[0] + wall[1] > HEIGHT-rad)
 					dir = -1;
 				else if (wall[0] < rad)
 					dir = 1;
 				wall[0] += dir;
-				if (currentSpace > 50)
-					currentSpace -= .01;
+				if (currentSpace > 30)
+					currentSpace -= .05;
 				wall[1] = currentSpace;
 				walls.push(wall);
 			}
