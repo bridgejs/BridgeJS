@@ -4,7 +4,7 @@
     android:layout_height="fill_parent"
     android:orientation="vertical" >
     
-    <com.eas.android.libraries.rapidjs.browser.RapidJSBrowser
+    <org.bridgejs.android.phonebridge.library.browser.BridgeJSBrowser
         android:id="@+id/browser"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent" />
