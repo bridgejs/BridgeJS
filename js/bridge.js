@@ -1,4 +1,4 @@
-function Rapid () {
+function Bridge () {
 
 	function browserIsAndroid(){
 		return navigator.userAgent.match(/Android/i);
@@ -14,13 +14,13 @@ function Rapid () {
 	}
 
 	function recommendUserSwitchesToRapid(){
-		if(confirm("Do you want to run this website in Rapid?")) {
+		if(confirm("Do you want to run this website with the PhoneBridge browser?")) {
 			switchThisURLToRapid();
 		}
 	}
 
 	function switchThisURLToRapid(){
-		changeURLTo("rapid://" + document.URL);
+		changeURLTo("bridge://" + document.URL);
 	}
 
 	function changeURLTo(newUrl){
@@ -49,8 +49,8 @@ function Rapid () {
 //Accelerometer wrapper
 //=========================================
 //API:
-//	rapid.accelerometer.getCurrentAcceleration(onSuccess, onError)
-//	rapid.accelerometer.watchAcceleration(onSuccess, onError)
+//	bridge.accelerometer.getCurrentAcceleration(onSuccess, onError)
+//	bridge.accelerometer.watchAcceleration(onSuccess, onError)
 //=========================================
 	this.accelerometer = {};
 
@@ -104,5 +104,5 @@ function Rapid () {
 
 }
 
-var rapid = new Rapid();
+var bridge = new Bridge();
 
