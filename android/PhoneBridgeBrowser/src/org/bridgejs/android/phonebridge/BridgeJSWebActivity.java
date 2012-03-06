@@ -2,12 +2,8 @@ package org.bridgejs.android.phonebridge;
 
 import java.lang.reflect.InvocationTargetException;
 
-import org.bridgejs.android.phonebridge.library.browser.BridgeJSBrowser;
-import org.bridgejs.android.phonebridge.library.pluginmanager.activitymodifiers.ActivityEventsModifier;
-import org.bridgejs.android.phonebridge.library.pluginmanager.activitymodifiers.ActivityResultCallback;
-import org.bridgejs.android.phonebridge.library.pluginmanager.activitymodifiers.SpawnActivityForResult;
 import org.bridgejs.android.phonebridge.library.DroidBridge;
-
+import org.bridgejs.android.phonebridge.library.browser.BridgeJSBrowser;
 
 import android.app.Activity;
 import android.content.Context;
