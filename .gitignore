@@ -4,8 +4,10 @@ bin/**/*
 bin/
 *.un~
 *.swap~
+*.swp
 *.jar
 *.dex
 *.class
 *.apk
 *.ap_
+*.swp

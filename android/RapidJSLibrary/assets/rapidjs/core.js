@@ -1,1 +1,0 @@
-var ___androidExists = true
