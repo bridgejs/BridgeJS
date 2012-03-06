@@ -28,10 +28,10 @@ public class DroidBridge extends Activity{
 	protected BridgeJSBrowser browser;
 	
 	public String getUrlFromIntent(Intent i, String defaultUrl){
-		String rapidURI = i.getDataString();
+		String bridgeURI = i.getDataString();
 		String webURI = i.getStringExtra(Intent.EXTRA_TEXT);
-		if (rapidURI != null){
-			defaultUrl = parseRapidURL(i.getDataString());
+		if (bridgeURI != null){
+			defaultUrl = parseBridgeURL(i.getDataString());
 		}
 		else if (webURI != null){
 			defaultUrl = webURI;
@@ -42,10 +42,10 @@ public class DroidBridge extends Activity{
 		return defaultUrl;
 	}
 
-	public String parseRapidURL(String rapidURI) {
+	public String parseBridgeURL(String bridgeURI) {
 
-		rapidURI = rapidURI.replaceFirst("rapid://.*?/+", "");
-		return "http://" + rapidURI;
+		bridgeURI = bridgeURI.replaceFirst("bridge://.*?/+", "");
+		return "http://" + bridgeURI;
 	}
 
 	public void loadUrlWithPlugins(String url){

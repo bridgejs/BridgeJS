@@ -33,7 +33,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
 
-                <data android:scheme="rapid" />
+                <data android:scheme="bridge" />
             </intent-filter>
         </activity>
     </application>
