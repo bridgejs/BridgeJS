@@ -22,7 +22,18 @@ function __bindAccelerometerToAndroid(){
 		}, options.frequency);
 	};
 
-	window.mWatch("ondevicemotion", function(id, oldval, newval){
+//	window.mWatch("ondevicemotion", function(id, oldval, newval){
+//	navigator.accelerometer.watchAcceleration(function(acceleration){
+//	var event = {};
+//	event.accelerationIncludingGravity = {};
+//	event.accelerationIncludingGravity.x = acceleration.x;
+//	event.accelerationIncludingGravity.y = acceleration.y;
+//	event.accelerationIncludingGravity.z = acceleration.z;
+//	newval(event);
+//	}, new function(){ }, {frequency: 50});
+//	return newval;
+//	});
+	__watch(window, "ondevicemotion", function(id, oldval, newval){
 		navigator.accelerometer.watchAcceleration(function(acceleration){
 			var event = {};
 			event.accelerationIncludingGravity = {};
@@ -33,34 +44,53 @@ function __bindAccelerometerToAndroid(){
 		}, new function(){ }, {frequency: 50});
 		return newval;
 	});
-
 };
 
-if (!Object.prototype.mWatch) {
-	Object.prototype.mWatch = function (prop, handler) {
-		var oldval = this[prop], newval = oldval,
-		getter = function () {
-			return newval;
-		},
-		setter = function (val) {
-			oldval = newval;
-			return newval = handler.call(this, prop, oldval, val);
-		};
-		if (delete this[prop]) {
-			if (Object.defineProperty) {
-				Object.defineProperty(this, prop, {
-					get: getter,
-					set: setter,
-					enumerable: false,
-					configurable: true
-				});
-			} else if (Object.prototype.__defineGetter__ && Object.prototype.__defineSetter__) {
-				Object.prototype.__defineGetter__.call(this, prop, getter);
-				Object.prototype.__defineSetter__.call(this, prop, setter);
-			};
-		};
+function __watch(obj, prop, handler){
+	var oldval = obj[prop], newval = oldval,
+	getter = function () {
+		return newval;
+	},
+	setter = function (val) {
+		oldval = newval;
+		return newval = handler.call(obj, prop, oldval, val);
 	};
+	delete obj[prop];
+	if (Object.defineProperty) {
+		Object.defineProperty(obj, prop, {
+			get: getter,
+			set: setter,
+			enumerable: false,
+			configurable: true
+		});
+	}
 };
+
+//if (!Object.prototype.mWatch) {
+//Object.prototype.mWatch = function (prop, handler) {
+//var oldval = this[prop], newval = oldval,
+//getter = function () {
+//return newval;
+//},
+//setter = function (val) {
+//oldval = newval;
+//return newval = handler.call(this, prop, oldval, val);
+//};
+//if (delete this[prop]) {
+//if (Object.defineProperty) {
+//Object.defineProperty(this, prop, {
+//get: getter,
+//set: setter,
+//enumerable: false,
+//configurable: true
+//});
+//} else if (Object.prototype.__defineGetter__ && Object.prototype.__defineSetter__) {
+//Object.prototype.__defineGetter__.call(this, prop, getter);
+//Object.prototype.__defineSetter__.call(this, prop, setter);
+//};
+//};
+//};
+//};
 
 __bindAccelerometerToAndroid();
 console.log("accelerometer loaded");
