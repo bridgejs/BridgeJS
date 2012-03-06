@@ -9,8 +9,8 @@ app.get('/server.js', function(req, res){
 	res.sendfile(__dirname + '/server.js');
 });
 
-app.get('/rapid.js', function(req, res){
-	res.sendfile(__dirname + '/js/rapid.js');
+app.get('/bridge.js', function(req, res){
+	res.sendfile(__dirname + '/js/bridge.js');
 });
 
 app.get('/demos/gameNative.html', function(req, res){
