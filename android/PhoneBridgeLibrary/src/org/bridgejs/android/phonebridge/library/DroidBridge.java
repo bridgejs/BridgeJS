@@ -4,7 +4,6 @@ import org.bridgejs.android.phonebridge.library.browser.BridgeJSBrowser;
 import org.bridgejs.android.phonebridge.library.pluginmanager.activitymodifiers.ActivityEventsModifier;
 import org.bridgejs.android.phonebridge.library.pluginmanager.activitymodifiers.ActivityResultCallback;
 import org.bridgejs.android.phonebridge.library.pluginmanager.activitymodifiers.SpawnActivityForResult;
-import org.bridgejs.android.phonebridge.library.R;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -14,21 +13,11 @@ import android.view.KeyEvent;
 
 public class DroidBridge extends Activity{
 
-	private BridgeJSBrowser browser;
+	protected BridgeJSBrowser browser;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.main);
-		if (browser != null){
-			try {
-				browser.stopAndDestroyWebView();
-			} catch (Exception e){
-				e.printStackTrace();
-			}
-		}
-		super.onCreate(savedInstanceState);
-		this.browser = (BridgeJSBrowser)findViewById(R.id.browser);
 		this.browser.init(this, new Handler(), false);
 	}
 

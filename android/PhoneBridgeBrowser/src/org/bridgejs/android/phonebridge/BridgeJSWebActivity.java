@@ -1,22 +1,18 @@
 package org.bridgejs.android.phonebridge;
 
-import java.lang.reflect.InvocationTargetException;
 
 import org.bridgejs.android.phonebridge.library.DroidBridge;
+import org.bridgejs.android.phonebridge.library.R;
 import org.bridgejs.android.phonebridge.library.browser.BridgeJSBrowser;
 
-import android.app.Activity;
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.view.KeyEvent;
-import android.view.inputmethod.InputMethodManager;
 
 public class BridgeJSWebActivity extends DroidBridge {
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
+		setContentView(R.layout.main);
+		browser = (BridgeJSBrowser)findViewById(R.id.browser);
 		super.onCreate(savedInstanceState);
 //		String url = "http://reddit.com";
 
@@ -31,6 +27,5 @@ public class BridgeJSWebActivity extends DroidBridge {
 				
 		url = getUrlFromIntent(getIntent(), url);
 		loadUrlWithPlugins(url);
-
 	}
 }
