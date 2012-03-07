@@ -62,7 +62,7 @@ public class BridgeJSBrowser extends FrameLayout{
 
 	private void createAndAddProgressBar(Context context){
 		this.progressBar = new ProgressBar(context, null, android.R.attr.progressBarStyleHorizontal);
-		this.progressBarUpdater = new ProgressBarUpdater(progressBar);
+		this.progressBarUpdater = new ProgressBarUpdater(progressBar, new Handler());
 
 		FrameLayout.LayoutParams progressBarLayout = 
 				new FrameLayout.LayoutParams(
