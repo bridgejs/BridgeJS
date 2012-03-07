@@ -104,5 +104,15 @@ function Bridge () {
 
 }
 
+//=========================================
+//Geolocation wrapper
+//=========================================
+//API:
+//	bridge.geolocation.getCurrentAcceleration(onSuccess, onError)
+//	bridge.geolocation.watchAcceleration(onSuccess, onError)
+//=========================================
+
+
+
 var bridge = new Bridge();
 
