@@ -102,7 +102,6 @@ function Bridge () {
 	//accelerometer.getCurrentAcceleration = 
 	//accelerometer.watchAcceleration = 
 
-}
 
 //=========================================
 //Geolocation wrapper
@@ -111,8 +110,32 @@ function Bridge () {
 //	bridge.geolocation.getCurrentAcceleration(onSuccess, onError)
 //	bridge.geolocation.watchAcceleration(onSuccess, onError)
 //=========================================
+    this.geolocation = {};
 
+	function browserSupportsWebkitGeolocation(){
+		return true; //TODO: I don't know how to actually check this
+	}
 
+    //TODO: Support all the options
+	if (browserIsRapid()){
+		this.geolocation.getCurrentPosition = navigator.geolocation.getCurentPosition;
+		this.geolocation.watchPosition = navigator.geolocation.watchPosition;
+	}
+	if (browserSupportsPhoneGap()){
+		this.geolocation.getCurrentPosition = navigator.accelerometer.getCurentPosition;
+		this.geolocation.watchPosition = navigator.accelerometer.watchPosition;
+	}
+	else if (browserSupportsWebkitGeolocation()){
+	    this.accelerometer.getCurrentLocation = navigator.accelerometer.getCurrentPosition;
+        this.accelerometer.watchPosition = navigator.accelerometer.watchPosition; //TODO: implement this
+    }
+	else {
+		console.log("Device does not accept geolocation!");
+	}
+	//accelerometer.getCurrentAcceleration = 
+	//accelerometer.watchAcceleration = 
+
+}
 
 var bridge = new Bridge();
 
