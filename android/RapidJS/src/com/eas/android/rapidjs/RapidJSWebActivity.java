@@ -21,10 +21,10 @@ public class RapidJSWebActivity extends Activity {
 		setContentView(R.layout.main);
 
 
-		String url = "http://html5.litten.com/layers/canvaslayers.html";
+		//String url = "http://html5.litten.com/layers/canvaslayers.html";
 		//		String url = "http://impactjs.com/drop";
 		//		String url = "http://rapidjs.com/gameNative.html";
-		//		String url = "file:///android_asset/gamePhoneGap.html";
+				String url = "file:///android_asset/testGeolocation.html";
 		//		String url = "file:///android_asset/gameNative.html";
 		//		String url = "file:///android_asset/test2.html";
 
