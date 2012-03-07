@@ -32,6 +32,7 @@ public class BridgeJSBrowser extends FrameLayout{
 
 	private BridgeJSWebView webView;
 	private ProgressBar progressBar;
+	private ProgressBarUpdater progressBarUpdater;
 
 	private boolean accelerateCanvas;
 
@@ -40,18 +41,19 @@ public class BridgeJSBrowser extends FrameLayout{
 	public void init(Activity activity, Handler handler, boolean accelerateCanvas){
 		this.accelerateCanvas = accelerateCanvas;
 		this.webView = new BridgeJSWebView(activity.getApplicationContext());
-		initPluginManager(activity, handler);
 		createAndAddProgressBar(activity.getApplicationContext());
+		initPluginManager(activity, handler);
 		createAndAddWebView(activity, handler);
 	}
 
 	private void initPluginManager(Activity activity, Handler handler){
-		this.pluginManager = new PluginManager(webView, activity, handler, accelerateCanvas);
+		this.pluginManager = new PluginManager(webView, activity, handler, progressBarUpdater, accelerateCanvas);
 		pluginManager.initPlugins();
 	}
 
 	private void createAndAddProgressBar(Context context){
 		this.progressBar = new ProgressBar(context, null, android.R.attr.progressBarStyleHorizontal);
+		this.progressBarUpdater = new ProgressBarUpdater(progressBar);
 
 		FrameLayout.LayoutParams progressBarLayout = 
 				new FrameLayout.LayoutParams(
@@ -63,7 +65,7 @@ public class BridgeJSBrowser extends FrameLayout{
 
 	private void createAndAddWebView(Activity activity, Handler handler){
 		webView.init(activity, handler);
-		webView.setWebChromeClient(new BridgeJSWebChromeClient(progressBar));
+		webView.setWebChromeClient(new BridgeJSWebChromeClient(progressBarUpdater));
 		webView.setWebViewClient(new BridgeJSWebViewClient(pluginManager, this));
 		this.addView(webView);
 	}
@@ -78,8 +80,7 @@ public class BridgeJSBrowser extends FrameLayout{
 	}
 
 	public void stopAndDestroyWebView() throws IllegalArgumentException, SecurityException, IllegalAccessException, InvocationTargetException, NoSuchMethodException, ClassNotFoundException{
-		Class.forName("android.webkit.WebView").getMethod("onPause", 
-				(Class[]) null).invoke(webView, (Object[]) null);
+		Class.forName("android.webkit.WebView").getMethod("onPause", (Class[]) null).invoke(webView, (Object[]) null);
 	}
 
 	@Override

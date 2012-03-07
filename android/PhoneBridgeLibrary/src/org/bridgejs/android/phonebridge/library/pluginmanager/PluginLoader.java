@@ -23,11 +23,14 @@ public class PluginLoader {
 		final class ContentLoaderTask extends AsyncTask<String, Void, String> {
 			@Override
 			protected String doInBackground(String... strings) {
+				requests.setProgressBar(10);
 				final String content = getContent(url);
 				return content;
 			}
 			@Override
 			protected void onPostExecute(String content) {
+//				System.out.println(content);
+				requests.setProgressBar(50);
 				webView.loadDataWithBaseURL(url, content, "text/html", "utf-8", null);
 			}
 		}

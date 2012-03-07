@@ -1,5 +1,12 @@
 package org.bridgejs.android.phonebridge.library;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.URL;
+
 import org.bridgejs.android.phonebridge.library.browser.BridgeJSBrowser;
 import org.bridgejs.android.phonebridge.library.pluginmanager.activitymodifiers.ActivityEventsModifier;
 import org.bridgejs.android.phonebridge.library.pluginmanager.activitymodifiers.ActivityResultCallback;
@@ -12,7 +19,7 @@ import android.os.Handler;
 import android.view.KeyEvent;
 
 public class DroidBridge extends Activity{
-	
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -26,7 +33,7 @@ public class DroidBridge extends Activity{
 	}
 
 	protected BridgeJSBrowser browser;
-	
+
 	public String getUrlFromIntent(Intent i, String defaultUrl){
 		String bridgeURI = i.getDataString();
 		String webURI = i.getStringExtra(Intent.EXTRA_TEXT);
@@ -38,7 +45,7 @@ public class DroidBridge extends Activity{
 		}
 
 		System.out.println("URI: " + defaultUrl);
-		
+
 		return defaultUrl;
 	}
 

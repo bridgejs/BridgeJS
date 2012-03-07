@@ -9,6 +9,7 @@ import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import org.bridgejs.android.phonebridge.library.browser.ProgressBarUpdater;
 import org.bridgejs.android.phonebridge.library.pluginmanager.activitymodifiers.ActivityEventsModifier;
 
 
@@ -26,15 +27,18 @@ public class PluginRequests {
 	private Activity activity;
 
 	private ActivityEventsModifier activityEventsModifier;
+	
+	private ProgressBarUpdater progressBarUpdater;
 
 	public void addJavascriptInterface(Object obj, String interfaceName){
 		webView.addJavascriptInterface(obj, interfaceName);
 	}
 
-	public PluginRequests(WebView webView, Activity activity, Handler handler, PluginManager pluginManager){
+	public PluginRequests(WebView webView, ProgressBarUpdater progressBarUpdater, Activity activity, Handler handler, PluginManager pluginManager){
 		this.webView = webView;
 		this.activity = activity;
 		this.handler = handler;
+		this.progressBarUpdater = progressBarUpdater;
 
 		this.activityEventsModifier = new ActivityEventsModifier(activity);
 	}
@@ -63,37 +67,36 @@ public class PluginRequests {
 			return downloadUrlData(url);
 		}
 	}
-
+	
+	public void setProgressBar(int progress){
+		progressBarUpdater.setProgress(progress);
+	}
+	
 	public String downloadUrlData(String urlString){
 		InputStream urlInputStream = null;
 		String content = "";
-		System.out.println(urlString);
 		try {
 			URL url = new URL(urlString);
 			urlInputStream = url.openStream();
-			DataInputStream urlDataInputStream = new DataInputStream(new BufferedInputStream(urlInputStream));
-			String line = "";
-			while ((line = urlDataInputStream.readLine()) != null) {
-				if (!line.startsWith("//"))
-					content += line + "\n";
-			}
+			content = getDataFromInputStream(urlInputStream);
+			urlInputStream.close();
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		if (urlInputStream != null){
-			try {
-				urlInputStream.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
 		return content;
 	}
 
 	public String getBridgeJSAsset(String asset){
-		return getLocalAsset("bridgejs/" + asset);
+		String content = "";;
+		try {
+			URL url = this.getClass().getClassLoader().getResource("org/bridgejs/android/phonebridge/library/bridgejs/" + asset);
+			content = getDataFromInputStream(url.openStream());
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+		return content;
 	}
 
 	public String getLocalAsset(String asset){
@@ -101,14 +104,7 @@ public class PluginRequests {
 		String content = "";
 		try{
 			InputStream is = getAssetManager().open(asset);
-			InputStreamReader isr = new InputStreamReader(is);
-			BufferedReader br = new BufferedReader(isr);
-
-			String line;
-			while (( line = br.readLine()) != null) {
-				if (!line.startsWith("//"))
-					content += line + "\n";
-			}
+			content = getDataFromInputStream(is);
 			is.close(); 
 		}
 		catch(Exception e){
@@ -116,7 +112,19 @@ public class PluginRequests {
 		}
 		return content;
 	}
-
+	
+	public String getDataFromInputStream(InputStream inputStream) throws IOException{
+		String content = "";
+		DataInputStream urlDataInputStream = new DataInputStream(new BufferedInputStream(inputStream));
+		String line = "";
+		while ((line = urlDataInputStream.readLine()) != null) {
+			if (!line.startsWith("//"))
+				content += line + "\n";
+		}
+		return content;
+	}
+	
+	
 	public void postJavascript(final String javascript){
 		try {
 			handler.post(new Runnable(){
