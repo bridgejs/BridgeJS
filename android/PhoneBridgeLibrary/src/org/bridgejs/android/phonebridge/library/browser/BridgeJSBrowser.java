@@ -39,11 +39,20 @@ public class BridgeJSBrowser extends FrameLayout{
 	private PluginManager pluginManager;
 
 	public void init(Activity activity, Handler handler, boolean accelerateCanvas){
+
+		FrameLayout.LayoutParams layout = 
+				new FrameLayout.LayoutParams(
+						FrameLayout.LayoutParams.FILL_PARENT, 
+						FrameLayout.LayoutParams.FILL_PARENT);
+		this.setLayoutParams(layout);
+
 		this.accelerateCanvas = accelerateCanvas;
 		this.webView = new BridgeJSWebView(activity.getApplicationContext());
 		createAndAddProgressBar(activity.getApplicationContext());
 		initPluginManager(activity, handler);
 		createAndAddWebView(activity, handler);
+		this.addView(webView);
+		this.addView(progressBar);
 	}
 
 	private void initPluginManager(Activity activity, Handler handler){
@@ -60,14 +69,18 @@ public class BridgeJSBrowser extends FrameLayout{
 						FrameLayout.LayoutParams.FILL_PARENT, 
 						FrameLayout.LayoutParams.WRAP_CONTENT);
 		progressBar.setLayoutParams(progressBarLayout);
-		this.addView(progressBar);
 	}
 
 	private void createAndAddWebView(Activity activity, Handler handler){
 		webView.init(activity, handler);
 		webView.setWebChromeClient(new BridgeJSWebChromeClient(progressBarUpdater));
 		webView.setWebViewClient(new BridgeJSWebViewClient(pluginManager, this));
-		this.addView(webView);
+
+		FrameLayout.LayoutParams webViewLayout = 
+				new FrameLayout.LayoutParams(
+						FrameLayout.LayoutParams.FILL_PARENT, 
+						FrameLayout.LayoutParams.FILL_PARENT);
+		webView.setLayoutParams(webViewLayout);
 	}
 
 	public void loadUrlWithPlugins(final String url){

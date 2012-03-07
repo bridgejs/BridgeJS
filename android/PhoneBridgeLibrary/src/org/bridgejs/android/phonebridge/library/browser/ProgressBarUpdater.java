@@ -11,11 +11,10 @@ public class ProgressBarUpdater {
 	}
 	
 	public void setProgress(int progressPercent){
-		progressBar.setProgress(progressPercent);
 		if (progressPercent >= 100)
 			progressBar.setVisibility(ProgressBar.GONE);
-//		else 
-//			progressBar.setVisibility(ProgressBar.VISIBLE);
-		progressBar.invalidate();
+		else 
+			progressBar.setVisibility(ProgressBar.VISIBLE);
+		progressBar.setProgress(progressPercent);
 	}
 }

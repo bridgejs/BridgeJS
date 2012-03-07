@@ -1,12 +1,5 @@
 package org.bridgejs.android.phonebridge.library;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.URL;
-
 import org.bridgejs.android.phonebridge.library.browser.BridgeJSBrowser;
 import org.bridgejs.android.phonebridge.library.pluginmanager.activitymodifiers.ActivityEventsModifier;
 import org.bridgejs.android.phonebridge.library.pluginmanager.activitymodifiers.ActivityResultCallback;
