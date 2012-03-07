@@ -25,7 +25,8 @@ public class BridgeJSWebActivity extends DroidBridge {
 		//		String url = "http://bridgejs.com/demos/gameNative.html"; //simple accelerometer game
 		//		String url = "http://www.webworks.dk/enginetest/?hn"; //gta clone
 				
-		url = getUrlFromIntent(getIntent(), url);
+		String defaultUrl = url;
+		url = getUrlFromIntent(getIntent(), defaultUrl);
 		loadUrlWithPlugins(url);
 	}
 }
