@@ -21,4 +21,8 @@ app.get('/demos/gamePhoneGap.html', function(req, res){
 	res.sendfile(__dirname + '/demos/gamePhoneGap.html');
 });
 
+app.get('/launcher', function(req, res){
+	res.sendfile(__dirname + '/launcher/launcher.html');
+});
+
 app.listen(80);
