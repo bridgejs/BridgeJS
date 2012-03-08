@@ -32,10 +32,13 @@ An `alert` will pop up with:
 ## TODO
 
 * Implement a permission system similar to Android's for potentially dangerous native API calls
+* Implement a check so that a user will be redirected to the Android market if and only if he doesn't have PhoneBridge installed on a bridge:// URI
+* Implement timeout and other options in Geolocation plugin
 * Simplify the plugin framework with Java's annotations
 * Support *ALL* of PhoneGap's APIs so any existing PhoneGap code will be able to run directly from a web browser.
 * Add more plugins (at least implement all of PhoneGap's plugiins)
 * Add more example applications and plugins
+* Add more control to the order of code in the activity events for plugins
 
 
 ## Warning 

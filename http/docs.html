@@ -65,11 +65,12 @@
 					<div class="well sidebar-nav">
 						<ul class="nav nav-list">
 							<li class="nav-header">Getting Started</li>
-							<li><a href="#section_1">Section 1</a></li>
-							<li><a href="#section_2">Section 2</a></li>
-							<li><a href="#section_3">Section 3</a></li>
-							<li><a href="#section_4">Section 4</a></li>
-							<li><a href="#section_5">Section 5</a></li>					
+							<li><a href="#section_1">Warning</a></li>
+							<li><a href="#section_2">Core</a></li>
+							<li><a href="#section_3">Accelerometer</a></li>
+							<li><a href="#section_4">Device</a></li>
+							<li><a href="#section_5">Geolocation</a></li>
+							<li><a href="#section_6">Writing Plugins</a></li>					
 						</ul>
 					</div>
 				</div>
@@ -77,92 +78,153 @@
 				
 				<div class="span9 offset3">
 					<section id="section_1">
-						<h2>Section 1</h2>
-						<p>Here's how you would, for example, herp the derp.  Or, if you'd like, you could probably derp the herp too.  To get started simple do something like this:</p>
-<pre class="prettyprint linenums: lang-js">
-this.accelerometer = {};
+                        <h2>Warning</h2>
+                        <p>bridgeJS APIs are currently <i>experimental</i> and subject to change</p>
+                    </section>
 
-	function browserSupportsWebkitAccelerometer(){
-		return true; //TODO: I don't know how to actually check this
-	}
-
-	if (browserIsRapid()){
-		this.accelerometer.getCurrentAcceleration = navigator.accelerometer.getCurentAcceleration;
-		this.accelerometer.watchAcceleration = navigator.accelerometer.watchAcceleration;
-	}
-	else if (browserSupportsPhoneGap()){
-		this.accelerometer.getCurrentAcceleration = navigator.accelerometer.getCurentAcceleration;
-		this.accelerometer.watchAcceleration = navigator.accelerometer.watchAcceleration;
-	}
-</pre>
-					</section>
-					
 					<section id="section_2">
-						<h2>Section 2</h2>
-						<p>Here's how you would, for example, herp the derp.  Or, if you'd like, you could probably derp the herp too.  To get started simple do something like this:</p>
-<pre class="prettyprint linenums: lang-js">
-this.accelerometer = {};
+						<h2>Core</h2>
+						<p>In order to use any native specific features in bridgeJS, you have two options: </p>
+						<h4>bridge.android.recommendNative()</h4>
+                        <p>Spawn a confirm box, on "yes" redirect user to PhoneBridge</p>
+<pre class="prettyprint lang-js">
+bridge.android.recommendNative();
 
-	function browserSupportsWebkitAccelerometer(){
-		return true; //TODO: I don't know how to actually check this
-	}
-
-	if (browserIsRapid()){
-		this.accelerometer.getCurrentAcceleration = navigator.accelerometer.getCurentAcceleration;
-		this.accelerometer.watchAcceleration = navigator.accelerometer.watchAcceleration;
-	}
-	else if (browserSupportsPhoneGap()){
-		this.accelerometer.getCurrentAcceleration = navigator.accelerometer.getCurentAcceleration;
-		this.accelerometer.watchAcceleration = navigator.accelerometer.watchAcceleration;
-	}
+if (bridge.android.browserIsBridge()) {
+    // user is running the HTML5 page in a non-bridge browser
+}
+else {
+    //user is running the HTML5 page in PhoneBridge
+}
+</pre>
+						<h4>bridge.android.requireNative()</h4>
+                        <p>If your application depends on some of the features only available to PhoneBridge call:</p>
+<pre class="prettyprint lang-js">
+bridge.android.requireNative();
+//crucial bridge native API calls
+</pre>
+						<h4>bridge.android.browserIsBridge()</h4>
+                        <p>Returns true if browser is bridge, false otherwise</p>
+<pre class="prettyprint lang-js">
+if (bridge.android.browserIsBridge()) {
+    // user is running the HTML5 page in a non-bridge browser
+}
+else {
+    //user is running the HTML5 page in PhoneBridge
+}
 </pre>
 					</section>
-					
+
 					<section id="section_3">
-						<h2>Section 3</h2>
-						<p>Here's how you would, for example, herp the derp.  Or, if you'd like, you could probably derp the herp too.  To get started simple do something like this:</p>
-<pre class="prettyprint linenums: lang-js">
-this.accelerometer = {};
-
-	function browserSupportsWebkitAccelerometer(){
-		return true; //TODO: I don't know how to actually check this
-	}
-
-	if (browserIsRapid()){
-		this.accelerometer.getCurrentAcceleration = navigator.accelerometer.getCurentAcceleration;
-		this.accelerometer.watchAcceleration = navigator.accelerometer.watchAcceleration;
-	}
-	else if (browserSupportsPhoneGap()){
-		this.accelerometer.getCurrentAcceleration = navigator.accelerometer.getCurentAcceleration;
-		this.accelerometer.watchAcceleration = navigator.accelerometer.watchAcceleration;
-	}
+						<h2>Accelerometer</h2>
+						<p>This plugin will fail safely through to Webkit's native HTML5 implementation, if the user is not running PhoneBridge</p>
+                        <h4>Acceleration object</h4>
+<pre class="prettyprint lang-js">
+acceleration.x; //acceleration in the x direction
+acceleration.y; //acceleration in the y direction
+acceleration.z; //acceleration in the z direction
+acceleration.timestamp; //the time recorded by the device the moment the data was recorded
+</pre>
+						<h4>bridge.accelerometer.getCurrentAcceleration(onSuccess, onError)</h4>
+						<p>Get the current acceleration of the device, on success call onSuccess(acceleration) once and on an error call onError() once</p>
+<pre class="prettyprint lang-js">
+function onSuccess(acceleration) {
+    console.log("Success: x:" + acceleration.x + ", y:" + 
+                    acceleration.y + ", z:" + acceleration.z + " at " + timestamp);
+};
+function onError() {
+    console.log("Error");
+};
+bridge.accelerometer.getCurrentAcceleration(onSuccess, onError);
+</pre>
+						<h4>bridge.accelerometer.watchAcceleration(onSuccess, onError)</h4>
+                        <p>Watch the change of acceleration on the device, on each success call onSuccess(acceleration) and on each error call OnError() </p>
+<pre class="prettyprint lang-js">
+function onSuccess(acceleration) {
+    console.log("Success again: x:" + acceleration.x + ", y:" + 
+                    acceleration.y + ", z:" + acceleration.z + " at " + timestamp);
+};
+function onError() {
+    console.log("Error");
+};
+bridge.accelerometer.watchCurrentAcceleration(onSuccess, onError);
 </pre>
 					</section>
 					
 					<section id="section_4">
-						<h2>Section 4</h2>
-						<p>Here's how you would, for example, herp the derp.  Or, if you'd like, you could probably derp the herp too.  To get started simple do something like this:</p>
-<pre class="prettyprint linenums: lang-js">
-this.accelerometer = {};
+						<h2>Device</h2>
+                        <p>This plugin will NOT safely use Webkit's HTML5 implementation of device. Device will be undefined in all browsers except PhoneBridge and PhoneGap.  </p>						
 
-	function browserSupportsWebkitAccelerometer(){
-		return true; //TODO: I don't know how to actually check this
-	}
-
-	if (browserIsRapid()){
-		this.accelerometer.getCurrentAcceleration = navigator.accelerometer.getCurentAcceleration;
-		this.accelerometer.watchAcceleration = navigator.accelerometer.watchAcceleration;
-	}
-	else if (browserSupportsPhoneGap()){
-		this.accelerometer.getCurrentAcceleration = navigator.accelerometer.getCurentAcceleration;
-		this.accelerometer.watchAcceleration = navigator.accelerometer.watchAcceleration;
-	}
+<pre class="prettyprint lang-js">
+//TODO
 </pre>
 					</section>
 					
 					<section id="section_5">
-						<h2>Section 5</h2>
-						<p>Some other stuff, maybe without code.</p>
+						<h2>Geolocation</h2>
+                        <p>This plugin will NOT safely use Webkit's HTML5 implementation of geolocation. This documentation applies only to these API calls running in PhoneBridge </p>
+                        <h4>Position and Coords objects</h4>
+<pre class="prettyprint lang-js">
+position.coords.latitude = latitude; //The lattitude of the device
+position.coords.longitude = longitude; //The longitude of the device
+position.coords.accuracy = accuracy; //The accuracy in meters of the measurement
+                                        //(60 means within 60 meters of given coordinates)
+position.coords.altitude = altitude; //The altitude of the measurement
+position.coords.bearing = bearing; //The bearing of the measurement
+position.coords.provider = provider; //The provider, a string (usually gps)
+position.coords.speed = speed; //The speed of the device
+position.coords.time = time; //The time as recorded by the internal location listener API
+
+position.timestamp = timestamp; //The time as recorded by the plugin
+</pre>
+                        <h4>bridge.geolocation.getCurrentPosition(onSuccess, onError)</h4>
+                        <p>Try to get the current position of the device and enable the location service if it is not enabled already. onSuccess(position) will return within 10 seconds (if there is no GPS satellite in range before 10 seconds pass call onError())</p>
+<pre class="prettyprint lang-js">
+function onSuccess(position) {
+    console.log("Success! I'm at Lat:" + position.coords.latitude + 
+                        ", Long:" + position.coords.longitude);
+};
+function onError() {
+    console.log("Error");
+};
+bridge.geolocation.getCurrentPosition(onSuccess, onError);
+</pre>
+                        <h4>bridge.geolocation.isEnabled()</h4>
+                        <p>Return true if the location service is enabled, false otherwise</p>
+<pre class="prettyprint lang-js">
+if(bridge.geolocation.isEnabled()) {
+    console.log("The location service is enabled"); //the battery will drain fast!
+}
+else {
+    console.log("The location service is not enabled"); //the battery will not drain too fast
+}
+</pre>
+
+                        <h4>bridge.geolocation.enableLocationService()</h4>
+                        <p>Enable the location service (this may take a few seconds to fully enable). Note: battery will drain significantly faster than if location service is off</p>
+<pre class="prettyprint lang-js">
+//location service is off
+bridge.geolocation.enableLocationService();
+//location service is on
+</pre>
+
+                        <h4>bridge.geolocation.disableLocationService()</h4>
+                        <p>Disable the location service (this may take a few seconds to fully disable). Note: it is wise to disable the location service when you don't need to access the user's location as this saves battery</p>
+<pre class="prettyprint lang-js">
+//onSuccess, onError defined up here
+bridge.getCurrentPosition(onSuccess, onError);
+
+//some code that relys on a lot of getCurrentPosition calls
+
+function doneWithLocationService() {
+   bridge.geolocation.disableLocationService(); //save the battery
+}
+</pre>
+					</section>
+					
+					<section id="section_6">
+						<h2>Writing Plugins</h2>
+						<p>TODO</p>
 					</section>
 					
 					<div class="clear"></div>
