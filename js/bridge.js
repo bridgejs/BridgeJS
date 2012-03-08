@@ -62,7 +62,7 @@ function Bridge () {
 		this.accelerometer.getCurrentAcceleration = navigator.accelerometer.getCurentAcceleration;
 		this.accelerometer.watchAcceleration = navigator.accelerometer.watchAcceleration;
 	}
-	if (browserSupportsPhoneGap()){
+	else if (browserSupportsPhoneGap()){
 		this.accelerometer.getCurrentAcceleration = navigator.accelerometer.getCurentAcceleration;
 		this.accelerometer.watchAcceleration = navigator.accelerometer.watchAcceleration;
 	}
@@ -118,16 +118,13 @@ function Bridge () {
 
     //TODO: Support all the options
 	if (browserIsRapid()){
-		this.geolocation.getCurrentPosition = navigator.geolocation.getCurentPosition;
-		this.geolocation.watchPosition = navigator.geolocation.watchPosition;
+
 	}
-	if (browserSupportsPhoneGap()){
-		this.geolocation.getCurrentPosition = navigator.accelerometer.getCurentPosition;
-		this.geolocation.watchPosition = navigator.accelerometer.watchPosition;
+	else if (browserSupportsPhoneGap()){
 	}
+
 	else if (browserSupportsWebkitGeolocation()){
-	    this.accelerometer.getCurrentLocation = navigator.accelerometer.getCurrentPosition;
-        this.accelerometer.watchPosition = navigator.accelerometer.watchPosition; //TODO: implement this
+
     }
 	else {
 		console.log("Device does not accept geolocation!");
