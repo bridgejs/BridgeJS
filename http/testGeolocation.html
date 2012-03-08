@@ -10,10 +10,11 @@
         <p> Longitude: <b id="longitude">Unknown</b></p>
         <p> Altitude: <b id="altitude">Unknown</b></p>
         <p> Accuracy: <b id="accuracy">Unknown</b></p>
-        <p> Altitude Accuracy: <b id="altitude_accuracy">Unknown</b></p>
-        <p> Heading: <b id="heading">Unknown</b></p>
+        <p> Bearing: <b id="bearing">Unknown</b></p>
         <p> Speed: <b id="speed">Unknown</b></p>
+        <p> Time: <b id="time">Unknown</b></p>
         <p> Timestamp: <b id="timestamp">Unknown</b></p>
+        I FUCKING UPDATED THE OGDGAME THNG
         <section>
         <div id="canvasesdiv"
             style="position: relative; width: 400px; height: 300px">
@@ -23,38 +24,54 @@
             This text is displayed if your browser does not support HTML5 Canvas.
             </canvas>
         </div>
+        
+            <input type="button" value="Get Current Position" onclick="buttontest" />
+        
         <script src="http://bridgejs.com/bridge.js"></script>
         <script type="text/javascript">
+        
             bridge.android.recommendNative();
 
-			var latatitudeHTML = document.getElementById("latitude");
+			var latitudeHTML = document.getElementById("latitude");
 			var longitudeHTML = document.getElementById("longitude");
 			var altitudeHTML = document.getElementById("altitude");
 			var accuracyHTML = document.getElementById("accuracy");
-			var altitudeAccuracyHTML = document.getElementById("altitude_accuracy");
-			var headingHTML = document.getElementById("heading");
+			var bearingHTML = document.getElementById("bearing");
 			var speedHTML = document.getElementById("speed");
+			var timeHTML = document.getElementById("time");
 			var timestampHTML = document.getElementById("timestamp");
 
-            var onSuccess = function(position) {
-                latitidudeHTML.innerHTML = position.coords.latitude;
+            function onSuccess(position) {
+                latitudeHTML.innerHTML = position.coords.latitude;
                 longitudeHTML.innerHTML = position.coords.longitude;
                 altitudeHTML.innerHTML = position.coords.altitude;
-                altitudeAccuracyHTML.innerHTML = position.coords.altitude_accuracy;
-                headingHTML.innerHTML = position.coords.heading;
+                accuracyHTML.innerHTML = position.coords.accuracy;
                 speedHTML.innerHTML = position.coords.speed;
-                timestampHTML.innerHTML = position.coords.timestamp;
+                bearingHTML.innerHTML = position.coords.bearing;
+                timestampHTML.innerHTML = position.timestamp;
+                timeHTML.innerHTML = position.coords.time;
             }
 
-            var onError = function(position) {
-                console.log("Error " + position);
+            function onError(position) {
+                console.log("Error: " + position);
             }
-
-
+            
+            function buttonPressed() {
+            	console.log("Before I call the native function");
+            	bridge.geolocation.getCurrentPosition(onSuccess, onError);
+            	console.log("Pressed the button");
+            }
+            
+            setTimeout("navigator.geolocation.disableLocationService(); console.log('timed out')", 10000);
+            
+            buttonPressed();
 
             </script>
-            <button type="button" onclick='bridge.android.getCurrentLocation(onSuccess, onError)'>
-                Get Current Location </button>
+            
+            <form>
+            	<input type="submit" value="Get Current Position" onClick="buttonPressed()" />
+            </form>
+            
             </section>
         </body>
     </html>
