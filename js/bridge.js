@@ -62,7 +62,7 @@ function Bridge () {
 		this.accelerometer.getCurrentAcceleration = navigator.accelerometer.getCurentAcceleration;
 		this.accelerometer.watchAcceleration = navigator.accelerometer.watchAcceleration;
 	}
-	if (browserSupportsPhoneGap()){
+	else if (browserSupportsPhoneGap()){
 		this.accelerometer.getCurrentAcceleration = navigator.accelerometer.getCurentAcceleration;
 		this.accelerometer.watchAcceleration = navigator.accelerometer.watchAcceleration;
 	}
@@ -98,6 +98,38 @@ function Bridge () {
 	}
 	else {
 		console.log("Device does not accept accelerometer!");
+	}
+	//accelerometer.getCurrentAcceleration = 
+	//accelerometer.watchAcceleration = 
+
+
+//=========================================
+//Geolocation wrapper
+//=========================================
+//API:
+//	bridge.geolocation.getCurrentPosition(onSuccess, onError)
+//	bridge.geolocation.watchAcceleration(onSuccess, onError)
+//=========================================
+    this.geolocation = {};
+
+	function browserSupportsWebkitGeolocation(){
+		return true; //TODO: I don't know how to actually check this
+	}
+
+    //TODO: Support all the options
+	if (browserIsRapid()){
+		this.geolocation.getCurrentPosition = navigator.geolocation.getCurrentPosition;
+	}
+	else if (browserSupportsPhoneGap()){
+		this.geolocation.getCurrentPosition = navigator.geolocation.getCurrentPosition;
+	}
+
+	else if (browserSupportsWebkitGeolocation()){
+		this.geolocation.getCurrentPosition = navigator.geolocation.getCurrentPosition;
+
+    }
+	else {
+		console.log("Device does not accept geolocation!");
 	}
 	//accelerometer.getCurrentAcceleration = 
 	//accelerometer.watchAcceleration = 
