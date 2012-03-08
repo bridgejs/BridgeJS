@@ -1,0 +1,40 @@
+body {
+	background-color: #262626;
+	padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+}
+
+.navbar {
+	border-bottom: 4px solid #019bc6;
+}
+
+.top_splash {
+	height:260px;
+	width: 100%;
+	position: relative;
+	top: -18px;
+	text-align: center;
+	padding-top: 60px;
+	background-image: url('../images/broken_noise.png');
+}
+
+#logo {
+	width: 640px;
+	padding-bottom: 30px;
+}
+
+.mid_content {
+
+}
+
+h1, h2, h3, h4, h5, h6, p {
+	color: #ddd;
+}
+
+.fixed {
+	position: fixed;
+}
+
+section {
+	padding-top: 55px;
+	margin-bottom: -40px;
+}
