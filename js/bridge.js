@@ -107,7 +107,7 @@ function Bridge () {
 //Geolocation wrapper
 //=========================================
 //API:
-//	bridge.geolocation.getCurrentAcceleration(onSuccess, onError)
+//	bridge.geolocation.getCurrentPosition(onSuccess, onError)
 //	bridge.geolocation.watchAcceleration(onSuccess, onError)
 //=========================================
     this.geolocation = {};
@@ -118,12 +118,14 @@ function Bridge () {
 
     //TODO: Support all the options
 	if (browserIsRapid()){
-
+		this.geolocation.getCurrentPosition = navigator.geolocation.getCurrentPosition;
 	}
 	else if (browserSupportsPhoneGap()){
+		this.geolocation.getCurrentPosition = navigator.geolocation.getCurrentPosition;
 	}
 
 	else if (browserSupportsWebkitGeolocation()){
+		this.geolocation.getCurrentPosition = navigator.geolocation.getCurrentPosition;
 
     }
 	else {
