@@ -158,10 +158,15 @@ bridge.accelerometer.watchCurrentAcceleration(onSuccess, onError);
 					
 					<section id="section_4">
 						<h2>Device</h2>
-                        <p>This plugin will NOT safely use Webkit's HTML5 implementation of device. Device will be undefined in all browsers except PhoneBridge and PhoneGap.  </p>						
-
+                        <p>This plugin will NOT safely use Webkit's HTML5 implementation of device. Device will be undefined in all browsers except PhoneBridge and PhoneGap. The device object is loaded before the page renders.</p>						
+                        <h4>Device object</h4>
 <pre class="prettyprint lang-js">
-//TODO
+device.name; //the device model name
+device.phonegap; //PhoneGap version (will always return -1 in PhoneBridge
+device.bridge; //the current version of bridge
+device.platform; //the platform (Android, etc) that bridgeJS is running on
+device.uuid; //a UUID attached to every Android device
+device.version; //The current build version of the Android SDK
 </pre>
 					</section>
 					
