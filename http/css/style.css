@@ -1,6 +1,5 @@
 body {
 	background-color: #262626;
-	padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
 }
 
 .navbar {
@@ -13,7 +12,7 @@ body {
 	position: relative;
 	top: -18px;
 	text-align: center;
-	padding-top: 60px;
+	padding-top: 120px;
 	background-image: url('../images/broken_noise.png');
 }
 
@@ -23,18 +22,61 @@ body {
 }
 
 .mid_content {
-
 }
 
 h1, h2, h3, h4, h5, h6, p {
-	color: #ddd;
+	color: #fff;
+}
+
+p {
+	color: #ccc;
+}
+
+section {
+	padding-top: 55px;
+	margin-bottom: -40px;
+}
+
+#docs_sidenav {
+
+}
+
+.main_container {
+	margin-top: 60px;
 }
 
 .fixed {
 	position: fixed;
 }
 
-section {
-	padding-top: 55px;
-	margin-bottom: -40px;
+@media (max-width: 767px) {
+	.top_splash {
+		/* gets rid of the extra padding on the left of the logo in mobile, so the bridge extends all the way across */
+		padding-left: 0px;
+	}
+
+	.btn-large {
+		margin-bottom: 10px;
+		min-width: 170px;
+	}
+
+	#docs_sidenav {
+		display: none;
+	}
+}
+
+@media (max-width: 979px) {
+	#fork_banner {
+		/* removes the fork bannerin mobile (it covers the navigation button anwyay, no good place for it) */
+		display: none;
+	}
+	
+	.main_container {
+		margin-top: 0px;
+	}
+	
+	.top_splash {
+		padding-top: 40px;
+	}
+	
 }
