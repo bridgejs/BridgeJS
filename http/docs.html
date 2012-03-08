@@ -183,7 +183,7 @@ position.coords.time = time; //The time as recorded by the internal location lis
 position.timestamp = timestamp; //The time as recorded by the plugin
 </pre>
                         <h4>bridge.geolocation.getCurrentPosition(onSuccess, onError)</h4>
-                        <p>Try to get the current position of the device and enable the location service if it is not enabled already. onSuccess(position) will return within 10 seconds (if there is no GPS satellite in range before 10 seconds pass call onError())</p>
+                        <p>Try to get the current position of the device and enable the location service if it is not enabled already. onSuccess(position) will return within 10 seconds (if there is no GPS satellite in range before 10 seconds pass call onError()). If the user's screen turns off before this call returns no callback will occur</p>
 <pre class="prettyprint lang-js">
 function onSuccess(position) {
     console.log("Success! I'm at Lat:" + position.coords.latitude + 

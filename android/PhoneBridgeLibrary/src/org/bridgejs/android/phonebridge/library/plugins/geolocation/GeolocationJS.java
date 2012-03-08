@@ -21,11 +21,13 @@ public class GeolocationJS {
 	private final LocationManager locationManager;
 	
 	private AtomicBoolean isEnabled;
+	private AtomicBoolean isPaused;
 	private AtomicLong minTimeBetweenUpdates;
 	
 	public GeolocationJS(PluginRequests requests) {
 		this.requests = requests;
 		isEnabled = new AtomicBoolean(false);
+		isPaused = new AtomicBoolean(false);
 		minTimeBetweenUpdates = new AtomicLong(100);
 		
 		networkListener = new GeolocationListener();
@@ -37,6 +39,7 @@ public class GeolocationJS {
 			public void run() {
 				if (isEnabled.get())
 					turnOffLocationService();
+				isPaused.set(true);
 			}
 		});
 		
@@ -44,13 +47,14 @@ public class GeolocationJS {
 			public void run() {
 				if (isEnabled.get())
 					turnOnLocationService(minTimeBetweenUpdates.get());
+				isPaused.set(false);
 			}
 		});
 	}
 	
 	public void getCurrentPosition(final int onSuccess, final int onError) {
 		
-		new CheckGPSTask(gpsListener, 10000, new CurrentLocationCallback() {
+		new CheckGPSTask(gpsListener, 10000, isPaused, new CurrentLocationCallback() {
 			
 			public void onCurrentLocation(Location currentLocation) {
 				final long timestamp = System.currentTimeMillis();

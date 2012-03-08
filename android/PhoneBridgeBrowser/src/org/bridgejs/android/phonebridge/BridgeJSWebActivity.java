@@ -17,7 +17,7 @@ public class BridgeJSWebActivity extends DroidBridge {
 		super.onCreate(savedInstanceState);
 		//		String url = "http://reddit.com";
 
-		String url = "http://dev.sencha.com/deploy/touch/examples/production/kitchensink/index.html";
+		String url = "http://www.bridgejs.com/";
 
 		//		String url = "http://html5.litten.com/layers/canvaslayers.html"; //simple canvas animation demo
 		//				String url = "http://impactjs.com/drop/"; //built with impactjs game library

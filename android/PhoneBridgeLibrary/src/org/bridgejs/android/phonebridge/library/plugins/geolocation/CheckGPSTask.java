@@ -1,5 +1,7 @@
 package org.bridgejs.android.phonebridge.library.plugins.geolocation;
 
+import java.util.concurrent.atomic.AtomicBoolean;
+
 import android.location.Location;
 import android.os.AsyncTask;
 
@@ -7,11 +9,13 @@ public class CheckGPSTask extends AsyncTask<Long, Void, Location> {
 
 	private CurrentLocationCallback callback;
 	private GeolocationListener gpsListener;
+	private AtomicBoolean isPaused;
 	
-	public CheckGPSTask(GeolocationListener gpsListener, long timeout, CurrentLocationCallback callback) {
+	public CheckGPSTask(GeolocationListener gpsListener, long timeout, AtomicBoolean isPaused, CurrentLocationCallback callback) {
 		this.gpsListener = gpsListener;
 		this.callback = callback;
 		this.execute(timeout);
+		this.isPaused = isPaused;
 	}
 	
 	@Override
@@ -20,6 +24,10 @@ public class CheckGPSTask extends AsyncTask<Long, Void, Location> {
 		
 		Location currentLocation;
 		do {
+			//if paused just return immediately
+			if (isPaused.get())
+				return null;
+			
 			System.out.println("Checking the location again");
 			currentLocation = gpsListener.getCurrentLocation();
 			if (currentLocation != null)
@@ -39,6 +47,8 @@ public class CheckGPSTask extends AsyncTask<Long, Void, Location> {
 	
 	@Override
 	protected void onPostExecute(Location location) {
+		if (isPaused.get())
+			return; //if we are paused don't call callback (injecting js will cause NullPointerException)
 		callback.onCurrentLocation(location);
 	}
 
