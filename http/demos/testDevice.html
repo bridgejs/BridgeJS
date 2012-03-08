@@ -1,0 +1,56 @@
+
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>Device Test</title>
+    </head>
+    <body>
+        <p> Name: <b id="name">Unknown</b></p>
+        <p> PhoneGap: <b id="phonegap">Unknown</b></p>
+        <p> Bridge: <b id="bridge">Unknown</b></p>
+        <p> Plattform: <b id="platform">Unknown</b></p>
+        <p> UUID: <b id="uuid">Unknown</b></p>
+        <p> Version: <b id="version">Unknown</b></p>
+        <section>
+        <div id="canvasesdiv"
+            style="position: relative; width: 400px; height: 300px">
+            <canvas id="layer1"
+            style="z-index: 1; position: absolute; left: 0px; top: 0px;"
+            height="500px" width="400">
+            This text is displayed if your browser does not support HTML5 Canvas.
+            </canvas>
+        </div>
+        
+        <script src="http://bridgejs.com/bridge.js"></script>
+        <script type="text/javascript">
+        
+            bridge.android.recommendNative();
+
+			var nameHTML = document.getElementById("name");J
+			var phoneGapHTML = document.getElementById("phonegap");
+			var bridgeHTML = document.getElementById("bridge");
+			var platformHTML = document.getElementById("platform");
+			var uuidHTML = document.getElementById("uuid");
+			var versionHTML = document.getElementById("version");
+
+            function updateHTMLData(device) {
+                nameHTML.innerHTML = device.name;
+                phoneGapHTML.innerHTML = device.phonegap;
+                bridgeHTML.innerHTML = device.bridge;
+                platformHTML.innerHTML = device.platform;
+                uuidHTML.innerHTML = device.uuid;
+                versionHTML.innerHTML = device.version;
+            }
+
+            updateHTMLData();
+
+            </script>
+            
+            <form>
+            	<input type="submit" value="Get Current Position" onClick="buttonPressed()" />
+            </form>
+            
+            </section>
+        </body>
+    </html>
