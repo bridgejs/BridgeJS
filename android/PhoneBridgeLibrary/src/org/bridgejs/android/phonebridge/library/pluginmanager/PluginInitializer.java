@@ -7,6 +7,8 @@ import org.bridgejs.android.phonebridge.library.plugins.accelerometer.Accelerome
 import org.bridgejs.android.phonebridge.library.plugins.callback.CallbackPlugin;
 import org.bridgejs.android.phonebridge.library.plugins.core.CorePlugin;
 import org.bridgejs.android.phonebridge.library.plugins.device.DevicePlugin;
+import org.bridgejs.android.phonebridge.library.plugins.geolocation.GeolocationJS;
+import org.bridgejs.android.phonebridge.library.plugins.geolocation.GeolocationPlugin;
 
 import android.webkit.WebView;
 
@@ -20,5 +22,6 @@ public class PluginInitializer {
 		
 		plugins.add(new AccelerometerPlugin());
 		plugins.add(new DevicePlugin());
+		plugins.add(new GeolocationPlugin());
 	}
 }
