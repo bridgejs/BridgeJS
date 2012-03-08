@@ -27,7 +27,7 @@ PhoneBridge will open immediately from any Android browser with:
 
 An `alert` will pop up with:
 
-`bridge.android.recommendNative()`
+`bridge.android.requireNative()`
 
 ## TODO
 
