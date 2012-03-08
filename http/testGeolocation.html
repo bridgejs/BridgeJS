@@ -14,7 +14,6 @@
         <p> Speed: <b id="speed">Unknown</b></p>
         <p> Time: <b id="time">Unknown</b></p>
         <p> Timestamp: <b id="timestamp">Unknown</b></p>
-        I FUCKING UPDATED THE OGDGAME THNG
         <section>
         <div id="canvasesdiv"
             style="position: relative; width: 400px; height: 300px">
@@ -57,12 +56,10 @@
             }
             
             function buttonPressed() {
-            	console.log("Before I call the native function");
             	bridge.geolocation.getCurrentPosition(onSuccess, onError);
-            	console.log("Pressed the button");
             }
             
-            setTimeout("navigator.geolocation.disableLocationService(); console.log('timed out')", 10000);
+            setTimeout("bridge.geolocation.disableLocationService(); console.log('timed out')", 10000);
             
             buttonPressed();
 
