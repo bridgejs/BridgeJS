@@ -60,11 +60,6 @@ public class GeolocationJS {
 					javascriptCallback = "__notGotCurrentLocation(" + onError + ");";
 				}
 				else {
-					System.out.println("Inputs: " + onSuccess + ", " + currentLocation.getLatitude() + 
-							"," + currentLocation.getLongitude() + "," + currentLocation.getAccuracy() + 
-							", " + currentLocation.getAltitude() + ", " + currentLocation.getBearing() +
-							", \"" + currentLocation.getProvider() + "\", " + currentLocation.getSpeed() +
-							", " + currentLocation.getTime() + ", " + timestamp);
 					javascriptCallback = "__gotCurrentLocation(" + onSuccess + "," + currentLocation.getLatitude() + 
 					"," + currentLocation.getLongitude() + "," + currentLocation.getAccuracy() + 
 					", " + currentLocation.getAltitude() + ", " + currentLocation.getBearing() +
@@ -72,7 +67,6 @@ public class GeolocationJS {
 					", " + currentLocation.getTime() + ", " + timestamp +");";
 				}
 				
-				System.out.println("About to run callback");
 				requests.postJavascript(javascriptCallback);
 			}
 			
