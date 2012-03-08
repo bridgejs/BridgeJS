@@ -32,6 +32,7 @@ An `alert` will pop up with:
 ## TODO
 
 * Implement a permission system similar to Android's for potentially dangerous native API calls
+* Make an app launcher rather than loading bridgejs.com on app startup
 * Implement a check so that a user will be redirected to the Android market if and only if he doesn't have PhoneBridge installed on a bridge:// URI
 * Implement timeout and other options in Geolocation plugin
 * Fix the *no* callback returning behavior of Geolocation plugin
