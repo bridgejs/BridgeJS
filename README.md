@@ -18,7 +18,7 @@ See [bridgeJS](http://www.bridgejs.com) for an API reference
 An application that runs on the Android platform that acts as a web browser but a bit different:
 
 * Use the official native bridgeJS API
-* Render HTML5's canvas at least as good or more efficiently than the stock browser
+* Render HTML5's canvas at least as efficient or more efficiently than the stock browser
 
 
 PhoneBridge will open immediately from any Android browser with:
