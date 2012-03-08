@@ -108,7 +108,9 @@ function Bridge () {
 //=========================================
 //API:
 //	bridge.geolocation.getCurrentPosition(onSuccess, onError)
-//	bridge.geolocation.watchAcceleration(onSuccess, onError)
+//	bridge.geolocation.isEnabled()
+//	bridge.geolocation.enableLocationService()
+//	bridge.geolocation.disableLocationService()
 //=========================================
     this.geolocation = {};
 
@@ -116,23 +118,29 @@ function Bridge () {
 		return true; //TODO: I don't know how to actually check this
 	}
 
-    //TODO: Support all the options
+    //TODO: Support the options parameter like in the HTML5 and PhoneGap spec
 	if (browserIsRapid()){
 		this.geolocation.getCurrentPosition = navigator.geolocation.getCurrentPosition;
+		this.geolocation.isEnabled = navigator.geolocation.isEnabled;
+		this.geolocation.enableLocationService = navigator.geolocation.enableLocationService;
+		this.geolocation.disableLocationService = navigator.geolocation.disableLocationService;
 	}
 	else if (browserSupportsPhoneGap()){
 		this.geolocation.getCurrentPosition = navigator.geolocation.getCurrentPosition;
+		this.geolocation.isEnabled = navigator.geolocation.isEnabled;
+		this.geolocation.enableLocationService = navigator.geolocation.enableLocationService;
+		this.geolocation.disableLocationService = navigator.geolocation.disableLocationService;
 	}
 
 	else if (browserSupportsWebkitGeolocation()){
 		this.geolocation.getCurrentPosition = navigator.geolocation.getCurrentPosition;
-
+		this.geolocation.isEnabled = navigator.geolocation.isEnabled;
+		this.geolocation.enableLocationService = navigator.geolocation.enableLocationService;
+		this.geolocation.disableLocationService = navigator.geolocation.disableLocationService;
     }
 	else {
 		console.log("Device does not accept geolocation!");
 	}
-	//accelerometer.getCurrentAcceleration = 
-	//accelerometer.watchAcceleration = 
 
 }
 
