@@ -5,6 +5,7 @@ import java.lang.reflect.InvocationTargetException;
 
 import org.bridgejs.android.phonebridge.library.pluginmanager.PluginManager;
 import org.bridgejs.android.phonebridge.library.pluginmanager.activitymodifiers.ActivityEventsModifier;
+import org.bridgejs.android.phonebridge.library.ui.StylizedProgressBarFactory;
 
 
 import android.app.Activity;
@@ -61,14 +62,8 @@ public class BridgeJSBrowser extends FrameLayout{
 	}
 
 	private void createAndAddProgressBar(Context context){
-		this.progressBar = new ProgressBar(context, null, android.R.attr.progressBarStyleHorizontal);
+		this.progressBar = StylizedProgressBarFactory.build(context);
 		this.progressBarUpdater = new ProgressBarUpdater(progressBar, new Handler());
-
-		FrameLayout.LayoutParams progressBarLayout = 
-				new FrameLayout.LayoutParams(
-						FrameLayout.LayoutParams.FILL_PARENT, 
-						FrameLayout.LayoutParams.WRAP_CONTENT);
-		progressBar.setLayoutParams(progressBarLayout);
 	}
 
 	private void createAndAddWebView(Activity activity, Handler handler){
