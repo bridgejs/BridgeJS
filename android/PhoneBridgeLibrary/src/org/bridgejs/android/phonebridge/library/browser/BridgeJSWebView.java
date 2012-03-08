@@ -44,7 +44,7 @@ public class BridgeJSWebView extends WebView {
 
 		settings.setJavaScriptCanOpenWindowsAutomatically(true);
 //		settings.setDefaultZoom(WebSettings.ZoomDensity.FAR);
-//		settings.setUseWideViewPort(true);
+//		settings.setUseWideViewPort(false);
 		
 		settings.setAppCacheEnabled(true);
 		settings.setDatabaseEnabled(true);
