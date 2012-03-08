@@ -1,5 +1,5 @@
 body {
-	background-color: #262626;
+	background-color: #222222;
 }
 
 .navbar {
@@ -13,7 +13,8 @@ body {
 	top: -18px;
 	text-align: center;
 	padding-top: 120px;
-	background-image: url('../images/broken_noise.png');
+	background-image: url('../images/dark_geometric.png');
+	border-bottom: 2px solid #1c1c1c;
 }
 
 #logo {
@@ -28,13 +29,24 @@ h1, h2, h3, h4, h5, h6, p {
 	color: #fff;
 }
 
+h1, h2 {
+	line-height: 28px;
+	margin-bottom: 8px;
+	font-family: Tahoma;
+}
+
 p {
 	color: #ccc;
 }
 
 section {
 	padding-top: 55px;
-	margin-bottom: -40px;
+	margin-bottom: -10px;
+	padding-bottom: 10px;
+}
+
+#docs h1, #docs h2 {
+	text-transform: uppercase;
 }
 
 #docs_sidenav {
