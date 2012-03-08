@@ -1,0 +1,74 @@
+
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>Geolocation Test</title>
+    </head>
+    <body>
+        <p> Latidude: <b id="latitude">Unknown</b></p>
+        <p> Longitude: <b id="longitude">Unknown</b></p>
+        <p> Altitude: <b id="altitude">Unknown</b></p>
+        <p> Accuracy: <b id="accuracy">Unknown</b></p>
+        <p> Bearing: <b id="bearing">Unknown</b></p>
+        <p> Speed: <b id="speed">Unknown</b></p>
+        <p> Time: <b id="time">Unknown</b></p>
+        <p> Timestamp: <b id="timestamp">Unknown</b></p>
+        <section>
+        <div id="canvasesdiv"
+            style="position: relative; width: 400px; height: 300px">
+            <canvas id="layer1"
+            style="z-index: 1; position: absolute; left: 0px; top: 0px;"
+            height="500px" width="400">
+            This text is displayed if your browser does not support HTML5 Canvas.
+            </canvas>
+        </div>
+        
+            <input type="button" value="Get Current Position" onclick="buttontest" />
+        
+        <script src="http://bridgejs.com/bridge.js"></script>
+        <script type="text/javascript">
+        
+            bridge.android.recommendNative();
+
+			var latitudeHTML = document.getElementById("latitude");
+			var longitudeHTML = document.getElementById("longitude");
+			var altitudeHTML = document.getElementById("altitude");
+			var accuracyHTML = document.getElementById("accuracy");
+			var bearingHTML = document.getElementById("bearing");
+			var speedHTML = document.getElementById("speed");
+			var timeHTML = document.getElementById("time");
+			var timestampHTML = document.getElementById("timestamp");
+
+            function onSuccess(position) {
+                latitudeHTML.innerHTML = position.coords.latitude;
+                longitudeHTML.innerHTML = position.coords.longitude;
+                altitudeHTML.innerHTML = position.coords.altitude;
+                accuracyHTML.innerHTML = position.coords.accuracy;
+                speedHTML.innerHTML = position.coords.speed;
+                bearingHTML.innerHTML = position.coords.bearing;
+                timestampHTML.innerHTML = position.timestamp;
+                timeHTML.innerHTML = position.coords.time;
+            }
+
+            function onError(position) {
+                console.log("Error: " + position);
+            }
+            
+            function buttonPressed() {
+            	bridge.geolocation.getCurrentPosition(onSuccess, onError);
+            }
+            
+            setTimeout("bridge.geolocation.disableLocationService(); console.log('timed out')", 10000);
+            
+            buttonPressed();
+
+            </script>
+            
+            <form>
+            	<input type="submit" value="Get Current Position" onClick="buttonPressed()" />
+            </form>
+            
+            </section>
+        </body>
+    </html>
