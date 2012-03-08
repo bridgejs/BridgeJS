@@ -15,9 +15,11 @@ public class BridgeJSWebActivity extends DroidBridge {
 		browser = (BridgeJSBrowser)findViewById(R.id.browser);
 		super.onCreate(savedInstanceState);
 //		String url = "http://reddit.com";
+		
+		String url = "http://dev.sencha.com/deploy/touch/examples/production/kitchensink/index.html";
 
 		//		String url = "http://html5.litten.com/layers/canvaslayers.html"; //simple canvas animation demo
-				String url = "http://impactjs.com/drop/"; //built with impactjs game library
+//				String url = "http://impactjs.com/drop/"; //built with impactjs game library
 		//		String url = "http://www.benjoffe.com/code/games/torus/"; //fast, but needs keyboard
 		//		String url = "http://clear.youyuxi.com/"; // ui demo w/ css3 (FAST!)
 		//		String url = "http://www.nihilogic.dk/labs/wolf/"; //wolfenstein, needs keyboard
