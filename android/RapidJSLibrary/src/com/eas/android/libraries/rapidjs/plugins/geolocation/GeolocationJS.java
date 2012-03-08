@@ -25,8 +25,8 @@ public class GeolocationJS {
 	
 	public GeolocationJS(RapidJSRequests requests) {
 		this.requests = requests;
-		
-		isEnabled.set(false);
+		isEnabled = new AtomicBoolean(false);
+		minTimeBetweenUpdates = new AtomicLong(100);
 		
 		networkListener = new GeolocationListener();
 		gpsListener = new GeolocationListener();
@@ -48,19 +48,35 @@ public class GeolocationJS {
 		});
 	}
 	
-	public void getCurrentLocation(int onSuccess, int onError) {
-		long timestamp = System.currentTimeMillis();
+	public void getCurrentPosition(final int onSuccess, final int onError) {
 		
-		Location currentLocation = gpsListener.getCurrentLocation();
-		if (currentLocation == null)
-			currentLocation = networkListener.getCurrentLocation();
-		
-		String javascriptCallback = "__gotCurrentLocation(" + onSuccess + "," + currentLocation.getLatitude() + 
-									"," + currentLocation.getLongitude() + "," + currentLocation.getAccuracy() + 
-									", " + currentLocation.getAltitude() + ", " + currentLocation.getBearing() +
-									", " + currentLocation.getProvider() + ", " + currentLocation.getSpeed() +
-									", " + currentLocation.getTime() + ", " + timestamp +");";
-		requests.postJavascript(javascriptCallback);
+		new CheckGPSTask(gpsListener, 10000, new CurrentLocationCallback() {
+			
+			public void onCurrentLocation(Location currentLocation) {
+				final long timestamp = System.currentTimeMillis();
+				String javascriptCallback;
+				
+				if (currentLocation == null) {
+					javascriptCallback = "__notGotCurrentLocation(" + onError + ");";
+				}
+				else {
+					System.out.println("Inputs: " + onSuccess + ", " + currentLocation.getLatitude() + 
+							"," + currentLocation.getLongitude() + "," + currentLocation.getAccuracy() + 
+							", " + currentLocation.getAltitude() + ", " + currentLocation.getBearing() +
+							", \"" + currentLocation.getProvider() + "\", " + currentLocation.getSpeed() +
+							", " + currentLocation.getTime() + ", " + timestamp);
+					javascriptCallback = "__gotCurrentLocation(" + onSuccess + "," + currentLocation.getLatitude() + 
+					"," + currentLocation.getLongitude() + "," + currentLocation.getAccuracy() + 
+					", " + currentLocation.getAltitude() + ", " + currentLocation.getBearing() +
+					", \"" + currentLocation.getProvider() + "\", " + currentLocation.getSpeed() +
+					", " + currentLocation.getTime() + ", " + timestamp +");";
+				}
+				
+				System.out.println("About to run callback");
+				requests.postJavascript(javascriptCallback);
+			}
+			
+		});
 	}
 	
 	public boolean isEnabled() {
@@ -68,14 +84,14 @@ public class GeolocationJS {
 	}
 	
 	public void enableLocationService(long minTimeBetweenUpdates) {
-		this.isEnabled.set(true);
 		this.minTimeBetweenUpdates.set(minTimeBetweenUpdates);
 		turnOnLocationService(minTimeBetweenUpdates);
+		this.isEnabled.set(true);
 	}
 	
 	public void disableLocationService() {
-		isEnabled.set(false);
 		turnOffLocationService();
+		isEnabled.set(false);
 	}
 	
 	private void turnOffLocationService() {
