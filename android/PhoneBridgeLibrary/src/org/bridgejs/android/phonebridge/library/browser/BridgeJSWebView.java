@@ -42,9 +42,9 @@ public class BridgeJSWebView extends WebView {
 		this.setVerticalScrollBarEnabled(true);
 		this.setHorizontalScrollBarEnabled(true);
 
-		settings.setJavaScriptEnabled(true);
+		settings.setJavaScriptCanOpenWindowsAutomatically(true);
 //		settings.setDefaultZoom(WebSettings.ZoomDensity.FAR);
-		settings.setUseWideViewPort(true);
+//		settings.setUseWideViewPort(true);
 		
 		settings.setAppCacheEnabled(true);
 		settings.setDatabaseEnabled(true);

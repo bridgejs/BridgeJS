@@ -1,5 +1,7 @@
 package org.bridgejs.android.phonebridge.library;
 
+import java.lang.reflect.InvocationTargetException;
+
 import org.bridgejs.android.phonebridge.library.browser.BridgeJSBrowser;
 import org.bridgejs.android.phonebridge.library.pluginmanager.activitymodifiers.ActivityEventsModifier;
 import org.bridgejs.android.phonebridge.library.pluginmanager.activitymodifiers.ActivityResultCallback;
@@ -46,6 +48,9 @@ public class DroidBridge extends Activity{
 	public void loadUrlWithPlugins(String url){
 		browser.loadUrlWithPlugins(url);
 	}
+	public void loadUrlWithoutPlugins(final String url){
+		browser.loadUrlWithoutPlugins(url);
+	}
 
 	/* Note: we do have to get the activityEventsModifier in *EVERY* event listener we override 
 	 * 			since we don't know if the pointer to the runnable will have changed at some point */
@@ -87,6 +92,13 @@ public class DroidBridge extends Activity{
 	public void onDestroy() {
 		ActivityEventsModifier activityEventsModifier = browser.getActivityEventsModifier();
 		activityEventsModifier.getOnDestroyModifier().run();
+		try {
+			browser.gotoBlankWebPage();
+			browser.stopAndDestroyWebView();
+			browser.destroyWebView();
+		} catch (Exception e){
+			
+		}
 		super.onDestroy();
 	}
 
@@ -128,7 +140,6 @@ public class DroidBridge extends Activity{
 		else if (keyCode == KeyEvent.KEYCODE_HOME) {
 			activityEventsModifier.getOnHomeButtonModifier();
 		}
-
 		return super.onKeyDown(keyCode, event);
 	}
 }

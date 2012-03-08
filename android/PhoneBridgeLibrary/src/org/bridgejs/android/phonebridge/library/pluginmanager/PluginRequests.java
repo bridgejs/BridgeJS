@@ -126,6 +126,8 @@ public class PluginRequests {
 	
 	
 	public void postJavascript(final String javascript){
+		if (webView == null)
+			return;
 		try {
 			handler.post(new Runnable(){
 				public void run() {

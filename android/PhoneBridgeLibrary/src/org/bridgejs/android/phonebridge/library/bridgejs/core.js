@@ -7,4 +7,4 @@ function disableAnnoyingBlueHighlightOnClick(){
 };
 disableAnnoyingBlueHighlightOnClick();
 
-console.log("core loaded");
+console.log("core lo3aded");

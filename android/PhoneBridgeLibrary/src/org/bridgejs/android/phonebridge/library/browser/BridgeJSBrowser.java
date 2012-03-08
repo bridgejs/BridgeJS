@@ -30,6 +30,10 @@ public class BridgeJSBrowser extends FrameLayout{
 		super(context);
 	}
 
+	public void destroyWebView(){
+		if (webView != null)
+			webView.destroy() ;
+	}
 
 	private BridgeJSWebView webView;
 	private ProgressBar progressBar;
@@ -68,7 +72,7 @@ public class BridgeJSBrowser extends FrameLayout{
 
 	private void createAndAddWebView(Activity activity, Handler handler){
 		webView.init(activity, handler);
-		webView.setWebChromeClient(new BridgeJSWebChromeClient(progressBarUpdater));
+		webView.setWebChromeClient(new BridgeJSWebChromeClient(activity, progressBarUpdater));
 		webView.setWebViewClient(new BridgeJSWebViewClient(pluginManager, this));
 
 		FrameLayout.LayoutParams webViewLayout = 
@@ -85,6 +89,11 @@ public class BridgeJSBrowser extends FrameLayout{
 
 	public void gotoBlankWebPage(){
 		webView.loadUrl("");
+	}
+
+	public void loadUrlWithoutPlugins(String url){
+		gotoBlankWebPage();
+		webView.loadUrl(url);
 	}
 
 	public void stopAndDestroyWebView() throws IllegalArgumentException, SecurityException, IllegalAccessException, InvocationTargetException, NoSuchMethodException, ClassNotFoundException{
