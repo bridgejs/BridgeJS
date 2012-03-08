@@ -26,7 +26,7 @@ public class CorePlugin implements BridgeJSPlugin {
 	}
 
 	public void onPageStartedLoading() {
-		
+
 	}
 
 	public String getPluginJS() {
