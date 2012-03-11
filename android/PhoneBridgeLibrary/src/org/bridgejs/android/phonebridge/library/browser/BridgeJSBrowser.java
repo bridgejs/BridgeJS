@@ -3,6 +3,7 @@ package org.bridgejs.android.phonebridge.library.browser;
 
 import java.lang.reflect.InvocationTargetException;
 
+import org.bridgejs.android.phonebridge.library.DroidBridge;
 import org.bridgejs.android.phonebridge.library.pluginmanager.PluginManager;
 import org.bridgejs.android.phonebridge.library.pluginmanager.activitymodifiers.ActivityEventsModifier;
 import org.bridgejs.android.phonebridge.library.ui.StylizedProgressBarFactory;
@@ -43,7 +44,7 @@ public class BridgeJSBrowser extends FrameLayout{
 
 	private PluginManager pluginManager;
 
-	public void init(Activity activity, Handler handler, boolean accelerateCanvas){
+	public void init(DroidBridge activity, Handler handler, boolean accelerateCanvas){
 
 		FrameLayout.LayoutParams layout = 
 				new FrameLayout.LayoutParams(
@@ -60,7 +61,7 @@ public class BridgeJSBrowser extends FrameLayout{
 		this.addView(progressBar);
 	}
 
-	private void initPluginManager(Activity activity, Handler handler){
+	private void initPluginManager(DroidBridge activity, Handler handler){
 		this.pluginManager = new PluginManager(webView, activity, handler, progressBarUpdater, accelerateCanvas);
 		pluginManager.initPlugins();
 	}

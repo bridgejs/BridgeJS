@@ -1,6 +1,7 @@
 package org.bridgejs.android.phonebridge.library;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.bridgejs.android.phonebridge.library.browser.BridgeJSBrowser;
 import org.bridgejs.android.phonebridge.library.pluginmanager.activitymodifiers.ActivityEventsModifier;
@@ -18,9 +19,12 @@ public class DroidBridge extends Activity{
 
 	protected BridgeJSBrowser browser;
 	
+	private AtomicBoolean isPaused;
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		isPaused = new AtomicBoolean(false);
 		this.browser.init(this, new Handler(), false);
 	}
 
@@ -65,6 +69,7 @@ public class DroidBridge extends Activity{
 	@Override
 	public void onResume() {
 		super.onResume();
+		isPaused.set(false);
 		ActivityEventsModifier activityEventsModifier = browser.getActivityEventsModifier();
 		activityEventsModifier.getOnResumeModifier().run();
 	}
@@ -73,7 +78,12 @@ public class DroidBridge extends Activity{
 	public void onPause() {
 		ActivityEventsModifier activityEventsModifier = browser.getActivityEventsModifier();
 		activityEventsModifier.getOnPauseModifier().run();
+		isPaused.set(true);
 		super.onPause();
+	}
+	
+	public AtomicBoolean getIsPaused() {
+		return isPaused;
 	}
 
 	@Override

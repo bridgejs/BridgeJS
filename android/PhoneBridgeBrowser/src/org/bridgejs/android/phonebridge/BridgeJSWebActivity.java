@@ -17,7 +17,8 @@ public class BridgeJSWebActivity extends DroidBridge {
 		super.onCreate(savedInstanceState);
 		//		String url = "http://reddit.com";
 
-		String url = "http://www.bridgejs.com/";
+		//String url = "http://www.bridgejs.com/";
+		String url = "file:///android_asset/testGeolocation.html";
 
 		//		String url = "http://html5.litten.com/layers/canvaslayers.html"; //simple canvas animation demo
 		//				String url = "http://impactjs.com/drop/"; //built with impactjs game library

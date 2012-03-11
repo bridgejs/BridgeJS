@@ -37,7 +37,7 @@ public class AcceleratedCanvas2DPlugin implements BridgeJSPlugin{
 	}
 
 	public void lookForCanvasUpdates(){
-		requests.postJavascript("__bindCanvasesToAndroid();");
+		requests.postJavascript("__bindCanvasesToAndroid();", this);
 	}
 
 	public void onDraw(Canvas canvas, int left, int top, float scale){

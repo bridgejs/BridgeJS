@@ -38,7 +38,7 @@ public class AccelerometerJS {
 
 	public void getCurrentAcceleration(int onSuccess, int onError){
 		long timestamp = System.currentTimeMillis();
-		requests.postJavascript("__gotCurrentAcceleration(" + onSuccess + "," + accelerationListener.accelerationX + "," + accelerationListener.accelerationY + "," + accelerationListener.accelerationZ + "," + timestamp +");");
+		requests.postJavascript("__gotCurrentAcceleration(" + onSuccess + "," + accelerationListener.accelerationX + "," + accelerationListener.accelerationY + "," + accelerationListener.accelerationZ + "," + timestamp +");", this);
 	}
 
 }

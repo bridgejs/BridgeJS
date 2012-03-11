@@ -8,7 +8,9 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.concurrent.atomic.AtomicBoolean;
 
+import org.bridgejs.android.phonebridge.library.DroidBridge;
 import org.bridgejs.android.phonebridge.library.browser.ProgressBarUpdater;
 import org.bridgejs.android.phonebridge.library.pluginmanager.activitymodifiers.ActivityEventsModifier;
 
@@ -16,6 +18,7 @@ import org.bridgejs.android.phonebridge.library.pluginmanager.activitymodifiers.
 import android.app.Activity;
 import android.content.res.AssetManager;
 import android.os.Handler;
+import android.util.Log;
 import android.webkit.WebView;
 
 public class PluginRequests {
@@ -24,7 +27,7 @@ public class PluginRequests {
 
 	private Handler handler;
 
-	private Activity activity;
+	private DroidBridge droidBridge;
 
 	private ActivityEventsModifier activityEventsModifier;
 	
@@ -34,13 +37,13 @@ public class PluginRequests {
 		webView.addJavascriptInterface(obj, interfaceName);
 	}
 
-	public PluginRequests(WebView webView, ProgressBarUpdater progressBarUpdater, Activity activity, Handler handler, PluginManager pluginManager){
+	public PluginRequests(WebView webView, ProgressBarUpdater progressBarUpdater, DroidBridge droidBridge, Handler handler, PluginManager pluginManager){
 		this.webView = webView;
-		this.activity = activity;
+		this.droidBridge = droidBridge;
 		this.handler = handler;
 		this.progressBarUpdater = progressBarUpdater;
 
-		this.activityEventsModifier = new ActivityEventsModifier(activity);
+		this.activityEventsModifier = new ActivityEventsModifier(droidBridge);
 	}
 
 	public Handler getHandler(){
@@ -48,7 +51,7 @@ public class PluginRequests {
 	}
 
 	public Object getSystemService(String service) {
-		return activity.getSystemService(service);
+		return droidBridge.getSystemService(service);
 	}
 
 	public void postInvalidate(){
@@ -56,7 +59,7 @@ public class PluginRequests {
 	}
 
 	public AssetManager getAssetManager(){
-		return activity.getAssets();
+		return droidBridge.getAssets();
 	}
 
 	public String getUrlData(String url){
@@ -125,12 +128,30 @@ public class PluginRequests {
 	}
 	
 	
-	public void postJavascript(final String javascript){
-		if (webView == null)
+	public void postJavascript(final String javascript, final Object context, final String messageToLog) {
+		final AtomicBoolean isPaused = droidBridge.getIsPaused();
+		try {
+			handler.post(new Runnable(){
+				public void run() {
+					if (webView == null || isPaused.get())
+						return;
+					Log.d("JSPost", "Loading js from: " + context.getClass() + ", msg: " + messageToLog);
+					webView.loadUrl("javascript:" + javascript);
+				}
+			});
+		} catch(Exception e){
+			e.printStackTrace();
+		}
+	}
+	
+	public void postJavascript(final String javascript, final Object context) {
+		AtomicBoolean isPaused = droidBridge.getIsPaused();
+		if (webView == null || isPaused.get())
 			return;
 		try {
 			handler.post(new Runnable(){
 				public void run() {
+					Log.d("JSPost", "Loading js from: " + context.getClass());
 					webView.loadUrl("javascript:" + javascript);
 				}
 			});

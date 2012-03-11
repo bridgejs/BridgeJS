@@ -71,7 +71,7 @@ public class GeolocationJS {
 					", " + currentLocation.getTime() + ", " + timestamp +");";
 				}
 				
-				requests.postJavascript(javascriptCallback);
+				requests.postJavascript(javascriptCallback, this);
 			}
 			
 		});
