@@ -17,11 +17,11 @@ public class Modifiers {
 	public List<Runnable> onRestartModifiers;
 	
 	/* Buttons on Phone */
-	public List<Runnable> onBackKeyModifiers;
-	public List<Runnable> onMenuKeyModifiers;
-	public List<Runnable> onVolumeDownKeyModifiers;
-	public List<Runnable> onVolumeUpKeyModifiers;
-	public List<Runnable> onHomeKeyModifiers;
+	public List<ButtonRunnable> onBackKeyModifiers;
+	public List<ButtonRunnable> onMenuKeyModifiers;
+	public List<ButtonRunnable> onVolumeDownKeyModifiers;
+	public List<ButtonRunnable> onVolumeUpKeyModifiers;
+	public List<ButtonRunnable> onHomeKeyModifiers;
 	
 	public ActivityResultCallback onActivityResultModifier;
 	
@@ -33,11 +33,11 @@ public class Modifiers {
 		this.onDestroyModifiers = new ArrayList<Runnable>();
 		this.onRestartModifiers = new ArrayList<Runnable>();
 		
-		this.onBackKeyModifiers = new ArrayList<Runnable>();
-		this.onMenuKeyModifiers = new ArrayList<Runnable>();
-		this.onVolumeDownKeyModifiers = new ArrayList<Runnable>();
-		this.onVolumeUpKeyModifiers = new ArrayList<Runnable>();
-		this.onHomeKeyModifiers = new ArrayList<Runnable>();
+		this.onBackKeyModifiers = new ArrayList<ButtonRunnable>();
+		this.onMenuKeyModifiers = new ArrayList<ButtonRunnable>();
+		this.onVolumeDownKeyModifiers = new ArrayList<ButtonRunnable>();
+		this.onVolumeUpKeyModifiers =  new ArrayList<ButtonRunnable>();
+		this.onHomeKeyModifiers =  new ArrayList<ButtonRunnable>();
 		
 		this.onActivityResultModifier = null;
 	}

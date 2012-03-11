@@ -48,23 +48,23 @@ public class ActivityEventsModifier {
 	
 	
 	
-	public void addToOnMenuButtonModifier(final Runnable newAction) {
+	public void addToOnMenuButtonModifier(final ButtonRunnable newAction) {
 		modifiers.onMenuKeyModifiers.add(newAction);
 	}
 	
-	public void addToOnBackButtonModifier(final Runnable newAction) {
+	public void addToOnBackButtonModifier(final ButtonRunnable newAction) {
 		modifiers.onBackKeyModifiers.add(newAction);
 	}
 	
-	public void addToOnVolumeDownButtonModifier(final Runnable newAction) {
+	public void addToOnVolumeDownButtonModifier(final ButtonRunnable newAction) {
 		modifiers.onVolumeDownKeyModifiers.add(newAction);
 	}
 	
-	public void addToOnVolumeUpButtonModifier(final Runnable newAction) {
+	public void addToOnVolumeUpButtonModifier(final ButtonRunnable newAction) {
 		modifiers.onVolumeUpKeyModifiers.add(newAction);
 	}
 	
-	public void addToOnHomeButtonModifier(final Runnable newAction) {
+	public void addToOnHomeButtonModifier(final ButtonRunnable newAction) {
 		modifiers.onHomeKeyModifiers.add(newAction);
 	}
 	
@@ -84,6 +84,18 @@ public class ActivityEventsModifier {
 				for (Runnable r: runnables) {
 					r.run();
 				}
+			}
+		};
+	}
+	
+	private ButtonRunnable flattenButton(final List<ButtonRunnable> runnables) {
+		return new ButtonRunnable() {
+			public boolean run() {
+				boolean andTasks = true;
+				for (ButtonRunnable r: runnables) {
+					andTasks = andTasks && r.run();
+				}
+				return andTasks;
 			}
 		};
 	}
@@ -113,24 +125,24 @@ public class ActivityEventsModifier {
 	}
 	
 	
-	public Runnable getOnMenuButtonModifier() {
-		return flatten(modifiers.onMenuKeyModifiers);
+	public ButtonRunnable getOnMenuButtonModifier() {
+		return flattenButton(modifiers.onMenuKeyModifiers);
 	}
 	
-	public Runnable getOnBackButtonModifier() {
-		return flatten(modifiers.onBackKeyModifiers);
+	public ButtonRunnable getOnBackButtonModifier() {
+		return flattenButton(modifiers.onBackKeyModifiers);
 	}
 	
-	public Runnable getOnVolumeDownButtonModifier() {
-		return flatten(modifiers.onVolumeDownKeyModifiers);
+	public ButtonRunnable getOnVolumeDownButtonModifier() {
+		return flattenButton(modifiers.onVolumeDownKeyModifiers);
 	}
 	
-	public Runnable getOnVolumeUpButtonModifier() {
-		return flatten(modifiers.onVolumeUpKeyModifiers);
+	public ButtonRunnable getOnVolumeUpButtonModifier() {
+		return flattenButton(modifiers.onVolumeUpKeyModifiers);
 	}
 	
-	public Runnable getOnHomeButtonModifier() {
-		return flatten(modifiers.onHomeKeyModifiers);
+	public ButtonRunnable getOnHomeButtonModifier() {
+		return flattenButton(modifiers.onHomeKeyModifiers);
 	}
 	
 	public SpawnActivityForResult getSpawnActivityInstance() {
