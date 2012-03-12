@@ -1,15 +1,9 @@
-function __gotBackButtonCallback(callbackID, x,y,z,timestamp){
-	acceleration = {};
-	acceleration.x = x;
-	acceleration.y = y;
-	acceleration.z = z;
-	acceleration.timestamp = timestamp;
-	___retrieveCallback(callbackID)(acceleration);
+function __gotBackButtonCallback(callbackID){
+	___retrieveCallback(callbackID)();
 };
 
-function __bindButtonToAndroid() {
-	on = {};
-	on.backButton = function(isSuper, callback) {
+function __bindBackButton() {
+	navigator.on.backButton = function(isSuper, callback) {
 		if (!isSuper) {
 			__androidButton.registerNoSuperBackButtonDownCallback(
 					___storeCallback(callback) 
@@ -21,6 +15,11 @@ function __bindButtonToAndroid() {
 			);
 		}
 	};
+};
+
+function __bindButtonToAndroid() {
+	navigator.on = {};
+	__bindBackButton();
 };
 
 __bindButtonToAndroid();

@@ -11,7 +11,7 @@ public class ButtonPlugin implements BridgeJSPlugin {
 	
 	public void init(PluginRequests requests) {
 		// TODO Auto-generated method stub
-		loadingJS = requests.getBridgeJSAsset("button.js");
+		loadingJS = requests.getBridgeJSAsset("buttonLoader.js");
 		
 		ButtonJS button = new ButtonJS(requests);
 		requests.addJavascriptInterface(button, "__androidButton");
