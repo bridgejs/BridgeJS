@@ -6,7 +6,7 @@
         <title>Device Test</title>
     </head>
     <body>
-        <p> Status: <b id="name">You haven't pressed the back button yet</b></p>
+        <p> Status: <b id="status">You haven't pressed the back button yet</b></p>
         <section>
         <div id="canvasesdiv"
             style="position: relative; width: 400px; height: 300px">
@@ -17,15 +17,18 @@
             </canvas>
         </div>
         
-        <script src="http://bridgejs.com/bridge.js"></script>
+        <script src="bridge.js"></script>
         <script type="text/javascript">
         
             bridge.android.recommendNative();
 
 			var statusHTML = document.getElementById("status");
 			
-            bridge.on.backButton(true, function() {
-            	statusHTML.innerHTML = "You pressed the back button (hopefully with no super)"
+            bridge.android.on.backButton(false, function() {
+            	statusHTML.innerHTML = "You pressed the back button (press the back button again to quit)"
+            	bridge.android.on.backButton(true, function() {
+            		console.log("Quitting");
+            	});
             });
 
             </script>

@@ -7,6 +7,7 @@ import java.util.Queue;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.view.KeyEvent;
 
 /* I think this is a pretty good solution to the problem of adding code to the main activity */
 public class ActivityEventsModifier {
@@ -90,10 +91,10 @@ public class ActivityEventsModifier {
 	
 	private ButtonRunnable flattenButton(final List<ButtonRunnable> runnables) {
 		return new ButtonRunnable() {
-			public boolean run() {
+			public boolean run(KeyEvent event) {
 				boolean andTasks = true;
 				for (ButtonRunnable r: runnables) {
-					andTasks = andTasks && r.run();
+					andTasks = andTasks && r.run(event);
 				}
 				return andTasks;
 			}
