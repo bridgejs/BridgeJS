@@ -34,7 +34,7 @@ public class ButtonJS {
 			requests.postJavascript("__gotBackButtonCallback(" + callback + ");", this);
 	}
 	
-	public boolean backButtonCallback() {
+	private boolean backButtonCallback() {
 		callBackButtonCallbacks();
 		
 		if (isDoBackButtonSuper.get()) {

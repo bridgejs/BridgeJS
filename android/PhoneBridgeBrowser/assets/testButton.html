@@ -1,0 +1,35 @@
+
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>Device Test</title>
+    </head>
+    <body>
+        <p> Status: <b id="name">You haven't pressed the back button yet</b></p>
+        <section>
+        <div id="canvasesdiv"
+            style="position: relative; width: 400px; height: 300px">
+            <canvas id="layer1"
+            style="z-index: 1; position: absolute; left: 0px; top: 0px;"
+            height="500px" width="400">
+            This text is displayed if your browser does not support HTML5 Canvas.
+            </canvas>
+        </div>
+        
+        <script src="http://bridgejs.com/bridge.js"></script>
+        <script type="text/javascript">
+        
+            bridge.android.recommendNative();
+
+			var statusHTML = document.getElementById("status");
+			
+            bridge.android.on.backButton(true, function() {
+            	statusHTML.innerHTML = "You pressed the back button (hopefully with no super)"
+            });
+
+            </script>
+            
+            </section>
+        </body>
+    </html>

@@ -106,6 +106,15 @@ function Bridge () {
 	//accelerometer.getCurrentAcceleration = 
 	//accelerometer.watchAcceleration = 
 
+//=========================================
+//Button wrapper
+//=========================================
+//API:
+//	bridge.android.on.backButton(isSuper, callback)
+//=========================================
+    this.android.on = {};
+    this.android.on.backButton = ;
+
 
 //=========================================
 //Geolocation wrapper
