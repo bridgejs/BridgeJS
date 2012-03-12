@@ -112,8 +112,7 @@ function Bridge () {
 //API:
 //	bridge.android.on.backButton(isSuper, callback)
 //=========================================
-    this.android.on = {};
-    this.android.on.backButton = ;
+    this.android.on = navigator.on;
 
 
 //=========================================
