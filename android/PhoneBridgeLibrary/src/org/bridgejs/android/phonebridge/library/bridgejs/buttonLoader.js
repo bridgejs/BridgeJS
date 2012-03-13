@@ -8,8 +8,6 @@ function __bindButtons() {
 	navigator.on.volumeupButton = __makeOnInterface("VolumeupButton");
 	navigator.on.menuButton = __makeOnInterface("MenuButton");
 	navigator.on.homeButton = __makeOnInterface("HomeButton");
-	
-	console.log(navigator.on.backButton);
 };
 
 function __makeOnInterface(whichButton) {

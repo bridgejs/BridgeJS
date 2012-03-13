@@ -35,7 +35,6 @@ public class ButtonJS {
 	}
 	
 	public void registerNoSuperBackButtonDownCallback(int callback) {
-		System.out.println("Registering backbutton with no super in java");
 		if (!backButton.getHasIsDoSuperBeenSetTrue())
 			backButton.setIsDoSuper(false);
 		
@@ -43,13 +42,11 @@ public class ButtonJS {
 	}
 	
 	public void registerSuperBackButtonDownCallback(int callback) {
-		System.out.println("Registering backbutton with super in java");
 		backButton.setIsDoSuper(true);
 		backButton.addToCallbacks(callback);
 	}
 	
 	public void registerNoSuperVolumedownButtonDownCallback(int callback) {
-		System.out.println("Registering volumedown with no super in java");
 		if (!volumedownButton.getHasIsDoSuperBeenSetTrue())
 			volumedownButton.setIsDoSuper(false);
 		
@@ -57,13 +54,11 @@ public class ButtonJS {
 	}
 	
 	public void registerSuperVolumedownButtonDownCallback(int callback) {
-		System.out.println("Registering volumedown with super in java");
 		volumedownButton.setIsDoSuper(true);
 		volumedownButton.addToCallbacks(callback);
 	}
 	
 	public void registerNoSuperVolumeupButtonDownCallback(int callback) {
-		System.out.println("Registering volumeup with no super in java");
 		if (!volumeupButton.getHasIsDoSuperBeenSetTrue())
 			volumeupButton.setIsDoSuper(false);
 		
@@ -71,13 +66,11 @@ public class ButtonJS {
 	}
 	
 	public void registerSuperVolumeupButtonDownCallback(int callback) {
-		System.out.println("Registering volumeup with super in java");
 		volumeupButton.setIsDoSuper(true);
 		volumeupButton.addToCallbacks(callback);
 	}
 	
 	public void registerNoSuperMenuButtonDownCallback(int callback) {
-		System.out.println("Registering menu with no super in java");
 		if (!menuButton.getHasIsDoSuperBeenSetTrue())
 			menuButton.setIsDoSuper(false);
 		
@@ -85,13 +78,11 @@ public class ButtonJS {
 	}
 	
 	public void registerSuperMenuButtonDownCallback(int callback) {
-		System.out.println("Registering menu with super in java");
 		menuButton.setIsDoSuper(true);
 		menuButton.addToCallbacks(callback);
 	}
 	
 	public void registerNoSuperHomeButtonDownCallback(int callback) {
-		System.out.println("Registering home with no super in java");
 		if (!homeButton.getHasIsDoSuperBeenSetTrue())
 			homeButton.setIsDoSuper(false);
 		
@@ -99,7 +90,6 @@ public class ButtonJS {
 	}
 	
 	public void registerSuperHomeButtonDownCallback(int callback) {
-		System.out.println("Registering home with super in java");
 		homeButton.setIsDoSuper(true);
 		homeButton.addToCallbacks(callback);
 	}

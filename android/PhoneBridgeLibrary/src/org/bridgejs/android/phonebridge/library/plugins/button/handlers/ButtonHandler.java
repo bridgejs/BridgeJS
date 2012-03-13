@@ -41,7 +41,6 @@ public abstract class ButtonHandler {
 		resetState();
 		
 		if (shouldDoSuper) {
-			System.out.println("Sending fake key event");
 			return requests.callSuperOnKeyDown(thisKeyCode, event);
 		}
 		else
