@@ -136,20 +136,26 @@ public class DroidBridge extends Activity{
 		ActivityEventsModifier activityEventsModifier = browser.getActivityEventsModifier();
 
 		if (keyCode == KeyEvent.KEYCODE_BACK){
-			activityEventsModifier.getOnBackButtonModifier();
+			return activityEventsModifier.getOnBackButtonModifier().run(event);
 		}
 		else if (keyCode == KeyEvent.KEYCODE_MENU) {
-			activityEventsModifier.getOnMenuButtonModifier();
+			return activityEventsModifier.getOnMenuButtonModifier().run(event);
 		}
 		else if (keyCode == KeyEvent.KEYCODE_VOLUME_DOWN) {
-			activityEventsModifier.getOnVolumeDownButtonModifier();
+			return activityEventsModifier.getOnVolumedownButtonModifier().run(event);
 		}
 		else if (keyCode == KeyEvent.KEYCODE_VOLUME_UP) {
-			activityEventsModifier.getOnVolumeUpButtonModifier();
+			return activityEventsModifier.getOnVolumeupButtonModifier().run(event);
 		}
 		else if (keyCode == KeyEvent.KEYCODE_HOME) {
-			activityEventsModifier.getOnHomeButtonModifier();
+			return activityEventsModifier.getOnHomeButtonModifier().run(event);
 		}
+		else {
+			return super.onKeyDown(keyCode, event);
+		}
+	}
+	
+	public boolean superOnKeyDown(int keyCode, KeyEvent event) {
 		return super.onKeyDown(keyCode, event);
 	}
 }

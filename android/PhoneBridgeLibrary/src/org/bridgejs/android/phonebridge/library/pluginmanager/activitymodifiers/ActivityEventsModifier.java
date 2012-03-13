@@ -7,6 +7,7 @@ import java.util.Queue;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.view.KeyEvent;
 
 /* I think this is a pretty good solution to the problem of adding code to the main activity */
 public class ActivityEventsModifier {
@@ -48,23 +49,23 @@ public class ActivityEventsModifier {
 	
 	
 	
-	public void addToOnMenuButtonModifier(final Runnable newAction) {
+	public void addToOnMenuButtonModifier(final ButtonRunnable newAction) {
 		modifiers.onMenuKeyModifiers.add(newAction);
 	}
 	
-	public void addToOnBackButtonModifier(final Runnable newAction) {
+	public void addToOnBackButtonModifier(final ButtonRunnable newAction) {
 		modifiers.onBackKeyModifiers.add(newAction);
 	}
 	
-	public void addToOnVolumeDownButtonModifier(final Runnable newAction) {
-		modifiers.onVolumeDownKeyModifiers.add(newAction);
+	public void addToOnVolumedownButtonModifier(final ButtonRunnable newAction) {
+		modifiers.onVolumedownKeyModifiers.add(newAction);
 	}
 	
-	public void addToOnVolumeUpButtonModifier(final Runnable newAction) {
-		modifiers.onVolumeUpKeyModifiers.add(newAction);
+	public void addToOnVolumeupButtonModifier(final ButtonRunnable newAction) {
+		modifiers.onVolumeupKeyModifiers.add(newAction);
 	}
 	
-	public void addToOnHomeButtonModifier(final Runnable newAction) {
+	public void addToOnHomeButtonModifier(final ButtonRunnable newAction) {
 		modifiers.onHomeKeyModifiers.add(newAction);
 	}
 	
@@ -84,6 +85,18 @@ public class ActivityEventsModifier {
 				for (Runnable r: runnables) {
 					r.run();
 				}
+			}
+		};
+	}
+	
+	private ButtonRunnable flattenButton(final List<ButtonRunnable> runnables) {
+		return new ButtonRunnable() {
+			public boolean run(KeyEvent event) {
+				boolean andTasks = true;
+				for (ButtonRunnable r: runnables) {
+					andTasks = andTasks && r.run(event);
+				}
+				return andTasks;
 			}
 		};
 	}
@@ -113,24 +126,24 @@ public class ActivityEventsModifier {
 	}
 	
 	
-	public Runnable getOnMenuButtonModifier() {
-		return flatten(modifiers.onMenuKeyModifiers);
+	public ButtonRunnable getOnMenuButtonModifier() {
+		return flattenButton(modifiers.onMenuKeyModifiers);
 	}
 	
-	public Runnable getOnBackButtonModifier() {
-		return flatten(modifiers.onBackKeyModifiers);
+	public ButtonRunnable getOnBackButtonModifier() {
+		return flattenButton(modifiers.onBackKeyModifiers);
 	}
 	
-	public Runnable getOnVolumeDownButtonModifier() {
-		return flatten(modifiers.onVolumeDownKeyModifiers);
+	public ButtonRunnable getOnVolumedownButtonModifier() {
+		return flattenButton(modifiers.onVolumedownKeyModifiers);
 	}
 	
-	public Runnable getOnVolumeUpButtonModifier() {
-		return flatten(modifiers.onVolumeUpKeyModifiers);
+	public ButtonRunnable getOnVolumeupButtonModifier() {
+		return flattenButton(modifiers.onVolumeupKeyModifiers);
 	}
 	
-	public Runnable getOnHomeButtonModifier() {
-		return flatten(modifiers.onHomeKeyModifiers);
+	public ButtonRunnable getOnHomeButtonModifier() {
+		return flattenButton(modifiers.onHomeKeyModifiers);
 	}
 	
 	public SpawnActivityForResult getSpawnActivityInstance() {

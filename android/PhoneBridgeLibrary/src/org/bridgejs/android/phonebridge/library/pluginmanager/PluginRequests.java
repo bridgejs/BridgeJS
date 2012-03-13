@@ -13,12 +13,14 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import org.bridgejs.android.phonebridge.library.DroidBridge;
 import org.bridgejs.android.phonebridge.library.browser.ProgressBarUpdater;
 import org.bridgejs.android.phonebridge.library.pluginmanager.activitymodifiers.ActivityEventsModifier;
+import org.bridgejs.android.phonebridge.library.pluginmanager.activitymodifiers.ButtonRunnable;
 
 
 import android.app.Activity;
 import android.content.res.AssetManager;
 import android.os.Handler;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.webkit.WebView;
 
 public class PluginRequests {
@@ -159,6 +161,10 @@ public class PluginRequests {
 			e.printStackTrace();
 		}
 	}
+	
+	public boolean callSuperOnKeyDown(int keyCode, KeyEvent event) {
+		return droidBridge.superOnKeyDown(keyCode, event);
+	}
 
 	public void addToOnResume(Runnable onResumeTask) {
 		activityEventsModifier.addToOnResumeModifier(onResumeTask);
@@ -181,23 +187,23 @@ public class PluginRequests {
 	}
 	
 	
-	public void addToOnMenuButtonModifier(final Runnable newAction) {
+	public void addToOnMenuButtonModifier(final ButtonRunnable newAction) {
 		activityEventsModifier.addToOnMenuButtonModifier(newAction);
 	}
 	
-	public void addToOnBackButtonModifier(final Runnable newAction) {
+	public void addToOnBackButtonModifier(final ButtonRunnable newAction) {
 		activityEventsModifier.addToOnBackButtonModifier(newAction);
 	}
 	
-	public void addToOnVolumeDownButtonModifier(final Runnable newAction) {
-		activityEventsModifier.addToOnVolumeDownButtonModifier(newAction);
+	public void addToOnVolumedownButtonModifier(final ButtonRunnable newAction) {
+		activityEventsModifier.addToOnVolumedownButtonModifier(newAction);
 	}
 	
-	public void addToOnVolumeUpButtonModifier(final Runnable newAction) {
-		activityEventsModifier.addToOnVolumeUpButtonModifier(newAction);
+	public void addToOnVolumeupButtonModifier(final ButtonRunnable newAction) {
+		activityEventsModifier.addToOnVolumeupButtonModifier(newAction);
 	}
 	
-	public void addToOnHomeButtonModifier(final Runnable newAction) {
+	public void addToOnHomeButtonModifier(final ButtonRunnable newAction) {
 		activityEventsModifier.addToOnHomeButtonModifier(newAction);
 	}
 	

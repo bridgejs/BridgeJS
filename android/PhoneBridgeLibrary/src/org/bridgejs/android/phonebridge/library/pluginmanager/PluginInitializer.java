@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.bridgejs.android.phonebridge.library.plugins.acceleratedCanvas2D.AcceleratedCanvas2DPlugin;
 import org.bridgejs.android.phonebridge.library.plugins.accelerometer.AccelerometerPlugin;
+import org.bridgejs.android.phonebridge.library.plugins.button.ButtonPlugin;
 import org.bridgejs.android.phonebridge.library.plugins.callback.CallbackPlugin;
 import org.bridgejs.android.phonebridge.library.plugins.core.CorePlugin;
 import org.bridgejs.android.phonebridge.library.plugins.device.DevicePlugin;
@@ -23,5 +24,6 @@ public class PluginInitializer {
 		plugins.add(new AccelerometerPlugin());
 		plugins.add(new DevicePlugin());
 		plugins.add(new GeolocationPlugin());
+		plugins.add(new ButtonPlugin());
 	}
 }

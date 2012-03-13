@@ -1,0 +1,74 @@
+
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>Device Test</title>
+    </head>
+    <body>
+        <p> BackButton: <b id="back">You haven't pressed the back button yet</b></p>
+        <p> VolumedownButton: <b id="volumedown">You haven't pressed the volume-down button yet</b></p>
+        <p> VolumeupButton: <b id="volumeup">You haven't pressed the volume-up button yet</b></p>
+        <p> MenuButton: <b id="menu">You haven't pressed the back menu-button yet</b></p>
+        <p> HomeButton: <b id="home">You haven't pressed the back home-button yet</b></p>
+        <section>
+        <div id="canvasesdiv"
+            style="position: relative; width: 400px; height: 300px">
+            <canvas id="layer1"
+            style="z-index: 1; position: absolute; left: 0px; top: 0px;"
+            height="500px" width="400">
+            This text is displayed if your browser does not support HTML5 Canvas.
+            </canvas>
+        </div>
+        
+        <script src="bridge.js"></script>
+        <script type="text/javascript">
+        
+            bridge.android.recommendNative();
+
+			var backHTML = document.getElementById("back");
+			var volumedownHTML = document.getElementById("volumedown");
+			var volumeupHTML = document.getElementById("volumeup");
+			var menuHTML = document.getElementById("menu");
+			var homeHTML = document.getElementById("home");
+			
+            bridge.android.on.backButton(false, function() {
+            	backHTML.innerHTML = "You pressed the back button (press it button again to quit)"
+            	bridge.android.on.backButton(true, function() {
+            		console.log("Quitting");
+            	});
+            });
+            
+            bridge.android.on.volumedownButton(false, function() {
+            	volumedownHTML.innerHTML = "You pressed the volumedown button (press it again to lower the volume)"
+            	bridge.android.on.vollumedownButton(true, function() {
+            		console.log("Lowering volume");
+            	});
+            });
+            
+            bridge.android.on.volumeupButton(false, function() {
+            	volumeupHTML.innerHTML = "You pressed the volumeup button (press it again to raise the volume)"
+            	bridge.android.on.volumeupButton(true, function() {
+            		console.log("Raisng volume");
+            	});
+            });
+            
+            bridge.android.on.menuButton(false, function() {
+            	menuHTML.innerHTML = "You pressed the menu button (press the menu button again to open the menu)"
+            	bridge.android.on.menuButton(true, function() {
+            		console.log("Opening menu");
+            	});
+            });
+            
+            bridge.android.on.homeButton(false, function() {
+            	homeHTML.innerHTML = "You pressed the home button (press the home button again to go home)"
+            	bridge.android.on.homeButton(true, function() {
+            		console.log("Going home");
+            	});
+            });
+
+            </script>
+            
+            </section>
+        </body>
+    </html>
