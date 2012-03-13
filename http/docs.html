@@ -71,7 +71,8 @@
 							<li><a href="#section_3">Accelerometer</a></li>
 							<li><a href="#section_4">Device</a></li>
 							<li><a href="#section_5">Geolocation</a></li>
-							<li><a href="#section_6">Writing Plugins</a></li>					
+							<li><a href="#section_6">Button</a></li>					
+							<li><a href="#section_7">Writing Plugins</a></li>					
 						</ul>
 					</div>
 				</div>
@@ -237,6 +238,51 @@ function doneWithLocationService() {
 					</section>
 					
 					<section id="section_6">
+						<h2>Button</h2>
+						<p>All these methods are very similar -- if you are confused after reading only one function description read the other examples as well. Only use functions within this plugin when you are sure the user is running on Android and with PhoneBridge.</p>
+
+                        <h4>bridge.android.on.backButton(isSuper, callback)</h4>
+                        <p>Register a callback function that will be called for the <i>next</i> time the user presses the back button on the Android device. Call with `isSuper` set to false to completely override the default behavior. Call with `isSuper` set to true to execute Android's default behavior <i>concurrently</i> with your callback</p>
+<pre class="prettyprint lang-js">
+bridge.android.on.backButton(false, function() {
+    console.log("Are you sure you want to quit?");
+});
+//the next press of the back button will implement the default behavior
+//behavior of the back button press
+</pre>
+                        <h4>bridge.android.on.volumedownButton(isSuper, callback)</h4>
+                        <p>Register a callback function that will be called for the <i>next</i> time the user presses the volumedown button on the Android device. Call with `isSuper` set to false to completely override the default behavior. Call with `isSuper` set to true to execute Android's default behavior <i>concurrently</i> with your callback</p>
+<pre class="prettyprint lang-js">
+bridge.android.on.volumedownButton(true, function() {
+    console.log("You just lowered the volume in my game!");
+});
+//the console.log will execute concurrently with the system handling 
+//the button press
+</pre>
+                        <h4>bridge.android.on.volumeupButton(isSuper, callback)</h4>
+                        <p>Register a callback function that will be called for the <i>next</i> time the user presses the volumeup button on the Android device. Call with `isSuper` set to false to completely override the default behavior. Call with `isSuper` set to true to execute Android's default behavior <i>concurrently</i> with your callback</p>
+<pre class="prettyprint lang-js">
+bridge.android.on.volumeupButton(false, function() {
+    moveTheRocketUp();
+});
+</pre>
+                        <h4>bridge.android.on.menuButton(isSuper, callback)</h4>
+                        <p>Register a callback function that will be called for the <i>next</i> time the user presses the menu button on the Android device. Call with `isSuper` set to false to completely override the default behavior. Call with `isSuper` set to true to execute Android's default behavior <i>concurrently</i> with your callback</p>
+<pre class="prettyprint lang-js">
+bridge.android.on.menuButton(false, function() {
+    person.jump();
+});
+</pre>
+                        <h4>bridge.android.on.homeButton(isSuper, callback)</h4>
+                        <p>Register a callback function that will be called for the <i>next</i> time the user presses the home button on the Android device. Due to limitations in the native Android API, there is no way to override the default behavior of the home button. <i>Setting `isSuper` does absolutely nothing</i> it is just kept as a parameter to keep consistency with the other functions in the `on` object.
+<pre class="prettyprint lang-js">
+bridge.android.on.homeButton(false, function() {
+    console.log("I have to execute concurrently with the system");
+});
+</pre>
+					</section>
+
+                    <section id="section_7">
 						<h2>Writing Plugins</h2>
 						<p>TODO</p>
 					</section>
