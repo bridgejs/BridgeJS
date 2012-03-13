@@ -19,8 +19,8 @@ public class Modifiers {
 	/* Buttons on Phone */
 	public List<ButtonRunnable> onBackKeyModifiers;
 	public List<ButtonRunnable> onMenuKeyModifiers;
-	public List<ButtonRunnable> onVolumeDownKeyModifiers;
-	public List<ButtonRunnable> onVolumeUpKeyModifiers;
+	public List<ButtonRunnable> onVolumedownKeyModifiers;
+	public List<ButtonRunnable> onVolumeupKeyModifiers;
 	public List<ButtonRunnable> onHomeKeyModifiers;
 	
 	public ActivityResultCallback onActivityResultModifier;
@@ -35,8 +35,8 @@ public class Modifiers {
 		
 		this.onBackKeyModifiers = new ArrayList<ButtonRunnable>();
 		this.onMenuKeyModifiers = new ArrayList<ButtonRunnable>();
-		this.onVolumeDownKeyModifiers = new ArrayList<ButtonRunnable>();
-		this.onVolumeUpKeyModifiers =  new ArrayList<ButtonRunnable>();
+		this.onVolumedownKeyModifiers = new ArrayList<ButtonRunnable>();
+		this.onVolumeupKeyModifiers =  new ArrayList<ButtonRunnable>();
 		this.onHomeKeyModifiers =  new ArrayList<ButtonRunnable>();
 		
 		this.onActivityResultModifier = null;

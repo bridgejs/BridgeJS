@@ -195,12 +195,12 @@ public class PluginRequests {
 		activityEventsModifier.addToOnBackButtonModifier(newAction);
 	}
 	
-	public void addToOnVolumeDownButtonModifier(final ButtonRunnable newAction) {
-		activityEventsModifier.addToOnVolumeDownButtonModifier(newAction);
+	public void addToOnVolumedownButtonModifier(final ButtonRunnable newAction) {
+		activityEventsModifier.addToOnVolumedownButtonModifier(newAction);
 	}
 	
-	public void addToOnVolumeUpButtonModifier(final ButtonRunnable newAction) {
-		activityEventsModifier.addToOnVolumeUpButtonModifier(newAction);
+	public void addToOnVolumeupButtonModifier(final ButtonRunnable newAction) {
+		activityEventsModifier.addToOnVolumeupButtonModifier(newAction);
 	}
 	
 	public void addToOnHomeButtonModifier(final ButtonRunnable newAction) {

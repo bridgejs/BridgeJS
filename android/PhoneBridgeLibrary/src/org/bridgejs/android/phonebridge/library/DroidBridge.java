@@ -142,10 +142,10 @@ public class DroidBridge extends Activity{
 			return activityEventsModifier.getOnMenuButtonModifier().run(event);
 		}
 		else if (keyCode == KeyEvent.KEYCODE_VOLUME_DOWN) {
-			return activityEventsModifier.getOnVolumeDownButtonModifier().run(event);
+			return activityEventsModifier.getOnVolumedownButtonModifier().run(event);
 		}
 		else if (keyCode == KeyEvent.KEYCODE_VOLUME_UP) {
-			return activityEventsModifier.getOnVolumeUpButtonModifier().run(event);
+			return activityEventsModifier.getOnVolumeupButtonModifier().run(event);
 		}
 		else if (keyCode == KeyEvent.KEYCODE_HOME) {
 			return activityEventsModifier.getOnHomeButtonModifier().run(event);

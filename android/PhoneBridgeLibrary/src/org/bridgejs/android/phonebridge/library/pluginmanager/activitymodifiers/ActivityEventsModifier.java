@@ -57,12 +57,12 @@ public class ActivityEventsModifier {
 		modifiers.onBackKeyModifiers.add(newAction);
 	}
 	
-	public void addToOnVolumeDownButtonModifier(final ButtonRunnable newAction) {
-		modifiers.onVolumeDownKeyModifiers.add(newAction);
+	public void addToOnVolumedownButtonModifier(final ButtonRunnable newAction) {
+		modifiers.onVolumedownKeyModifiers.add(newAction);
 	}
 	
-	public void addToOnVolumeUpButtonModifier(final ButtonRunnable newAction) {
-		modifiers.onVolumeUpKeyModifiers.add(newAction);
+	public void addToOnVolumeupButtonModifier(final ButtonRunnable newAction) {
+		modifiers.onVolumeupKeyModifiers.add(newAction);
 	}
 	
 	public void addToOnHomeButtonModifier(final ButtonRunnable newAction) {
@@ -134,12 +134,12 @@ public class ActivityEventsModifier {
 		return flattenButton(modifiers.onBackKeyModifiers);
 	}
 	
-	public ButtonRunnable getOnVolumeDownButtonModifier() {
-		return flattenButton(modifiers.onVolumeDownKeyModifiers);
+	public ButtonRunnable getOnVolumedownButtonModifier() {
+		return flattenButton(modifiers.onVolumedownKeyModifiers);
 	}
 	
-	public ButtonRunnable getOnVolumeUpButtonModifier() {
-		return flattenButton(modifiers.onVolumeUpKeyModifiers);
+	public ButtonRunnable getOnVolumeupButtonModifier() {
+		return flattenButton(modifiers.onVolumeupKeyModifiers);
 	}
 	
 	public ButtonRunnable getOnHomeButtonModifier() {
