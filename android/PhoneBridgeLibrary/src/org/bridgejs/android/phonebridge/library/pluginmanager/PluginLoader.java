@@ -3,6 +3,7 @@ package org.bridgejs.android.phonebridge.library.pluginmanager;
 
 import android.os.AsyncTask;
 import android.os.Handler;
+import android.util.Log;
 import android.webkit.WebView;
 
 public class PluginLoader {
@@ -13,7 +14,7 @@ public class PluginLoader {
 
 	private PluginManager pluginManager;
 	
-	public PluginLoader(PluginManager pluginManager, WebView webView, PluginRequests requests, Handler handler){
+	public PluginLoader(PluginManager pluginManager, WebView webView, PluginRequests requests){
 		this.webView = webView;
 		this.requests = requests;
 		this.pluginManager = pluginManager;
@@ -27,11 +28,21 @@ public class PluginLoader {
 				final String content = getContent(url);
 				return content;
 			}
+			
+			private void safelyLoadDataAndUpdateProgress(String content) {
+				try {
+					requests.setProgressBar(50);
+					webView.loadDataWithBaseURL(url, content, "text/html", "utf-8", null);
+				}
+				catch (Exception e) {
+					Log.e("Exception", "Safely caught exception");	
+				}
+			}
+			
 			@Override
 			protected void onPostExecute(String content) {
-//				System.out.println(content);
-				requests.setProgressBar(50);
-				webView.loadDataWithBaseURL(url, content, "text/html", "utf-8", null);
+				
+				safelyLoadDataAndUpdateProgress(content);
 			}
 		}
 		ContentLoaderTask contentLoaderTask = new ContentLoaderTask();

@@ -8,7 +8,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.os.Handler;
 import android.util.AttributeSet;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
@@ -30,7 +29,7 @@ public class BridgeJSWebView extends WebView {
 		super(context);
 	}
 
-	public void init(final Activity activity, Handler handler){
+	public void init(final Activity activity){
 
 		WebSettings settings = getSettings();
 		settings.setJavaScriptEnabled(true);

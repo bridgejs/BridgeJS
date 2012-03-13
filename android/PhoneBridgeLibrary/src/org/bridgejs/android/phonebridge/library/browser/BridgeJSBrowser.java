@@ -6,6 +6,7 @@ import java.lang.reflect.InvocationTargetException;
 import org.bridgejs.android.phonebridge.library.DroidBridge;
 import org.bridgejs.android.phonebridge.library.pluginmanager.PluginManager;
 import org.bridgejs.android.phonebridge.library.pluginmanager.activitymodifiers.ActivityEventsModifier;
+import org.bridgejs.android.phonebridge.library.ui.HandlerWithLog;
 import org.bridgejs.android.phonebridge.library.ui.StylizedProgressBarFactory;
 
 
@@ -44,7 +45,7 @@ public class BridgeJSBrowser extends FrameLayout{
 
 	private PluginManager pluginManager;
 
-	public void init(DroidBridge activity, Handler handler, boolean accelerateCanvas){
+	public void init(DroidBridge activity, HandlerWithLog handler, boolean accelerateCanvas){
 
 		FrameLayout.LayoutParams layout = 
 				new FrameLayout.LayoutParams(
@@ -54,25 +55,25 @@ public class BridgeJSBrowser extends FrameLayout{
 
 		this.accelerateCanvas = accelerateCanvas;
 		this.webView = new BridgeJSWebView(activity.getApplicationContext());
-		createAndAddProgressBar(activity.getApplicationContext());
+		createAndAddProgressBar(activity.getApplicationContext(), handler);
 		initPluginManager(activity, handler);
-		createAndAddWebView(activity, handler);
+		createAndAddWebView(activity);
 		this.addView(webView);
 		this.addView(progressBar);
 	}
 
-	private void initPluginManager(DroidBridge activity, Handler handler){
+	private void initPluginManager(DroidBridge activity, HandlerWithLog handler){
 		this.pluginManager = new PluginManager(webView, activity, handler, progressBarUpdater, accelerateCanvas);
 		pluginManager.initPlugins();
 	}
 
-	private void createAndAddProgressBar(Context context){
+	private void createAndAddProgressBar(Context context, HandlerWithLog handler){
 		this.progressBar = StylizedProgressBarFactory.build(context);
-		this.progressBarUpdater = new ProgressBarUpdater(progressBar, new Handler());
+		this.progressBarUpdater = new ProgressBarUpdater(progressBar, handler);
 	}
 
-	private void createAndAddWebView(Activity activity, Handler handler){
-		webView.init(activity, handler);
+	private void createAndAddWebView(Activity activity){
+		webView.init(activity);
 		webView.setWebChromeClient(new BridgeJSWebChromeClient(activity, progressBarUpdater));
 		webView.setWebViewClient(new BridgeJSWebViewClient(pluginManager, this));
 

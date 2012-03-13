@@ -14,6 +14,7 @@ import org.bridgejs.android.phonebridge.library.DroidBridge;
 import org.bridgejs.android.phonebridge.library.browser.ProgressBarUpdater;
 import org.bridgejs.android.phonebridge.library.pluginmanager.activitymodifiers.ActivityEventsModifier;
 import org.bridgejs.android.phonebridge.library.pluginmanager.activitymodifiers.ButtonRunnable;
+import org.bridgejs.android.phonebridge.library.ui.HandlerWithLog;
 
 
 import android.app.Activity;
@@ -27,7 +28,7 @@ public class PluginRequests {
 
 	private WebView webView;
 
-	private Handler handler;
+	private HandlerWithLog handler;
 
 	private DroidBridge droidBridge;
 
@@ -39,7 +40,7 @@ public class PluginRequests {
 		webView.addJavascriptInterface(obj, interfaceName);
 	}
 
-	public PluginRequests(WebView webView, ProgressBarUpdater progressBarUpdater, DroidBridge droidBridge, Handler handler, PluginManager pluginManager){
+	public PluginRequests(WebView webView, ProgressBarUpdater progressBarUpdater, DroidBridge droidBridge, HandlerWithLog handler, PluginManager pluginManager){
 		this.webView = webView;
 		this.droidBridge = droidBridge;
 		this.handler = handler;
@@ -48,7 +49,7 @@ public class PluginRequests {
 		this.activityEventsModifier = new ActivityEventsModifier(droidBridge);
 	}
 
-	public Handler getHandler(){
+	public HandlerWithLog getHandler(){
 		return handler;
 	}
 

@@ -2,6 +2,7 @@ package org.bridgejs.android.phonebridge.library.plugins.acceleratedCanvas2D;
 
 import org.bridgejs.android.phonebridge.library.pluginmanager.BridgeJSPlugin;
 import org.bridgejs.android.phonebridge.library.pluginmanager.PluginRequests;
+import org.bridgejs.android.phonebridge.library.ui.HandlerWithLog;
 
 import android.graphics.Canvas;
 import android.os.Handler;
@@ -27,8 +28,8 @@ public class AcceleratedCanvas2DPlugin implements BridgeJSPlugin{
 	}
 	
 	public void startPeriodicScanningForCanvasUpdates(){
-		final Handler handler = requests.getHandler();
-		handler.postDelayed(new Runnable(){
+		final HandlerWithLog handler = requests.getHandler();
+		handler.postDelayed(this.getClass(), "Starting periodic scan for canvas updates",  new Runnable(){
 			public void run() {
 				lookForCanvasUpdates();
 				handler.postDelayed(this, 500);

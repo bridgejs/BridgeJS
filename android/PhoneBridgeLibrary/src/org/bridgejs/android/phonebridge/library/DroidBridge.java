@@ -7,11 +7,11 @@ import org.bridgejs.android.phonebridge.library.browser.BridgeJSBrowser;
 import org.bridgejs.android.phonebridge.library.pluginmanager.activitymodifiers.ActivityEventsModifier;
 import org.bridgejs.android.phonebridge.library.pluginmanager.activitymodifiers.ActivityResultCallback;
 import org.bridgejs.android.phonebridge.library.pluginmanager.activitymodifiers.SpawnActivityForResult;
+import org.bridgejs.android.phonebridge.library.ui.HandlerWithLog;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.KeyEvent;
 import android.view.Window;
 
@@ -25,7 +25,7 @@ public class DroidBridge extends Activity{
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		isPaused = new AtomicBoolean(false);
-		this.browser.init(this, new Handler(), false);
+		this.browser.init(this, new HandlerWithLog(), false);
 	}
 
 	public String getUrlFromIntent(Intent i, String defaultUrl){
