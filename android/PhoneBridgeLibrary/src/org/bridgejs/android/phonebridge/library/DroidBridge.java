@@ -11,8 +11,10 @@ import org.bridgejs.android.phonebridge.library.ui.HandlerWithLog;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.opengl.Visibility;
 import android.os.Bundle;
 import android.view.KeyEvent;
+import android.view.View;
 import android.view.Window;
 
 public class DroidBridge extends Activity{
@@ -103,9 +105,10 @@ public class DroidBridge extends Activity{
 		ActivityEventsModifier activityEventsModifier = browser.getActivityEventsModifier();
 		activityEventsModifier.getOnDestroyModifier().run();
 		try {
-			browser.gotoBlankWebPage();
-			browser.stopAndDestroyWebView();
-			browser.destroyWebView();
+			//browser.gotoBlankWebPage();
+			//browser.stopAndDestroyWebView();
+			browser.setVisibility(View.INVISIBLE);
+			//browser.destroyWebView();
 		} catch (Exception e){
 			
 		}
