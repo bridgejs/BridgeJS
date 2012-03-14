@@ -163,6 +163,33 @@ function Bridge () {
 //	bridge.geolocation.disableLocationService()
 //=========================================
 
+//=========================================
+//Device wrapper
+//=========================================
+//API:
+//	bridge.orientation.getCurrentAzimuth(onSuccess,onError)
+//  bridge.orientation.getCurrentPitch(onSuccess, onError)
+//  bridge.orientation.getCurrentRoll(onSuccess,onError)
+//=========================================
+    this.orientation = {};
+
+	function browserSupportsWebkitCompass(){
+		return true; //TODO: I don't know how to actually check this
+	}
+    //TODO: Support the options parameter like in the HTML5 and PhoneGap spec
+	if (browserIsRapid()){
+		this.orientation.getCurrentOrientation = navigator.compass.getCurrentOrientation;
+	}
+	else if (browserSupportsPhoneGap()){
+		this.orientation.getCurrentOrientation = navigator.compass.getCurrentOrientation;
+	}
+
+	else if (browserSupportsWebkitGeolocation()){
+		this.orientation.getCurrentOrientation = navigator.compass.getCurrentOrientation;
+	}
+	else {
+		console.log("Device does not accept geolocation!");
+	}
 }
 
 var bridge = new Bridge();
