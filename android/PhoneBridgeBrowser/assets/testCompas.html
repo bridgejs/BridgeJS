@@ -1,0 +1,52 @@
+
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>Compass Test</title>
+    </head>
+    <body>
+        <p> Azimuth: <b id="azimuth">Unknown</b></p>
+        <p> Pitch: <b id="pitch">Unknown</b></p>
+        <p> Roll: <b id="roll">Unknown</b></p>
+        <p> Timestamp: <b id="timestamp">Unknown</b></p>
+        <input type="button" value="Get Current Orientation" onclick="retrieveData()" />
+        <section>
+        <div id="canvasesdiv"
+            style="position: relative; width: 400px; height: 300px">
+            <canvas id="layer1"
+            style="z-index: 1; position: absolute; left: 0px; top: 0px;"
+            height="500px" width="400">
+            This text is displayed if your browser does not support HTML5 Canvas.
+            </canvas>
+        </div> 
+       		 <script src="bridge.js"></script>
+       		 <script type="text/javascript">
+        
+	            bridge.android.recommendNative();
+	
+					var azimuthHTML = document.getElementById("azimuth");
+					var pitchHTML = document.getElementById("pitch");
+					var rollHTML = document.getElementById("roll");
+					var timestampHTML = document.getElementById("timestamp");
+		
+		            function onSuccess(position) {
+						azimuthHTML.innerHTML = position.azimuth;
+						pitchHTML.innerHTML = position.pitch;
+						rollHTML.innerHTML = position.roll;
+		                timestampHTML.innerHTML = position.timestamp;
+		
+		            }
+		
+		            function onError(position) {
+		                console.log("Error: " + position);
+		            }
+		            
+		            function retrieveData() {
+		            	bridge.orientation.getCurrentOrientation(onSuccess, onError);
+		            }
+	            
+         	   </script>
+            </section>
+        </body>
+    </html>
