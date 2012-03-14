@@ -168,6 +168,11 @@ function Bridge () {
 //=========================================
 //API:
 //	bridge.orientation.getCurrentOrientation(onSuccess,onError)
+//		object returned contains:
+//			.azimuth
+//			.pitch
+//			.roll
+//			.timestamp
 //=========================================
     this.orientation = {};
 
