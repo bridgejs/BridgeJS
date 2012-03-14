@@ -12,14 +12,14 @@ public class CompassListener implements SensorEventListener {
 
 	public void onSensorChanged(SensorEvent event) {
 	
-		if(event.sensor.getType() == Sensor.TYPE_ORIENTATION)
-		{
+		if(event.sensor.getType() == Sensor.TYPE_ORIENTATION){
 			azimuth = event.values[0];
 			pitch = event.values[1];
 			roll = event.values[2];
 		}
 	}
-	public void onAccuracyChanged(Sensor arg0, int arg1) {
-		
+	
+	public void onAccuracyChanged(Sensor arg0, int arg1) {		
 	}
+	
 }

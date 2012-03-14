@@ -14,8 +14,7 @@ public class CompassJS {
 	private PluginRequests requests;
 	private final CompassListener compassListener;
 	
-	public CompassJS(PluginRequests requests)
-	{
+	public CompassJS(PluginRequests requests){
 		this.requests = requests;
 		
 		final SensorManager sensorManager = (SensorManager) requests.getSystemService(Activity.SENSOR_SERVICE);
@@ -37,8 +36,7 @@ public class CompassJS {
 		});
 		
 	}
-	public void getCurrentOrientation(int onSuccess, int onError)
-	{
+	public void getCurrentOrientation(int onSuccess, int onError){
 		long timestamp = System.currentTimeMillis();
 		requests.postJavascript("__gotCurrentOrientation(" + onSuccess +"," + compassListener.azimuth+","+compassListener.pitch+","+compassListener.roll+","+timestamp+");",this);
 	}
