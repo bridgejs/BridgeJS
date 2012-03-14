@@ -167,9 +167,7 @@ function Bridge () {
 //Orientation Wrapper
 //=========================================
 //API:
-//	bridge.orientation.getCurrentAzimuth(onSuccess,onError)
-//  bridge.orientation.getCurrentPitch(onSuccess, onError)
-//  bridge.orientation.getCurrentRoll(onSuccess,onError)
+//	bridge.orientation.getCurrentOrientation(onSuccess,onError)
 //=========================================
     this.orientation = {};
 
