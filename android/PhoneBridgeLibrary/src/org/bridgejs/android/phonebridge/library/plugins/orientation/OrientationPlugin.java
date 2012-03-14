@@ -1,20 +1,20 @@
-package org.bridgejs.android.phonebridge.library.plugins.compass;
+package org.bridgejs.android.phonebridge.library.plugins.orientation;
 
 import org.bridgejs.android.phonebridge.library.pluginmanager.BridgeJSPlugin;
 import org.bridgejs.android.phonebridge.library.pluginmanager.PluginRequests;
 import android.graphics.Canvas;
 
 
-public class CompassPlugin implements BridgeJSPlugin{
+public class OrientationPlugin implements BridgeJSPlugin{
 	
 	private String loadingJS;
 	
 	public void init(PluginRequests requests) {
 		
-		loadingJS = requests.getBridgeJSAsset("compassLoader.js");
+		loadingJS = requests.getBridgeJSAsset("orientationLoader.js");
 		
-		CompassJS compass = new CompassJS(requests);
-		requests.addJavascriptInterface(compass, "__androidCompass");
+		OrientationJS orientation = new OrientationJS(requests);
+		requests.addJavascriptInterface(orientation, "__androidOrientation");
 	}
 
 	public void onDraw(Canvas canvas, int left, int top, float scale) {

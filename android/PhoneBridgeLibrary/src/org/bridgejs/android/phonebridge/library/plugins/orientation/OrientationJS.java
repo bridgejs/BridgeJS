@@ -1,4 +1,4 @@
-package org.bridgejs.android.phonebridge.library.plugins.compass;
+package org.bridgejs.android.phonebridge.library.plugins.orientation;
 
 import org.bridgejs.android.phonebridge.library.pluginmanager.PluginRequests;
 import org.bridgejs.android.phonebridge.library.plugins.accelerometer.AccelerometerListener;
@@ -10,16 +10,16 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 
 
-public class CompassJS {
+public class OrientationJS {
 	private PluginRequests requests;
-	private final CompassListener compassListener;
+	private final OrientationListener compassListener;
 	
-	public CompassJS(PluginRequests requests){
+	public OrientationJS(PluginRequests requests){
 		this.requests = requests;
 		
 		final SensorManager sensorManager = (SensorManager) requests.getSystemService(Activity.SENSOR_SERVICE);
 		final Sensor compassSensor = sensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION);
-		compassListener = new CompassListener();
+		compassListener = new OrientationListener();
 
 		sensorManager.registerListener(compassListener, compassSensor, SensorManager.SENSOR_DELAY_GAME);
 

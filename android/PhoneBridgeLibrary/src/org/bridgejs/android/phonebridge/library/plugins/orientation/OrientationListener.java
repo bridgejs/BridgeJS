@@ -1,10 +1,10 @@
-package org.bridgejs.android.phonebridge.library.plugins.compass;
+package org.bridgejs.android.phonebridge.library.plugins.orientation;
 
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 
-public class CompassListener implements SensorEventListener {
+public class OrientationListener implements SensorEventListener {
 
 	public float azimuth; //standard 2-d compass
 	public float pitch;   //upwards and downwards

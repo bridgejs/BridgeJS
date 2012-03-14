@@ -6,11 +6,11 @@ import org.bridgejs.android.phonebridge.library.plugins.acceleratedCanvas2D.Acce
 import org.bridgejs.android.phonebridge.library.plugins.accelerometer.AccelerometerPlugin;
 import org.bridgejs.android.phonebridge.library.plugins.button.ButtonPlugin;
 import org.bridgejs.android.phonebridge.library.plugins.callback.CallbackPlugin;
-import org.bridgejs.android.phonebridge.library.plugins.compass.CompassPlugin;
 import org.bridgejs.android.phonebridge.library.plugins.core.CorePlugin;
 import org.bridgejs.android.phonebridge.library.plugins.device.DevicePlugin;
 import org.bridgejs.android.phonebridge.library.plugins.geolocation.GeolocationJS;
 import org.bridgejs.android.phonebridge.library.plugins.geolocation.GeolocationPlugin;
+import org.bridgejs.android.phonebridge.library.plugins.orientation.OrientationPlugin;
 
 import android.webkit.WebView;
 
@@ -26,6 +26,6 @@ public class PluginInitializer {
 		plugins.add(new DevicePlugin());
 		plugins.add(new GeolocationPlugin());
 		plugins.add(new ButtonPlugin());
-		plugins.add(new CompassPlugin());
+		plugins.add(new OrientationPlugin());
 	}
 }

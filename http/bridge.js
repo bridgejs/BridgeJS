@@ -173,7 +173,7 @@ function Bridge () {
 //API:
 //	bridge.orientation.getCurrentOrientation(onSuccess,onError)
 //		object returned contains:
-//			.azimuth
+//			.azimuth   (2-d compass)
 //			.pitch
 //			.roll
 //			.timestamp
@@ -185,14 +185,13 @@ function Bridge () {
 	}
     //TODO: Support the options parameter like in the HTML5 and PhoneGap spec
 	if (browserIsRapid()){
-		this.orientation.getCurrentOrientation = navigator.compass.getCurrentOrientation;
+		this.orientation.getCurrentOrientation = navigator.orientation.getCurrentOrientation;
 	}
 	else if (browserSupportsPhoneGap()){
-		this.orientation.getCurrentOrientation = navigator.compass.getCurrentOrientation;
+		this.orientation.getCurrentOrientation = navigator.orientation.getCurrentOrientation;
 	}
-
 	else if (browserSupportsWebkitCompass()){
-		this.orientation.getCurrentOrientation = navigator.compass.getCurrentOrientation;
+		this.orientation.getCurrentOrientation = navigator.orientation.getCurrentOrientation;
 	}
 	else {
 		console.log("Device does not accept Orientation!");

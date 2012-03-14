@@ -284,8 +284,8 @@ bridge.android.on.homeButton(false, function() {
 					</section>
 
                     <section id="section_7">
-                        <h2>Compass</h2>
-                        <p>The plugin will NOT safely use Webkit's HTML5 implementation of orientation tracking. This document applies only to API calls running in PhoneBridge </p>
+                        <h2>Orientation</h2>
+                        <p>The plugin will NOT safely use Webkit's HTML5 implementation of orientation tracking. This document applies only to API calls running in PhoneBridge. </p>
 
                         <h4> Orientation Object </h4>
  <pre class="prettyprint lang-js">
@@ -298,8 +298,6 @@ orientation.roll;
 </pre>
                         <h4> bridge.orientation.getCurrentOrientation(onSuccess,onError)</h4>
                         <p> Get the current orientation of the device. On success call onSuccess(orientation) once and on error call onError() once.<p>
-
-                    </section>
  <pre class="prettyprint lang-js">
 function onSuccess(compass){
     console.log("Success: azimuth: " + compass.azimuth + ", pitch: " + 
@@ -311,6 +309,8 @@ function onError(){
 bridge.orientation.getCurrentOrientation(onSuccess,onError);
 
 </pre>
+                    </section>
+
                     <section id="section_8">
 						<h2>Writing Plugins</h2>
 						<p>TODO</p>

@@ -8,15 +8,15 @@ function __gotCurrentOrientation(callbackID, azimuth,pitch,roll,timestamp){
 	___retrieveCallback(callbackID)(directions);
 };
 
-function __bindCompassToAndroid(){
-	navigator.compass = {};
-	navigator.compass.getCurrentOrientation = function(onSuccess, onError){
-		__androidCompass.getCurrentOrientation(
+function __bindOrientationToAndroid(){
+	navigator.orientation = {};
+	navigator.orientation.getCurrentOrientation = function(onSuccess, onError){
+		__androidOrientation.getCurrentOrientation(
 				___storeCallback(onSuccess), 
 				___storeCallback(onError)
 		);
 	};
 };
 
-__bindCompassToAndroid();
+__bindOrientationToAndroid();
 console.log("compass loaded");
