@@ -111,6 +111,10 @@ function Bridge () {
 //=========================================
 //API:
 //	bridge.android.on.backButton(isSuper, callback)
+//  bridge.android.on.volumedownButton(isSuper, callback)
+//  bridge.android.on.volumeupButton(isSuper, callback)
+//  bridge.android.on.menuButton(isSuper, callback)
+//  bridge.android.on.homeButton(isSuper, callback)
 //=========================================
     this.android.on = navigator.on;
 
