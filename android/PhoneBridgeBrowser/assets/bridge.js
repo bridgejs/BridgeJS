@@ -190,7 +190,6 @@ function Bridge () {
 	else if (browserSupportsPhoneGap()){
 		this.orientation.getCurrentOrientation = navigator.compass.getCurrentOrientation;
 	}
-
 	else if (browserSupportsWebkitCompass()){
 		this.orientation.getCurrentOrientation = navigator.compass.getCurrentOrientation;
 	}
