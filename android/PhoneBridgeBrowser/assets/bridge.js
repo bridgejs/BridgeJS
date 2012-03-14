@@ -164,7 +164,7 @@ function Bridge () {
 //=========================================
 
 //=========================================
-//Device wrapper
+//Orientation Wrapper
 //=========================================
 //API:
 //	bridge.orientation.getCurrentAzimuth(onSuccess,onError)
@@ -184,11 +184,11 @@ function Bridge () {
 		this.orientation.getCurrentOrientation = navigator.compass.getCurrentOrientation;
 	}
 
-	else if (browserSupportsWebkitGeolocation()){
+	else if (browserSupportsWebkitCompass()){
 		this.orientation.getCurrentOrientation = navigator.compass.getCurrentOrientation;
 	}
 	else {
-		console.log("Device does not accept geolocation!");
+		console.log("Device does not accept Orientation!");
 	}
 }
 
