@@ -19,40 +19,34 @@
             height="500px" width="400">
             This text is displayed if your browser does not support HTML5 Canvas.
             </canvas>
-        </div>
+        </div> 
+       		 <script src="bridge.js"></script>
+       		 <script type="text/javascript">
         
-        
-        <script src="bridge.js"></script>
-        <script type="text/javascript">
-        
-            bridge.android.recommendNative();
-
-			var azimuthHTML = document.getElementById("azimuth");
-			var pitchHTML = document.getElementById("pitch");
-			var rollHTML = document.getElementById("roll");
-			var timestampHTML = document.getElementById("timestamp");
-
-            function onSuccess(position) {
-				azimuthHTML.innerHTML = position.azimuth;
-				pitchHTML.innerHTML = position.pitch;
-				rollHTML.innerHTML = position.roll;
-                timestampHTML.innerHTML = position.timestamp;
-
-            }
-
-            function onError(position) {
-                console.log("Error: " + position);
-            }
-            
-            function retrieveData() {
-            	bridge.orientation.getCurrentOrientation(onSuccess, onError);
-            }
-            
-            
-
-            </script>
-            
-            
+	            bridge.android.recommendNative();
+	
+					var azimuthHTML = document.getElementById("azimuth");
+					var pitchHTML = document.getElementById("pitch");
+					var rollHTML = document.getElementById("roll");
+					var timestampHTML = document.getElementById("timestamp");
+		
+		            function onSuccess(position) {
+						azimuthHTML.innerHTML = position.azimuth;
+						pitchHTML.innerHTML = position.pitch;
+						rollHTML.innerHTML = position.roll;
+		                timestampHTML.innerHTML = position.timestamp;
+		
+		            }
+		
+		            function onError(position) {
+		                console.log("Error: " + position);
+		            }
+		            
+		            function retrieveData() {
+		            	bridge.orientation.getCurrentOrientation(onSuccess, onError);
+		            }
+	            
+         	   </script>
             </section>
         </body>
     </html>
