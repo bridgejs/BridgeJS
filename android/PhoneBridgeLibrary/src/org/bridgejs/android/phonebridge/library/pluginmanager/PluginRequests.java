@@ -39,6 +39,14 @@ public class PluginRequests {
 	public void addJavascriptInterface(Object obj, String interfaceName){
 		webView.addJavascriptInterface(obj, interfaceName);
 	}
+	
+	public boolean canWebViewGoBack() {
+		return webView.canGoBack();
+	}
+	
+	public void webViewGoBack() {
+		webView.goBack();
+	}
 
 	public PluginRequests(WebView webView, ProgressBarUpdater progressBarUpdater, DroidBridge droidBridge, HandlerWithLog handler, PluginManager pluginManager){
 		this.webView = webView;

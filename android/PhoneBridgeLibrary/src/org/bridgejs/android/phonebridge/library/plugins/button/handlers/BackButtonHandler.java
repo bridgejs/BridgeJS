@@ -15,13 +15,30 @@ public class BackButtonHandler extends ButtonHandler {
 		this.requests = requests;
 		init();
 	}
+	
+	@Override
+	public boolean callback(KeyEvent event) {
+		
+		super.callCallbacks(event);
+		boolean shouldDoSuper = super.getIsDoSuper();
+		super.resetState();
+		
+		if (shouldDoSuper) {
+			if (requests.canWebViewGoBack()) {
+		        requests.webViewGoBack();
+		        return true;
+		    }
+			return requests.callSuperOnKeyDown(KeyEvent.KEYCODE_BACK, event);
+		}
+		else
+			return true;
+	}
 
 	private void init() {
-		// TODO Auto-generated method stub
 		requests.addToOnBackButtonModifier(new ButtonRunnable() {
 
 			public boolean run(KeyEvent event) {
-				return BackButtonHandler.super.callback(event);
+				return callback(event);
 			}
 			
 		});
