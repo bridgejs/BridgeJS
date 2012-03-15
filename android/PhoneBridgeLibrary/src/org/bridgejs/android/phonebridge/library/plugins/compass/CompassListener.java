@@ -6,9 +6,9 @@ import android.hardware.SensorEventListener;
 
 public class CompassListener implements SensorEventListener {
 
-	public float azimuth;
-	public float pitch;
-	public float roll;
+	public float azimuth; //standard 2-d compass
+	public float pitch;   //upwards and downwards
+	public float roll;	//left and right tilt
 
 	public void onSensorChanged(SensorEvent event) {
 	
