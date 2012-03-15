@@ -19,6 +19,10 @@ import android.widget.ProgressBar;
 
 public class BridgeJSWebView extends WebView {
 
+	private WebHistoryStack webHistoryStack;
+	public final static int MAX_HISTORY_SIZE = 20;
+
+	
 	public BridgeJSWebView(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
 	}
@@ -28,9 +32,15 @@ public class BridgeJSWebView extends WebView {
 	public BridgeJSWebView(Context context) {
 		super(context);
 	}	
+	
+	public WebHistoryStack getWebHistoryStack() {
+		return this.webHistoryStack;
+	}
 
 	public void init(final Activity activity){
 
+		this.webHistoryStack = new WebHistoryStack(20);
+		
 		WebSettings settings = getSettings();
 		settings.setJavaScriptEnabled(true);
 		settings.setBuiltInZoomControls(true);
@@ -52,5 +62,19 @@ public class BridgeJSWebView extends WebView {
 		settings.setDomStorageEnabled(true);
 		
 	}
-
+	
+	@Override
+	public boolean canGoBack() {
+		return webHistoryStack.doesHistoryExist();
+	}
+	
+	@Override
+	public void goBack() {
+		WebContent data = webHistoryStack.pop();
+		if (data.content.equals(""))
+			super.loadUrl(data.url);
+		else
+			super.loadDataWithBaseURL(data.url, data.content, "text/html", "utf-8", "");
+	}
+	
 }
