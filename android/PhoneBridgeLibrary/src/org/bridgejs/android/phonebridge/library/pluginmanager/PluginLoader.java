@@ -1,6 +1,9 @@
 package org.bridgejs.android.phonebridge.library.pluginmanager;
 
 
+import org.bridgejs.android.phonebridge.library.browser.WebContent;
+import org.bridgejs.android.phonebridge.library.browser.WebHistoryStack;
+
 import android.os.AsyncTask;
 import android.os.Handler;
 import android.util.Log;
@@ -11,7 +14,7 @@ public class PluginLoader {
 	private PluginRequests requests;
 
 	private WebView webView;
-
+	
 	private PluginManager pluginManager;
 	
 	public PluginLoader(PluginManager pluginManager, WebView webView, PluginRequests requests){
@@ -20,7 +23,7 @@ public class PluginLoader {
 		this.pluginManager = pluginManager;
 	}
 
-	public void loadUrl(final String url){
+	public void loadUrl(final String url, final WebHistoryStack webHistoryStack){
 		final class ContentLoaderTask extends AsyncTask<String, Void, String> {
 			@Override
 			protected String doInBackground(String... strings) {
@@ -32,7 +35,8 @@ public class PluginLoader {
 			private void safelyLoadDataAndUpdateProgress(String content) {
 				try {
 					requests.setProgressBar(50);
-					webView.loadDataWithBaseURL(url, content, "text/html", "utf-8", null);
+					//System.out.println("Content: " + content);
+					webView.loadDataWithBaseURL(url, content, "text/html", "utf-8", "");
 				}
 				catch (Exception e) {
 					Log.e("Exception", "Safely caught exception");	
@@ -41,8 +45,10 @@ public class PluginLoader {
 			
 			@Override
 			protected void onPostExecute(String content) {
-				
 				safelyLoadDataAndUpdateProgress(content);
+				WebContent webContent = new WebContent(content, url);
+				
+				webHistoryStack.push(webContent);
 			}
 		}
 		ContentLoaderTask contentLoaderTask = new ContentLoaderTask();

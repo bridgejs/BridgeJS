@@ -19,6 +19,8 @@ import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 
 public class BridgeJSBrowser extends FrameLayout{
+	
+	
 
 	public BridgeJSBrowser(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
@@ -36,7 +38,8 @@ public class BridgeJSBrowser extends FrameLayout{
 		if (webView != null)
 			webView.destroy() ;
 	}
-
+	
+	
 	private BridgeJSWebView webView;
 	private ProgressBar progressBar;
 	private ProgressBarUpdater progressBarUpdater;
@@ -60,6 +63,7 @@ public class BridgeJSBrowser extends FrameLayout{
 		createAndAddWebView(activity);
 		this.addView(webView);
 		this.addView(progressBar);
+		
 	}
 
 	private void initPluginManager(DroidBridge activity, HandlerWithLog handler){
@@ -86,7 +90,9 @@ public class BridgeJSBrowser extends FrameLayout{
 
 	public void loadUrlWithPlugins(final String url){
 		gotoBlankWebPage();
-		pluginManager.loadUrlWithPlugins(webView, url);
+		
+		WebHistoryStack webHistoryStack = webView.getWebHistoryStack();
+		pluginManager.loadUrlWithPlugins(webView, url, webHistoryStack);
 	}
 
 	public void gotoBlankWebPage(){
@@ -96,6 +102,9 @@ public class BridgeJSBrowser extends FrameLayout{
 	public void loadUrlWithoutPlugins(String url){
 		gotoBlankWebPage();
 		webView.loadUrl(url);
+		
+		WebHistoryStack webHistoryStack = webView.getWebHistoryStack();
+		webHistoryStack.push(new WebContent("", url));
 	}
 
 	public void stopAndDestroyWebView() throws IllegalArgumentException, SecurityException, IllegalAccessException, InvocationTargetException, NoSuchMethodException, ClassNotFoundException{

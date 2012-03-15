@@ -3,7 +3,9 @@ package org.bridgejs.android.phonebridge.library.pluginmanager;
 import java.util.ArrayList;
 
 import org.bridgejs.android.phonebridge.library.DroidBridge;
+import org.bridgejs.android.phonebridge.library.browser.BridgeJSWebView;
 import org.bridgejs.android.phonebridge.library.browser.ProgressBarUpdater;
+import org.bridgejs.android.phonebridge.library.browser.WebHistoryStack;
 import org.bridgejs.android.phonebridge.library.pluginmanager.activitymodifiers.ActivityEventsModifier;
 import org.bridgejs.android.phonebridge.library.ui.HandlerWithLog;
 
@@ -23,7 +25,7 @@ public class PluginManager {
 	
 	private ProgressBarUpdater progressBarUpdater;
 
-	public PluginManager(WebView webView, DroidBridge activity, HandlerWithLog handler, ProgressBarUpdater progressBarUpdater, boolean accelerateCanvas){
+	public PluginManager(BridgeJSWebView webView, DroidBridge activity, HandlerWithLog handler, ProgressBarUpdater progressBarUpdater, boolean accelerateCanvas){
 		plugins = new ArrayList<BridgeJSPlugin>();
 		requests = new PluginRequests(webView, progressBarUpdater, activity, handler, this);
 		pluginLoader = new PluginLoader(this, webView, requests);
@@ -66,8 +68,8 @@ public class PluginManager {
 		return str;
 	}
 
-	public void loadUrlWithPlugins(WebView webView, String url){
-		pluginLoader.loadUrl(url);
+	public void loadUrlWithPlugins(WebView webView, String url, WebHistoryStack webHistoryStack){
+		pluginLoader.loadUrl(url, webHistoryStack);
 	}
 
 	public void onDraw(Canvas canvas, int left, int top, float scale){
