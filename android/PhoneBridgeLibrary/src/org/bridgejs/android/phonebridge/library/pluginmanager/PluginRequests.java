@@ -11,7 +11,9 @@ import java.net.URL;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.bridgejs.android.phonebridge.library.DroidBridge;
+import org.bridgejs.android.phonebridge.library.browser.BridgeJSWebView;
 import org.bridgejs.android.phonebridge.library.browser.ProgressBarUpdater;
+import org.bridgejs.android.phonebridge.library.browser.WebHistoryStack;
 import org.bridgejs.android.phonebridge.library.pluginmanager.activitymodifiers.ActivityEventsModifier;
 import org.bridgejs.android.phonebridge.library.pluginmanager.activitymodifiers.ButtonRunnable;
 import org.bridgejs.android.phonebridge.library.ui.HandlerWithLog;
@@ -26,7 +28,7 @@ import android.webkit.WebView;
 
 public class PluginRequests {
 
-	private WebView webView;
+	private BridgeJSWebView webView;
 
 	private HandlerWithLog handler;
 
@@ -35,12 +37,20 @@ public class PluginRequests {
 	private ActivityEventsModifier activityEventsModifier;
 	
 	private ProgressBarUpdater progressBarUpdater;
-
+	
 	public void addJavascriptInterface(Object obj, String interfaceName){
 		webView.addJavascriptInterface(obj, interfaceName);
 	}
+	
+	public boolean canWebViewGoBack() {
+		return webView.canGoBack();
+	}
+	
+	public void webViewGoBack() {
+		webView.goBack();
+	}
 
-	public PluginRequests(WebView webView, ProgressBarUpdater progressBarUpdater, DroidBridge droidBridge, HandlerWithLog handler, PluginManager pluginManager){
+	public PluginRequests(BridgeJSWebView webView, ProgressBarUpdater progressBarUpdater, DroidBridge droidBridge, HandlerWithLog handler, PluginManager pluginManager){
 		this.webView = webView;
 		this.droidBridge = droidBridge;
 		this.handler = handler;

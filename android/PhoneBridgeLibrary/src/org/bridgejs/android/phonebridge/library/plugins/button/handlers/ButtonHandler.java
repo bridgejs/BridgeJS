@@ -24,12 +24,12 @@ public abstract class ButtonHandler {
 		this.thisKeyCode = thisKeyCode;
 	}
 	
-	private void callCallbacks(KeyEvent event) {
+	public void callCallbacks(KeyEvent event) {
 		for (int callback : callbacks)
 			requests.postJavascript("__gotButtonCallback(" + callback + ");", this);
 	}
 	
-	private void resetState() {
+	public void resetState() {
 		callbacks.clear();
 		hasIsDoSuperBeenSetTrue.set(false);
 		isDoSuper.set(true);
