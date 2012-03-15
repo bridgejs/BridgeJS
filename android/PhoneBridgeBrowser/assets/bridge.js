@@ -173,7 +173,7 @@ function Bridge () {
 //API:
 //	bridge.orientation.getCurrentOrientation(onSuccess,onError)
 //		object returned contains:
-//			.azimuth
+//			.azimuth   (2-d compass)
 //			.pitch
 //			.roll
 //			.timestamp
