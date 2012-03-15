@@ -32,7 +32,7 @@ public class PluginLoader {
 			private void safelyLoadDataAndUpdateProgress(String content) {
 				try {
 					requests.setProgressBar(50);
-					webView.loadDataWithBaseURL(url, content, "text/html", "utf-8", null);
+					webView.loadUrl(url);
 				}
 				catch (Exception e) {
 					Log.e("Exception", "Safely caught exception");	

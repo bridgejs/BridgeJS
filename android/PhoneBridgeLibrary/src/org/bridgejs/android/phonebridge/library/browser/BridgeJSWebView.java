@@ -27,7 +27,7 @@ public class BridgeJSWebView extends WebView {
 	}
 	public BridgeJSWebView(Context context) {
 		super(context);
-	}
+	}	
 
 	public void init(final Activity activity){
 
