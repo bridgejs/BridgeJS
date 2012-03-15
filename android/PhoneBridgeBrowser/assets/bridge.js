@@ -111,6 +111,10 @@ function Bridge () {
 //=========================================
 //API:
 //	bridge.android.on.backButton(isSuper, callback)
+//  bridge.android.on.volumedownButton(isSuper, callback)
+//  bridge.android.on.volumeupButton(isSuper, callback)
+//  bridge.android.on.menuButton(isSuper, callback)
+//  bridge.android.on.homeButton(isSuper, callback)
 //=========================================
     this.android.on = navigator.on;
 
@@ -163,6 +167,35 @@ function Bridge () {
 //	bridge.geolocation.disableLocationService()
 //=========================================
 
+//=========================================
+//Orientation Wrapper
+//=========================================
+//API:
+//	bridge.orientation.getCurrentOrientation(onSuccess,onError)
+//		object returned contains:
+//			.azimuth
+//			.pitch
+//			.roll
+//			.timestamp
+//=========================================
+    this.orientation = {};
+
+	function browserSupportsWebkitCompass(){
+		return true; //TODO: I don't know how to actually check this
+	}
+    //TODO: Support the options parameter like in the HTML5 and PhoneGap spec
+	if (browserIsRapid()){
+		this.orientation.getCurrentOrientation = navigator.compass.getCurrentOrientation;
+	}
+	else if (browserSupportsPhoneGap()){
+		this.orientation.getCurrentOrientation = navigator.compass.getCurrentOrientation;
+	}
+	else if (browserSupportsWebkitCompass()){
+		this.orientation.getCurrentOrientation = navigator.compass.getCurrentOrientation;
+	}
+	else {
+		console.log("Device does not accept Orientation!");
+	}
 }
 
 var bridge = new Bridge();

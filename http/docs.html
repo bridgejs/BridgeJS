@@ -71,8 +71,9 @@
 							<li><a href="#section_3">Accelerometer</a></li>
 							<li><a href="#section_4">Device</a></li>
 							<li><a href="#section_5">Geolocation</a></li>
-							<li><a href="#section_6">Button</a></li>					
-							<li><a href="#section_7">Writing Plugins</a></li>					
+							<li><a href="#section_6">Button</a></li>
+                            				<li><a href="#section_7">Compass</a></li>					
+							<li><a href="#section_8">Writing Plugins</a></li>					
 						</ul>
 					</div>
 				</div>
@@ -140,7 +141,7 @@ acceleration.timestamp; //the time recorded by the device the moment the data wa
 <pre class="prettyprint lang-js">
 function onSuccess(acceleration) {
     console.log("Success: x:" + acceleration.x + ", y:" + 
-                    acceleration.y + ", z:" + acceleration.z + " at " + timestamp);
+                    acceleration.y + ", z:" + acceleration.z +  "at"  + timestamp);
 };
 function onError() {
     console.log("Error");
@@ -283,9 +284,36 @@ bridge.android.on.homeButton(false, function() {
 					</section>
 
                     <section id="section_7">
+                        <h2>Compass</h2>
+                        <p>The plugin will NOT safely use Webkit's HTML5 implementation of orientation tracking. This document applies only to API calls running in PhoneBridge </p>
+
+                        <h4> Orientation Object </h4>
+ <pre class="prettyprint lang-js">
+//compass like 2-d orientation where 0 = North, 90 = East, etc 
+orientation.azimuth;
+//side to side orientation where vertical is 0, left is 90, and right is -90
+orientation.pitch;
+//degree to which the device is tilted backwards or forwards 
+orientation.roll;
+</pre>
+                        <h4> bridge.orientation.getCurrentOrientation(onSuccess,onError)</h4>
+                        <p> Get the current orientation of the device. On success call onSuccess(orientation) once and on error call onError() once.<p>
+
+                    </section>
+ <pre class="prettyprint lang-js">
+function onSuccess(compass){
+    console.log("Success: azimuth: " + compass.azimuth + ", pitch: " + 
+      compass.pitch + ", roll: " + compass.roll + "at" + compass.timestamp);
+};
+function onError(){
+    console.log("Error");
+};
+bridge.orientation.getCurrentOrientation(onSuccess,onError);
+
+</pre>
+                    <section id="section_8">
 						<h2>Writing Plugins</h2>
 						<p>TODO</p>
-					</section>
 					
 					<div class="clear"></div>
 					
