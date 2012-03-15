@@ -51,4 +51,8 @@ The API is *experimental* and subject to change
 Do not deploy production code with [bridgeJS](http://www.bridgejs.com) yet. 
 Instead use PhoneGap's APIs -- we will eventually support all PhoneGap API calls.
 
+## Contributors
 
+See here: https://github.com/bridgejs/bridgejs/contributors
+and
+Stephen Klee -- @sdklee
