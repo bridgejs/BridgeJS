@@ -55,4 +55,4 @@ Instead use PhoneGap's APIs -- we will eventually support all PhoneGap API calls
 
 See here: https://github.com/bridgejs/bridgejs/contributors
 and
-Stephen Klee -- @sdklee
+Steven Klee -- @sdklee
